@@ -1,0 +1,218 @@
+{
+  "label": "AI in marketing, SEO & AEO",
+  "summary": "AI search, SEO and AI in marketing — news and your own search data turned into what it means for marketing teams",
+  "audience": "Marketers, SEO and content leads, growth and GTM teams, founders and product marketers",
+  "pillars": [
+    {
+      "name": "AEO & AI search",
+      "covers": "Getting cited by ChatGPT, Google AI Mode / AI Overviews, Perplexity, Gemini, Claude, Copilot; AI visibility tracking; llms.txt and AI crawlers"
+    },
+    {
+      "name": "SEO",
+      "covers": "Core and spam updates, technical SEO, content that still ranks, measuring results in a zero-click world, Search Console"
+    },
+    {
+      "name": "Marketing agents & ops",
+      "covers": "Agentic martech, CRM and automation, AI workflows for small marketing teams, what to automate and what to keep human"
+    },
+    {
+      "name": "Paid media",
+      "covers": "Ads in AI surfaces, Performance Max, AI-written ad copy, where budget should move"
+    },
+    {
+      "name": "Content & social",
+      "covers": "AI-assisted research, writing and design; LinkedIn/Instagram/YouTube changes; content distribution systems"
+    }
+  ],
+  "out_of_scope": [
+    "AI security, AI evals and AI-based cyberattacks",
+    "General AI news with no marketing or search angle"
+  ],
+  "territories": {
+    "top_label": "stories in your marketing pillars",
+    "order": [
+      "AEO & AI search",
+      "SEO",
+      "Marketing agents & ops",
+      "Paid media",
+      "Content & social"
+    ],
+    "keywords": {
+      "AEO & AI search": [
+        "ai overview",
+        "ai mode",
+        "chatgpt search",
+        "searchgpt",
+        "perplexity",
+        "answer engine",
+        "aeo",
+        "geo ",
+        "generative engine",
+        "ai search",
+        "ai visibility",
+        "llm visibility",
+        "cited",
+        "citation",
+        "llms.txt",
+        "gptbot",
+        "claudebot",
+        "ai crawler",
+        "zero-click",
+        "zero click",
+        "business hub",
+        "ai shopping",
+        "agentic commerce",
+        "assistive agent",
+        "chatgpt for seo",
+        "ai for seo"
+      ],
+      "SEO": [
+        "seo",
+        "search engine",
+        "core update",
+        "spam update",
+        "ranking",
+        "rankings",
+        "serp",
+        "search console",
+        "backlink",
+        "crawl",
+        "indexing",
+        "structured data",
+        "schema markup",
+        "keyword",
+        "organic traffic",
+        "organic search",
+        "google search",
+        "bing",
+        "e-e-a-t",
+        "helpful content",
+        "search central",
+        "sitemap",
+        "canonical",
+        "local search",
+        "google business profile",
+        "keyword cluster",
+        "clustering",
+        "cluster map",
+        "topic cluster"
+      ],
+      "Marketing agents & ops": [
+        "martech",
+        "marketing automation",
+        "marketing agent",
+        "marketing team",
+        "marketers",
+        "cmo",
+        "crm",
+        "hubspot",
+        "salesforce",
+        "marketo",
+        "adobe",
+        "cdp",
+        "personaliz",
+        "email marketing",
+        "lifecycle",
+        "campaign",
+        "gtm",
+        "go-to-market",
+        "demand gen",
+        "lead gen",
+        "b2b marketing",
+        "workflow",
+        "agentic",
+        "marketing ai",
+        "ai agents",
+        "ai marketing"
+      ],
+      "Paid media": [
+        "advertis",
+        "ads ",
+        "ad format",
+        "google ads",
+        "meta ads",
+        "ppc",
+        "paid search",
+        "performance max",
+        "ai max",
+        "cpc",
+        "roas",
+        "bidding",
+        "sponsored",
+        "shopping ads",
+        "retail media",
+        "attribution",
+        "media buy",
+        "programmatic",
+        "ctv"
+      ],
+      "Content & social": [
+        "content marketing",
+        "content strategy",
+        "linkedin",
+        "instagram",
+        "reels",
+        "tiktok",
+        "youtube",
+        "threads",
+        "creator",
+        "influencer",
+        "social media",
+        "newsletter",
+        "copywriting",
+        "brand",
+        "video marketing",
+        "carousel",
+        "engagement"
+      ]
+    },
+    "topic_terms": [
+      "marketing",
+      "marketer",
+      "seo",
+      "search",
+      "ads",
+      "advertis",
+      "brand",
+      "content",
+      "social",
+      "growth",
+      "gtm",
+      "campaign",
+      "customer",
+      "audience",
+      "traffic",
+      "conversion",
+      "funnel",
+      "ecommerce",
+      "e-commerce",
+      "commerce",
+      "creator",
+      "publisher"
+    ]
+  },
+  "hashtags": {
+    "A": [
+      "#aimarketing",
+      "#aiforbusiness",
+      "#marketingtips",
+      "#aitools",
+      "#chatgpt"
+    ],
+    "B": [
+      "#seo",
+      "#aeo",
+      "#aisearch",
+      "#digitalmarketing",
+      "#googleseo"
+    ],
+    "C": [
+      "#b2bmarketing",
+      "#growthmarketing",
+      "#contentstrategy",
+      "#martech",
+      "#marketing"
+    ]
+  },
+  "sources_file": "ai-marketing.sources.json"
+}

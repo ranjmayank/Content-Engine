@@ -1,0 +1,140 @@
+{
+  "label": "E-commerce & DTC",
+  "summary": "Running and growing an online store: conversion, marketplaces, ads, retention and operations",
+  "audience": "Store owners, DTC founders, e-commerce marketers and managers",
+  "pillars": [
+    {
+      "name": "Conversion & CRO",
+      "covers": "Product pages, checkout, reviews, A/B tests"
+    },
+    {
+      "name": "Marketplaces",
+      "covers": "Amazon, Flipkart, Etsy, eBay, Walmart, TikTok Shop"
+    },
+    {
+      "name": "Ads & acquisition",
+      "covers": "Meta, Google Shopping, TikTok ads, influencers, CAC"
+    },
+    {
+      "name": "Retention & email",
+      "covers": "Email/SMS flows, loyalty, subscriptions, LTV"
+    },
+    {
+      "name": "Platforms & operations",
+      "covers": "Shopify, WooCommerce, logistics, payments, returns"
+    }
+  ],
+  "out_of_scope": [
+    "B2B enterprise software"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "Conversion & CRO",
+      "Marketplaces",
+      "Ads & acquisition",
+      "Retention & email",
+      "Platforms & operations"
+    ],
+    "keywords": {
+      "Conversion & CRO": [
+        "conversion",
+        "cro",
+        "checkout",
+        "cart",
+        "abandon",
+        "product page",
+        "a/b test",
+        "landing page",
+        "reviews"
+      ],
+      "Marketplaces": [
+        "amazon",
+        "flipkart",
+        "etsy",
+        "ebay",
+        "walmart",
+        "marketplace",
+        "tiktok shop",
+        "seller",
+        "fba",
+        "meesho"
+      ],
+      "Ads & acquisition": [
+        "meta ads",
+        "facebook ads",
+        "google shopping",
+        "performance max",
+        "tiktok ads",
+        "influencer",
+        "cac",
+        "roas",
+        "paid social",
+        "advertis"
+      ],
+      "Retention & email": [
+        "email",
+        "sms",
+        "klaviyo",
+        "loyalty",
+        "subscription",
+        "repeat purchase",
+        "ltv",
+        "retention",
+        "whatsapp"
+      ],
+      "Platforms & operations": [
+        "shopify",
+        "woocommerce",
+        "bigcommerce",
+        "shipping",
+        "logistics",
+        "fulfil",
+        "payments",
+        "returns",
+        "inventory",
+        "3pl"
+      ]
+    },
+    "topic_terms": [
+      "ecommerce",
+      "e-commerce",
+      "dtc",
+      "d2c",
+      "online store",
+      "retail",
+      "shopper",
+      "brand",
+      "sales",
+      "order"
+    ],
+    "boost_terms": [
+      "ai",
+      "agentic commerce"
+    ]
+  },
+  "hashtags": {
+    "A": [
+      "#ecommerce",
+      "#dtc",
+      "#shopify",
+      "#onlinebusiness",
+      "#retail"
+    ],
+    "B": [
+      "#cro",
+      "#conversionrate",
+      "#emailmarketing",
+      "#ecommercetips",
+      "#d2c"
+    ],
+    "C": [
+      "#amazonseller",
+      "#performancemarketing",
+      "#metaads",
+      "#brandbuilding",
+      "#smallbusiness"
+    ]
+  },
+  "sources_file": null
+}

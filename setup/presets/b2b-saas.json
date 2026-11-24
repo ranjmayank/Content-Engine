@@ -1,0 +1,143 @@
+{
+  "label": "B2B SaaS growth",
+  "summary": "How B2B software companies grow: product-led growth, sales, pricing, marketing and retention",
+  "audience": "SaaS founders, product managers, growth, marketing and sales leaders",
+  "pillars": [
+    {
+      "name": "Product-led growth",
+      "covers": "Activation, onboarding, freemium and trials, product analytics"
+    },
+    {
+      "name": "Pricing & packaging",
+      "covers": "Pricing models, usage-based pricing, discounting, price increases"
+    },
+    {
+      "name": "Sales & GTM",
+      "covers": "Outbound, sales-led motions, partnerships, ICP and positioning"
+    },
+    {
+      "name": "Marketing & demand",
+      "covers": "Demand gen, content, SEO, paid, events, brand"
+    },
+    {
+      "name": "Retention & expansion",
+      "covers": "Churn, NRR, customer success, expansion revenue"
+    }
+  ],
+  "out_of_scope": [
+    "Consumer app news",
+    "Crypto and trading"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "Product-led growth",
+      "Pricing & packaging",
+      "Sales & GTM",
+      "Marketing & demand",
+      "Retention & expansion"
+    ],
+    "keywords": {
+      "Product-led growth": [
+        "product-led",
+        "plg",
+        "onboarding",
+        "activation",
+        "freemium",
+        "free trial",
+        "self-serve",
+        "product analytics",
+        "time to value",
+        "aha moment"
+      ],
+      "Pricing & packaging": [
+        "pricing",
+        "price increase",
+        "usage-based",
+        "seat-based",
+        "packaging",
+        "discount",
+        "monetiz",
+        "willingness to pay",
+        "tier"
+      ],
+      "Sales & GTM": [
+        "sales",
+        "outbound",
+        "pipeline",
+        "gtm",
+        "go-to-market",
+        "icp",
+        "positioning",
+        "sdr",
+        "account executive",
+        "enterprise deal",
+        "partner"
+      ],
+      "Marketing & demand": [
+        "demand gen",
+        "marketing",
+        "content",
+        "seo",
+        "paid",
+        "linkedin ads",
+        "webinar",
+        "event",
+        "brand",
+        "lead"
+      ],
+      "Retention & expansion": [
+        "churn",
+        "retention",
+        "net revenue retention",
+        "nrr",
+        "expansion",
+        "upsell",
+        "customer success",
+        "renewal",
+        "ltv"
+      ]
+    },
+    "topic_terms": [
+      "saas",
+      "software",
+      "startup",
+      "b2b",
+      "arr",
+      "mrr",
+      "founder",
+      "revenue",
+      "growth",
+      "customer"
+    ],
+    "boost_terms": [
+      "ai",
+      "agent",
+      "llm"
+    ]
+  },
+  "hashtags": {
+    "A": [
+      "#saas",
+      "#b2b",
+      "#startups",
+      "#productledgrowth",
+      "#growth"
+    ],
+    "B": [
+      "#pricing",
+      "#gtm",
+      "#sales",
+      "#founders",
+      "#saasmarketing"
+    ],
+    "C": [
+      "#customersuccess",
+      "#churn",
+      "#b2bmarketing",
+      "#plg",
+      "#revenue"
+    ]
+  },
+  "sources_file": null
+}

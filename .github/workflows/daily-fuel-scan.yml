@@ -1,0 +1,59 @@
+name: Daily fuel scan
+
+# Reads every source in scanner/sources/sources.json, writes a digest of new stories ranked by your pillars.
+# Works with no secrets. Optional: NOTION_TOKEN + NOTION_DATABASE_ID send top picks to Notion.
+
+on:
+  schedule:
+    - cron: "0 8 * * *"   # engine:scan (rewrite with: python3 setup/schedule.py)
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scanner/fuel_scanner.py"
+      - "scanner/sources/sources.json"
+      - "scanner/sources/territories.json"
+      - "scanner/sources/BACKFILL"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # First run records everything as seen and reports the last 2 days.
+      # A file scanner/sources/BACKFILL containing a number N re-reports the last N days once.
+      - name: Scan sources
+        working-directory: scanner
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_STATUS_TYPE: ${{ vars.NOTION_STATUS_TYPE }}
+        run: |
+          [ -f ../engine.config.json ] || { echo "::notice::Not set up yet — run python3 setup/init.py and commit engine.config.json (docs/SETUP.md)."; exit 0; }
+          dir=sources
+          title="Sources — $(python3 -c 'import json;print(json.load(open("../engine.config.json")).get("brand",{}).get("site_name","your site"))' 2>/dev/null || echo 'your site')"
+          if [ ! -f "$dir/seen_urls.json" ]; then
+            python3 fuel_scanner.py --config "$dir" --init --title "$title"
+          elif [ -f "$dir/BACKFILL" ]; then
+            python3 fuel_scanner.py --config "$dir" --backfill "$(tr -dc 0-9 < "$dir/BACKFILL")" --title "$title"
+            rm "$dir/BACKFILL"
+          else
+            python3 fuel_scanner.py --config "$dir" --title "$title"
+          fi
+      - name: Commit digest and state
+        run: |
+          git config user.name "fuel-scanner"
+          git config user.email "fuel-scanner@users.noreply.github.com"
+          git add -A scanner/
+          git diff --staged --quiet || git commit -m "Fuel digest $(date -u +%F) [skip ci]"
+          git pull --rebase && git push

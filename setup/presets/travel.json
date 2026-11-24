@@ -1,0 +1,134 @@
+{
+  "label": "Travel",
+  "summary": "Where to go, how to get there for less, and what's changed for travellers",
+  "audience": "Independent travellers, families and frequent flyers",
+  "pillars": [
+    {
+      "name": "Destinations",
+      "covers": "Places, itineraries, seasons, what's new"
+    },
+    {
+      "name": "Flights & airlines",
+      "covers": "Fares, routes, airline news, airports"
+    },
+    {
+      "name": "Stays",
+      "covers": "Hotels, homestays, Airbnb, loyalty programs"
+    },
+    {
+      "name": "Visas & rules",
+      "covers": "Visas, passports, entry rules, travel advisories"
+    },
+    {
+      "name": "Budget & points",
+      "covers": "Deals, points, credit cards, travel hacks"
+    }
+  ],
+  "out_of_scope": [
+    "Luxury product launches unrelated to travel"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "Destinations",
+      "Flights & airlines",
+      "Stays",
+      "Visas & rules",
+      "Budget & points"
+    ],
+    "keywords": {
+      "Destinations": [
+        "destination",
+        "itinerary",
+        "things to do",
+        "city guide",
+        "island",
+        "beach",
+        "trek",
+        "national park",
+        "festival",
+        "unesco"
+      ],
+      "Flights & airlines": [
+        "flight",
+        "airline",
+        "airfare",
+        "airport",
+        "route",
+        "baggage",
+        "frequent flyer",
+        "lounge",
+        "indigo",
+        "emirates"
+      ],
+      "Stays": [
+        "hotel",
+        "resort",
+        "airbnb",
+        "homestay",
+        "hostel",
+        "booking.com",
+        "marriott",
+        "hilton",
+        "stay"
+      ],
+      "Visas & rules": [
+        "visa",
+        "passport",
+        "e-visa",
+        "schengen",
+        "entry rules",
+        "advisory",
+        "immigration",
+        "eta",
+        "esta"
+      ],
+      "Budget & points": [
+        "deal",
+        "cheap",
+        "budget",
+        "points",
+        "miles",
+        "credit card",
+        "cashback",
+        "discount",
+        "sale"
+      ]
+    },
+    "topic_terms": [
+      "travel",
+      "trip",
+      "tourism",
+      "tourist",
+      "traveller",
+      "traveler",
+      "vacation",
+      "holiday"
+    ],
+    "boost_terms": []
+  },
+  "hashtags": {
+    "A": [
+      "#travel",
+      "#travelgram",
+      "#wanderlust",
+      "#traveltips",
+      "#explore"
+    ],
+    "B": [
+      "#budgettravel",
+      "#flights",
+      "#cheapflights",
+      "#travelhacks",
+      "#points"
+    ],
+    "C": [
+      "#travelguide",
+      "#itinerary",
+      "#hotels",
+      "#visa",
+      "#solotravel"
+    ]
+  },
+  "sources_file": null
+}

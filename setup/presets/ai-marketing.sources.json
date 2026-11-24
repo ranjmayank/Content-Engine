@@ -1,0 +1,632 @@
+[
+  {
+    "name": "Search Engine Roundtable",
+    "category": "AEO & AI search",
+    "why": "First to report AI Mode, AI Overviews and ChatGPT search changes",
+    "site": "https://www.seroundtable.com/",
+    "type": "sitemap",
+    "url": "https://www.seroundtable.com/sitemap.xml"
+  },
+  {
+    "name": "Search Engine Journal",
+    "category": "AEO & AI search",
+    "why": "AI search guides, SEO Pulse and industry data",
+    "site": "https://www.searchenginejournal.com/",
+    "type": "rss",
+    "url": "https://www.searchenginejournal.com/feed/"
+  },
+  {
+    "name": "Growth Memo (Kevin Indig)",
+    "category": "AEO & AI search",
+    "why": "Data-led analysis of AI search and organic growth",
+    "site": "https://www.growth-memo.com/",
+    "type": "rss",
+    "url": "https://www.growth-memo.com/feed"
+  },
+  {
+    "name": "iPullRank",
+    "category": "AEO & AI search",
+    "why": "Technical deep dives on AI Mode and generative search",
+    "site": "https://ipullrank.com/blog",
+    "type": "rss",
+    "url": "https://ipullrank.com/feed"
+  },
+  {
+    "name": "Profound Blog",
+    "category": "AEO & AI search",
+    "why": "AI visibility research (vendor)",
+    "site": "https://www.tryprofound.com/blog",
+    "type": "sitemap",
+    "url": "https://www.tryprofound.com/sitemap.xml",
+    "include": "/blog/"
+  },
+  {
+    "name": "OpenAI News",
+    "category": "AEO & AI search",
+    "why": "ChatGPT search, shopping, ads and Business Hub launches (marketing/search stories only)",
+    "site": "https://openai.com/news/",
+    "type": "rss",
+    "url": "https://openai.com/news/rss.xml",
+    "topic_only": true
+  },
+  {
+    "name": "Perplexity Blog",
+    "category": "AEO & AI search",
+    "why": "Perplexity search, shopping and publisher programs (no reliable feed)",
+    "site": "https://www.perplexity.ai/hub",
+    "type": "manual",
+    "url": "https://www.perplexity.ai/hub"
+  },
+  {
+    "name": "Marie Haynes",
+    "category": "AEO & AI search",
+    "why": "Google's AI systems, helpful content and core updates",
+    "site": "https://www.mariehaynes.com/",
+    "type": "rss",
+    "url": "https://www.mariehaynes.com/feed/"
+  },
+  {
+    "name": "Glenn Gabe (GSQi)",
+    "category": "AEO & AI search",
+    "why": "Core update and AI Overviews case studies",
+    "site": "https://www.gsqi.com/marketing-blog/",
+    "type": "rss",
+    "url": "https://www.gsqi.com/marketing-blog/feed/"
+  },
+  {
+    "name": "Brodie Clark",
+    "category": "AEO & AI search",
+    "why": "Spots new Google SERP and AI Mode features first",
+    "site": "https://brodieclark.com/",
+    "type": "rss",
+    "url": "https://brodieclark.com/feed/"
+  },
+  {
+    "name": "SparkToro",
+    "category": "AEO & AI search",
+    "why": "Zero-click search and audience research data",
+    "site": "https://sparktoro.com/blog/",
+    "type": "rss",
+    "url": "https://sparktoro.com/blog/feed/"
+  },
+  {
+    "name": "Seer Interactive",
+    "category": "AEO & AI search",
+    "why": "AI Overviews CTR studies and search data",
+    "site": "https://www.seerinteractive.com/insights",
+    "type": "sitemap",
+    "url": "https://www.seerinteractive.com/sitemap.xml",
+    "include": "/insights/"
+  },
+  {
+    "name": "Anthropic News",
+    "category": "AEO & AI search",
+    "why": "Claude search and web features (marketing/search stories only)",
+    "site": "https://www.anthropic.com/news",
+    "type": "sitemap",
+    "url": "https://www.anthropic.com/sitemap.xml",
+    "include": "/news/",
+    "topic_only": true
+  },
+  {
+    "name": "Google Blog \u2014 AI",
+    "category": "AEO & AI search",
+    "why": "Gemini and AI Mode launches (marketing/search stories only)",
+    "site": "https://blog.google/technology/ai/",
+    "type": "rss",
+    "url": "https://blog.google/technology/ai/rss/",
+    "topic_only": true
+  },
+  {
+    "name": "ChatGPT Release Notes",
+    "category": "AEO & AI search",
+    "why": "Every ChatGPT search, shopping and ads change (no feed)",
+    "site": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+    "type": "manual",
+    "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes"
+  },
+  {
+    "name": "BrightEdge Research",
+    "category": "AEO & AI search",
+    "why": "AI Overviews and AI search share data (no feed)",
+    "site": "https://www.brightedge.com/resources/research-reports",
+    "type": "manual",
+    "url": "https://www.brightedge.com/resources/research-reports"
+  },
+  {
+    "name": "Google Search Central Blog",
+    "category": "SEO & Google",
+    "why": "Google's official search, core update and AI Overviews announcements",
+    "site": "https://developers.google.com/search/blog",
+    "type": "rss",
+    "url": "https://developers.google.com/search/blog/feed.xml"
+  },
+  {
+    "name": "Google Search Status Dashboard",
+    "category": "SEO & Google",
+    "why": "Core and spam update rollouts, start and finish dates",
+    "site": "https://status.search.google.com/",
+    "type": "manual",
+    "url": "https://status.search.google.com/"
+  },
+  {
+    "name": "Google Blog \u2014 Search",
+    "category": "SEO & Google",
+    "why": "Search product launches from Google",
+    "site": "https://blog.google/products/search/",
+    "type": "rss",
+    "url": "https://blog.google/products/search/rss/"
+  },
+  {
+    "name": "Ahrefs Blog",
+    "category": "SEO & Google",
+    "why": "SEO and AI search studies built on real data",
+    "site": "https://ahrefs.com/blog/",
+    "type": "rss",
+    "url": "https://ahrefs.com/blog/feed/"
+  },
+  {
+    "name": "Semrush Blog",
+    "category": "SEO & Google",
+    "why": "SEO, AI visibility and marketing studies",
+    "site": "https://www.semrush.com/blog/",
+    "type": "rss",
+    "url": "https://www.semrush.com/blog/feed/"
+  },
+  {
+    "name": "Moz Blog",
+    "category": "SEO & Google",
+    "why": "SEO fundamentals and research",
+    "site": "https://moz.com/blog",
+    "type": "rss",
+    "url": "https://moz.com/posts/rss/blog"
+  },
+  {
+    "name": "Bing Webmaster Blog",
+    "category": "SEO & Google",
+    "why": "Bing and Copilot search changes (Bing's index feeds Copilot and ChatGPT search)",
+    "site": "https://blogs.bing.com/webmaster",
+    "type": "manual",
+    "url": "https://blogs.bing.com/webmaster"
+  },
+  {
+    "name": "Backlinko",
+    "category": "SEO & Google",
+    "why": "SEO guides and studies",
+    "site": "https://backlinko.com/",
+    "type": "rss",
+    "url": "https://backlinko.com/feed"
+  },
+  {
+    "name": "Yoast SEO Blog",
+    "category": "SEO & Google",
+    "why": "WordPress SEO and the monthly SEO update",
+    "site": "https://yoast.com/seo-blog/",
+    "type": "rss",
+    "url": "https://yoast.com/feed/"
+  },
+  {
+    "name": "Screaming Frog Blog",
+    "category": "SEO & Google",
+    "why": "Technical SEO and crawler releases",
+    "site": "https://www.screamingfrog.co.uk/blog/",
+    "type": "rss",
+    "url": "https://www.screamingfrog.co.uk/feed/"
+  },
+  {
+    "name": "SISTRIX",
+    "category": "SEO & Google",
+    "why": "Visibility data: core update winners and losers",
+    "site": "https://www.sistrix.com/blog/",
+    "type": "rss",
+    "url": "https://www.sistrix.com/feed/"
+  },
+  {
+    "name": "Lumar",
+    "category": "SEO & Google",
+    "why": "Monthly SEO and AI search news roundup",
+    "site": "https://www.lumar.io/blog/",
+    "type": "rss",
+    "url": "https://www.lumar.io/feed/"
+  },
+  {
+    "name": "Detailed",
+    "category": "SEO & Google",
+    "why": "SEO strategy and industry analysis",
+    "site": "https://detailed.com/",
+    "type": "rss",
+    "url": "https://detailed.com/feed/"
+  },
+  {
+    "name": "Jono Alderson",
+    "category": "SEO & Google",
+    "why": "Technical SEO and the future of search",
+    "site": "https://www.jonoalderson.com/",
+    "type": "rss",
+    "url": "https://www.jonoalderson.com/feed/"
+  },
+  {
+    "name": "Siege Media",
+    "category": "SEO & Google",
+    "why": "Content SEO and link-earning data",
+    "site": "https://www.siegemedia.com/blog",
+    "type": "rss",
+    "url": "https://www.siegemedia.com/feed"
+  },
+  {
+    "name": "Google Analytics \u2014 what's new",
+    "category": "SEO & Google",
+    "why": "GA4 feature changes (no feed)",
+    "site": "https://support.google.com/analytics/answer/9164320",
+    "type": "manual",
+    "url": "https://support.google.com/analytics/answer/9164320"
+  },
+  {
+    "name": "MarTech",
+    "category": "AI marketing & martech",
+    "why": "AI-powered martech releases and operations",
+    "site": "https://martech.org/",
+    "type": "rss",
+    "url": "https://martech.org/feed/"
+  },
+  {
+    "name": "Marketing AI Institute",
+    "category": "AI marketing & martech",
+    "why": "AI for marketers: tools, adoption and research",
+    "site": "https://www.marketingaiinstitute.com/blog",
+    "type": "rss",
+    "url": "https://www.marketingaiinstitute.com/blog/rss.xml"
+  },
+  {
+    "name": "Agile Brand Guide \u2014 daily martech news",
+    "category": "AI marketing & martech",
+    "why": "Daily roundup of marketing technology and AI news",
+    "site": "https://agilebrandguide.com/",
+    "type": "rss",
+    "url": "https://agilebrandguide.com/feed/",
+    "topic_only": true
+  },
+  {
+    "name": "HubSpot Marketing Blog",
+    "category": "AI marketing & martech",
+    "why": "Marketing practice and HubSpot's AI features",
+    "site": "https://blog.hubspot.com/marketing",
+    "type": "rss",
+    "url": "https://blog.hubspot.com/marketing/rss.xml"
+  },
+  {
+    "name": "MarketingProfs AI Update",
+    "category": "AI marketing & martech",
+    "why": "Weekly AI news and views for marketers",
+    "site": "https://www.marketingprofs.com/opinions/",
+    "type": "manual",
+    "url": "https://www.marketingprofs.com/opinions/"
+  },
+  {
+    "name": "Lenny's Newsletter",
+    "category": "AI marketing & martech",
+    "why": "Product and growth thinking the audience reads",
+    "site": "https://www.lennysnewsletter.com/",
+    "type": "rss",
+    "url": "https://www.lennysnewsletter.com/feed"
+  },
+  {
+    "name": "chiefmartec (Scott Brinker)",
+    "category": "AI marketing & martech",
+    "why": "The martech landscape and agentic marketing ops",
+    "site": "https://chiefmartec.com/",
+    "type": "rss",
+    "url": "https://chiefmartec.com/feed/"
+  },
+  {
+    "name": "MarTech Series",
+    "category": "AI marketing & martech",
+    "why": "Martech launches and funding",
+    "site": "https://martechseries.com/",
+    "type": "rss",
+    "url": "https://martechseries.com/feed/"
+  },
+  {
+    "name": "Google Marketing Platform Blog",
+    "category": "AI marketing & martech",
+    "why": "GA4, Search Ads 360 and measurement updates",
+    "site": "https://blog.google/products/marketingplatform/360/",
+    "type": "rss",
+    "url": "https://blog.google/products/marketingplatform/360/rss/"
+  },
+  {
+    "name": "Salesforce News",
+    "category": "AI marketing & martech",
+    "why": "Agentforce and Marketing Cloud (marketing stories only)",
+    "site": "https://www.salesforce.com/news/",
+    "type": "rss",
+    "url": "https://www.salesforce.com/news/feed/",
+    "topic_only": true
+  },
+  {
+    "name": "The Rundown AI",
+    "category": "AI marketing & martech",
+    "why": "Daily AI news (marketing/search stories only)",
+    "site": "https://www.therundown.ai/",
+    "type": "rss",
+    "url": "https://www.therundown.ai/feed",
+    "topic_only": true
+  },
+  {
+    "name": "MKT1 (Emily Kramer)",
+    "category": "AI marketing & martech",
+    "why": "B2B marketing team playbooks",
+    "site": "https://newsletter.mkt1.co/",
+    "type": "rss",
+    "url": "https://newsletter.mkt1.co/feed"
+  },
+  {
+    "name": "Elena Verna",
+    "category": "AI marketing & martech",
+    "why": "Product-led growth and AI-era growth loops",
+    "site": "https://www.elenaverna.com/",
+    "type": "rss",
+    "url": "https://www.elenaverna.com/feed"
+  },
+  {
+    "name": "Marketing Brew",
+    "category": "AI marketing & martech",
+    "why": "Daily marketing industry news (newsletter, no feed)",
+    "site": "https://www.marketingbrew.com/",
+    "type": "manual",
+    "url": "https://www.marketingbrew.com/"
+  },
+  {
+    "name": "Google Ads & Commerce Blog",
+    "category": "Paid media & ads",
+    "why": "Official Google Ads, AI Max and AI Mode ad formats",
+    "site": "https://blog.google/products/ads-commerce/",
+    "type": "rss",
+    "url": "https://blog.google/products/ads-commerce/rss/"
+  },
+  {
+    "name": "PPC Land",
+    "category": "Paid media & ads",
+    "why": "Fast coverage of ad platform changes",
+    "site": "https://ppc.land/",
+    "type": "rss",
+    "url": "https://ppc.land/rss/"
+  },
+  {
+    "name": "Digiday",
+    "category": "Paid media & ads",
+    "why": "Media, agencies and ad tech",
+    "site": "https://digiday.com/",
+    "type": "rss",
+    "url": "https://digiday.com/feed/",
+    "topic_only": true
+  },
+  {
+    "name": "AdExchanger",
+    "category": "Paid media & ads",
+    "why": "Ad tech, retail media and measurement",
+    "site": "https://www.adexchanger.com/",
+    "type": "rss",
+    "url": "https://www.adexchanger.com/feed/"
+  },
+  {
+    "name": "Adweek",
+    "category": "Paid media & ads",
+    "why": "Advertising, brands and agencies",
+    "site": "https://www.adweek.com/",
+    "type": "rss",
+    "url": "https://www.adweek.com/feed/"
+  },
+  {
+    "name": "PPC Hero",
+    "category": "Paid media & ads",
+    "why": "Hands-on Google and Microsoft Ads tactics",
+    "site": "https://www.ppchero.com/",
+    "type": "rss",
+    "url": "https://www.ppchero.com/feed/"
+  },
+  {
+    "name": "WordStream Blog",
+    "category": "Paid media & ads",
+    "why": "PPC benchmarks and AI ad features",
+    "site": "https://www.wordstream.com/blog",
+    "type": "rss",
+    "url": "https://www.wordstream.com/feed"
+  },
+  {
+    "name": "Microsoft Advertising Blog",
+    "category": "Paid media & ads",
+    "why": "Copilot ads and Microsoft Ads changes (no reliable feed)",
+    "site": "https://about.ads.microsoft.com/en/blog",
+    "type": "manual",
+    "url": "https://about.ads.microsoft.com/en/blog"
+  },
+  {
+    "name": "Meta for Business News",
+    "category": "Paid media & ads",
+    "why": "Meta Advantage+ and AI ad tools (no feed)",
+    "site": "https://www.facebook.com/business/news",
+    "type": "manual",
+    "url": "https://www.facebook.com/business/news"
+  },
+  {
+    "name": "Social Media Today",
+    "category": "Content & social",
+    "why": "LinkedIn, Instagram, TikTok and YouTube platform updates",
+    "site": "https://www.socialmediatoday.com/",
+    "type": "rss",
+    "url": "https://www.socialmediatoday.com/feeds/news/"
+  },
+  {
+    "name": "Instagram @creators / Meta newsroom",
+    "category": "Content & social",
+    "why": "Instagram and Facebook feature changes (Meta blocks automated reading)",
+    "site": "https://about.fb.com/news/",
+    "type": "manual",
+    "url": "https://about.fb.com/news/"
+  },
+  {
+    "name": "LinkedIn Marketing Blog",
+    "category": "Content & social",
+    "why": "LinkedIn algorithm and B2B content changes",
+    "site": "https://www.linkedin.com/business/marketing/blog",
+    "type": "manual",
+    "url": "https://www.linkedin.com/business/marketing/blog"
+  },
+  {
+    "name": "Buffer Resources",
+    "category": "Content & social",
+    "why": "Social media data and platform changes",
+    "site": "https://buffer.com/resources/",
+    "type": "rss",
+    "url": "https://buffer.com/resources/rss/"
+  },
+  {
+    "name": "Hootsuite Blog",
+    "category": "Content & social",
+    "why": "Social trends and algorithm guides",
+    "site": "https://blog.hootsuite.com/",
+    "type": "rss",
+    "url": "https://blog.hootsuite.com/feed/"
+  },
+  {
+    "name": "Sprout Social Insights",
+    "category": "Content & social",
+    "why": "Social media research and benchmarks",
+    "site": "https://sproutsocial.com/insights/",
+    "type": "rss",
+    "url": "https://sproutsocial.com/insights/feed/"
+  },
+  {
+    "name": "YouTube Official Blog",
+    "category": "Content & social",
+    "why": "YouTube and Shorts feature changes",
+    "site": "https://blog.youtube/",
+    "type": "rss",
+    "url": "https://blog.youtube/rss/"
+  },
+  {
+    "name": "Orbit Media",
+    "category": "Content & social",
+    "why": "Content marketing research (annual blogger survey)",
+    "site": "https://www.orbitmedia.com/blog/",
+    "type": "rss",
+    "url": "https://www.orbitmedia.com/feed/"
+  },
+  {
+    "name": "Copyblogger",
+    "category": "Content & social",
+    "why": "Writing and content marketing craft",
+    "site": "https://copyblogger.com/",
+    "type": "rss",
+    "url": "https://copyblogger.com/feed/"
+  },
+  {
+    "name": "LinkedIn Newsroom",
+    "category": "Content & social",
+    "why": "LinkedIn product and feed changes (no feed)",
+    "site": "https://news.linkedin.com/",
+    "type": "manual",
+    "url": "https://news.linkedin.com/"
+  },
+  {
+    "name": "Inc42",
+    "category": "India",
+    "why": "Indian startup, D2C and funding news (marketing/search stories only)",
+    "site": "https://inc42.com/",
+    "type": "rss",
+    "url": "https://inc42.com/feed/",
+    "topic_only": true
+  },
+  {
+    "name": "Analytics India Magazine",
+    "category": "India",
+    "why": "Enterprise AI in India (marketing/search stories only)",
+    "site": "https://analyticsindiamag.com/",
+    "type": "rss",
+    "url": "https://analyticsindiamag.com/feed/",
+    "topic_only": true
+  },
+  {
+    "name": "exchange4media",
+    "category": "India",
+    "why": "Indian advertising, media and digital marketing news",
+    "site": "https://www.exchange4media.com/",
+    "type": "manual",
+    "url": "https://www.exchange4media.com/"
+  },
+  {
+    "name": "afaqs!",
+    "category": "India",
+    "why": "Indian marketing and brand news",
+    "site": "https://www.afaqs.com/",
+    "type": "manual",
+    "url": "https://www.afaqs.com/"
+  },
+  {
+    "name": "ETBrandEquity",
+    "category": "India",
+    "why": "Indian marketing and advertising news",
+    "site": "https://brandequity.economictimes.indiatimes.com/",
+    "type": "rss",
+    "url": "https://brandequity.economictimes.indiatimes.com/rss/topstories"
+  },
+  {
+    "name": "MediaNama",
+    "category": "India",
+    "why": "Indian digital policy, platforms and ads (marketing/search stories only)",
+    "site": "https://www.medianama.com/",
+    "type": "rss",
+    "url": "https://www.medianama.com/feed/",
+    "topic_only": true
+  },
+  {
+    "name": "YourStory",
+    "category": "India",
+    "why": "Indian startups and D2C (marketing/search stories only)",
+    "site": "https://yourstory.com/",
+    "type": "rss",
+    "url": "https://yourstory.com/feed",
+    "topic_only": true
+  },
+  {
+    "name": "Reddit r/SEO",
+    "category": "Communities & podcasts",
+    "why": "What practitioners are seeing after updates (Reddit blocks automated reading)",
+    "site": "https://www.reddit.com/r/SEO/",
+    "type": "manual",
+    "url": "https://www.reddit.com/r/SEO/"
+  },
+  {
+    "name": "Reddit r/bigseo",
+    "category": "Communities & podcasts",
+    "why": "Senior SEO discussion",
+    "site": "https://www.reddit.com/r/bigseo/",
+    "type": "manual",
+    "url": "https://www.reddit.com/r/bigseo/"
+  },
+  {
+    "name": "Reddit r/PPC",
+    "category": "Communities & podcasts",
+    "why": "Paid search practitioners",
+    "site": "https://www.reddit.com/r/PPC/",
+    "type": "manual",
+    "url": "https://www.reddit.com/r/PPC/"
+  },
+  {
+    "name": "Search Off the Record (Google podcast)",
+    "category": "Communities & podcasts",
+    "why": "Google Search team on how search works",
+    "site": "https://search-off-the-record.libsyn.com/",
+    "type": "rss",
+    "url": "https://search-off-the-record.libsyn.com/rss"
+  },
+  {
+    "name": "Marketing Against the Grain (podcast)",
+    "category": "Communities & podcasts",
+    "why": "HubSpot's CMO and team on AI in marketing",
+    "site": "https://www.youtube.com/@MarketingAgainsttheGrain",
+    "type": "manual",
+    "url": "https://www.youtube.com/@MarketingAgainsttheGrain"
+  }
+]

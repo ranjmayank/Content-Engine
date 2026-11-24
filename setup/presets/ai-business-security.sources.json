@@ -1,0 +1,512 @@
+[
+  {
+    "name": "The Neuron",
+    "category": "AI news for business",
+    "why": "Everything that happened in AI, explained for business",
+    "site": "https://www.theneuron.ai/newsletter",
+    "type": "rss",
+    "url": "https://www.theneuron.ai/feed/"
+  },
+  {
+    "name": "The Rundown AI",
+    "category": "AI news for business",
+    "why": "Daily AI news and how to use it at work",
+    "site": "https://www.therundown.ai/",
+    "type": "rss",
+    "url": "https://www.therundown.ai/feed"
+  },
+  {
+    "name": "Superhuman AI",
+    "category": "AI news for business",
+    "why": "Short daily news and practical tools",
+    "site": "https://www.superhuman.ai/",
+    "type": "sitemap",
+    "url": "https://www.superhuman.ai/sitemap.xml",
+    "include": "/p/"
+  },
+  {
+    "name": "Ben's Bites",
+    "category": "AI news for business",
+    "why": "Launches, startups and how-tos",
+    "site": "https://www.bensbites.com/",
+    "type": "rss",
+    "url": "https://www.bensbites.com/feed"
+  },
+  {
+    "name": "TLDR AI",
+    "category": "AI news for business",
+    "why": "Quick summaries of the day's AI stories",
+    "site": "https://tldr.tech/ai",
+    "type": "rss",
+    "url": "https://tldr.tech/api/rss/ai"
+  },
+  {
+    "name": "Import AI (Jack Clark)",
+    "category": "AI news for business",
+    "why": "Weekly deeper read on research and policy",
+    "site": "https://jack-clark.net/",
+    "type": "rss",
+    "url": "https://jack-clark.net/feed/"
+  },
+  {
+    "name": "Axios AI+",
+    "category": "AI news for business",
+    "why": "AI business and policy news (no AI-only feed)",
+    "site": "https://www.axios.com/technology",
+    "type": "manual",
+    "url": "https://www.axios.com/technology"
+  },
+  {
+    "name": "TechCrunch AI",
+    "category": "AI news for business",
+    "why": "Big launches, funding and enterprise deals",
+    "site": "https://techcrunch.com/category/artificial-intelligence/",
+    "type": "rss",
+    "url": "https://techcrunch.com/category/artificial-intelligence/feed/"
+  },
+  {
+    "name": "The Decoder",
+    "category": "AI news for business",
+    "why": "Fast, factual AI news",
+    "site": "https://the-decoder.com/",
+    "type": "rss",
+    "url": "https://the-decoder.com/feed/"
+  },
+  {
+    "name": "Reuters AI",
+    "category": "AI news for business",
+    "why": "Hard news: deals, regulation, lawsuits (no public feed)",
+    "site": "https://www.reuters.com/technology/artificial-intelligence/",
+    "type": "manual",
+    "url": "https://www.reuters.com/technology/artificial-intelligence/"
+  },
+  {
+    "name": "The Information",
+    "category": "AI news for business",
+    "why": "Inside scoops on AI companies (paid)",
+    "site": "https://www.theinformation.com/",
+    "type": "manual",
+    "url": "https://www.theinformation.com/"
+  },
+  {
+    "name": "Analytics India Magazine",
+    "category": "AI news for business",
+    "why": "AI news from India",
+    "site": "https://analyticsindiamag.com/",
+    "type": "rss",
+    "url": "https://analyticsindiamag.com/feed/"
+  },
+  {
+    "name": "OpenAI News",
+    "category": "AI companies (primary sources)",
+    "why": "Launches, plus OpenAI's reports on disrupting malicious uses of AI",
+    "site": "https://openai.com/news/",
+    "type": "rss",
+    "url": "https://openai.com/news/rss.xml"
+  },
+  {
+    "name": "Anthropic News",
+    "category": "AI companies (primary sources)",
+    "why": "Claude launches, plus Anthropic's threat intelligence reports",
+    "site": "https://www.anthropic.com/news",
+    "type": "sitemap",
+    "url": "https://www.anthropic.com/sitemap.xml",
+    "include": "/news/"
+  },
+  {
+    "name": "Google DeepMind Blog",
+    "category": "AI companies (primary sources)",
+    "why": "Gemini launches and research",
+    "site": "https://deepmind.google/discover/blog/",
+    "type": "rss",
+    "url": "https://deepmind.google/blog/feed"
+  },
+  {
+    "name": "Microsoft Source",
+    "category": "AI companies (primary sources)",
+    "why": "Copilot and Azure AI announcements (AI stories only)",
+    "site": "https://news.microsoft.com/source/",
+    "type": "rss",
+    "url": "https://news.microsoft.com/source/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "Meta AI Blog",
+    "category": "AI companies (primary sources)",
+    "why": "Llama and Meta AI launches (no feed; Meta blocks automated reading)",
+    "site": "https://ai.meta.com/blog/",
+    "type": "manual",
+    "url": "https://ai.meta.com/blog/",
+    "include": "/blog/"
+  },
+  {
+    "name": "Hugging Face Blog",
+    "category": "AI companies (primary sources)",
+    "why": "Open-source model releases",
+    "site": "https://huggingface.co/blog",
+    "type": "rss",
+    "url": "https://huggingface.co/blog/feed.xml"
+  },
+  {
+    "name": "OWASP GenAI Security Project",
+    "category": "AI security & safe adoption",
+    "why": "The industry standard for LLM and agent risks",
+    "site": "https://genai.owasp.org/blog/",
+    "type": "rss",
+    "url": "https://genai.owasp.org/feed/"
+  },
+  {
+    "name": "Simon Willison",
+    "category": "AI security & safe adoption",
+    "why": "The clearest writing on prompt injection and AI agents",
+    "site": "https://simonwillison.net/",
+    "type": "rss",
+    "url": "https://simonwillison.net/atom/everything/"
+  },
+  {
+    "name": "Embrace The Red",
+    "category": "AI security & safe adoption",
+    "why": "Real prompt-injection attacks on real AI tools",
+    "site": "https://embracethered.com/blog/",
+    "type": "rss",
+    "url": "https://embracethered.com/blog/index.xml"
+  },
+  {
+    "name": "tl;dr sec",
+    "category": "AI security & safe adoption",
+    "why": "Weekly security roundup with a strong AI section",
+    "site": "https://tldrsec.com/",
+    "type": "sitemap",
+    "url": "https://tldrsec.com/sitemap.xml",
+    "include": "/p/"
+  },
+  {
+    "name": "NIST News",
+    "category": "AI security & safe adoption",
+    "why": "US AI risk frameworks and standards (AI stories only)",
+    "site": "https://www.nist.gov/artificial-intelligence",
+    "type": "rss",
+    "url": "https://www.nist.gov/news-events/news/rss.xml",
+    "ai_only": true
+  },
+  {
+    "name": "MITRE ATLAS",
+    "category": "AI security & safe adoption",
+    "why": "Catalogue of known attacks on AI systems",
+    "site": "https://atlas.mitre.org/",
+    "type": "manual",
+    "url": "https://atlas.mitre.org/"
+  },
+  {
+    "name": "UK AI Security Institute",
+    "category": "AI security & safe adoption",
+    "why": "Government research on AI risks and safeguards",
+    "site": "https://www.aisi.gov.uk/",
+    "type": "sitemap",
+    "url": "https://www.aisi.gov.uk/sitemap.xml",
+    "include": [
+      "/blog/",
+      "/work/",
+      "/research/"
+    ]
+  },
+  {
+    "name": "CSA AI Safety Initiative",
+    "category": "AI security & safe adoption",
+    "why": "AI security research and guidance (site can't be scanned)",
+    "site": "https://cloudsecurityalliance.org/ai-safety-initiative",
+    "type": "manual",
+    "url": "https://cloudsecurityalliance.org/ai-safety-initiative"
+  },
+  {
+    "name": "AI Incident Database",
+    "category": "AI security & safe adoption",
+    "why": "Real AI failures and harms, logged as they happen",
+    "site": "https://incidentdatabase.ai/",
+    "type": "rss",
+    "url": "https://incidentdatabase.ai/rss.xml"
+  },
+  {
+    "name": "Lakera Blog",
+    "category": "AI security & safe adoption",
+    "why": "Prompt-injection and agent security research (vendor)",
+    "site": "https://www.lakera.ai/blog",
+    "type": "sitemap",
+    "url": "https://www.lakera.ai/sitemap.xml",
+    "include": "/blog/"
+  },
+  {
+    "name": "HiddenLayer Research",
+    "category": "AI security & safe adoption",
+    "why": "Attacks on AI models and agents (vendor)",
+    "site": "https://hiddenlayer.com/innovation-hub/",
+    "type": "sitemap",
+    "url": "https://hiddenlayer.com/sitemap.xml",
+    "include": [
+      "/innovation-hub/",
+      "/research/"
+    ]
+  },
+  {
+    "name": "Artificial Analysis",
+    "category": "AI evals & model comparison",
+    "why": "Independent comparisons: quality, speed and price",
+    "site": "https://artificialanalysis.ai/articles",
+    "type": "sitemap",
+    "url": "https://artificialanalysis.ai/sitemap.xml",
+    "include": "/articles/"
+  },
+  {
+    "name": "LMArena",
+    "category": "AI evals & model comparison",
+    "why": "Leaderboard ranked by real user votes",
+    "site": "https://lmarena.ai/leaderboard",
+    "type": "manual",
+    "url": "https://lmarena.ai/leaderboard"
+  },
+  {
+    "name": "Epoch AI",
+    "category": "AI evals & model comparison",
+    "why": "Independent data on models, compute and trends",
+    "site": "https://epoch.ai/latest",
+    "type": "sitemap",
+    "url": "https://epoch.ai/sitemap.xml",
+    "include": [
+      "/blog/",
+      "/gradient-updates/",
+      "/data-insights/",
+      "/newsletter/"
+    ]
+  },
+  {
+    "name": "METR",
+    "category": "AI evals & model comparison",
+    "why": "Tests of how long and complex a task AI agents can complete on their own",
+    "site": "https://metr.org/",
+    "type": "sitemap",
+    "url": "https://metr.org/sitemap.xml",
+    "include": [
+      "/blog/",
+      "/research/"
+    ]
+  },
+  {
+    "name": "Stanford HELM",
+    "category": "AI evals & model comparison",
+    "why": "Academic, many-angle model evaluations",
+    "site": "https://crfm.stanford.edu/helm/",
+    "type": "manual",
+    "url": "https://crfm.stanford.edu/helm/"
+  },
+  {
+    "name": "Scale SEAL Leaderboards",
+    "category": "AI evals & model comparison",
+    "why": "Expert-built private benchmarks",
+    "site": "https://scale.com/leaderboard",
+    "type": "manual",
+    "url": "https://scale.com/leaderboard"
+  },
+  {
+    "name": "LiveBench",
+    "category": "AI evals & model comparison",
+    "why": "Regularly refreshed benchmark models can't memorise",
+    "site": "https://livebench.ai/",
+    "type": "manual",
+    "url": "https://livebench.ai/"
+  },
+  {
+    "name": "SWE-bench",
+    "category": "AI evals & model comparison",
+    "why": "The standard test for AI coding agents",
+    "site": "https://www.swebench.com/",
+    "type": "manual",
+    "url": "https://www.swebench.com/"
+  },
+  {
+    "name": "LLM Stats",
+    "category": "AI evals & model comparison",
+    "why": "Compare benchmark scores across models in one place",
+    "site": "https://llm-stats.com/benchmarks",
+    "type": "manual",
+    "url": "https://llm-stats.com/benchmarks"
+  },
+  {
+    "name": "Interconnects (Nathan Lambert)",
+    "category": "AI evals & model comparison",
+    "why": "Clear analysis of model releases and benchmarks",
+    "site": "https://www.interconnects.ai/",
+    "type": "rss",
+    "url": "https://www.interconnects.ai/feed"
+  },
+  {
+    "name": "Stanford AI Index",
+    "category": "AI evals & model comparison",
+    "why": "The big annual AI data report",
+    "site": "https://hai.stanford.edu/ai-index",
+    "type": "manual",
+    "url": "https://hai.stanford.edu/ai-index"
+  },
+  {
+    "name": "Google Threat Intelligence",
+    "category": "AI-based cyberattacks",
+    "why": "How attackers misuse Gemini and AI agents",
+    "site": "https://cloud.google.com/blog/topics/threat-intelligence",
+    "type": "rss",
+    "url": "https://cloudblog.withgoogle.com/topics/threat-intelligence/rss/",
+    "ai_only": true
+  },
+  {
+    "name": "Microsoft Threat Intelligence",
+    "category": "AI-based cyberattacks",
+    "why": "Original reports like ARTEX (attackers using AI agents)",
+    "site": "https://www.microsoft.com/en-us/security/blog/",
+    "type": "rss",
+    "url": "https://www.microsoft.com/en-us/security/blog/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "KELA",
+    "category": "AI-based cyberattacks",
+    "why": "AI threat landscape reports, including dark-web AI tools",
+    "site": "https://www.kelacyber.com/resources/research/",
+    "type": "sitemap",
+    "url": "https://www.kelacyber.com/sitemap.xml",
+    "ai_only": true,
+    "include": [
+      "/research/",
+      "/blog/"
+    ]
+  },
+  {
+    "name": "Unit 42 (Palo Alto Networks)",
+    "category": "AI-based cyberattacks",
+    "why": "Research on AI-powered attacks",
+    "site": "https://unit42.paloaltonetworks.com/",
+    "type": "rss",
+    "url": "https://unit42.paloaltonetworks.com/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "Check Point Research",
+    "category": "AI-based cyberattacks",
+    "why": "AI-generated malware and phishing research",
+    "site": "https://research.checkpoint.com/",
+    "type": "rss",
+    "url": "https://research.checkpoint.com/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "Recorded Future (Insikt Group)",
+    "category": "AI-based cyberattacks",
+    "why": "Threat intelligence on attackers' use of AI",
+    "site": "https://www.recordedfuture.com/research",
+    "type": "sitemap",
+    "url": "https://www.recordedfuture.com/sitemap.xml",
+    "include": "/research/",
+    "ai_only": true
+  },
+  {
+    "name": "CrowdStrike Blog",
+    "category": "AI-based cyberattacks",
+    "why": "Threat reports and AI-attack trends",
+    "site": "https://www.crowdstrike.com/en-us/blog/",
+    "type": "rss",
+    "url": "https://www.crowdstrike.com/en-us/blog/feed",
+    "ai_only": true
+  },
+  {
+    "name": "The Hacker News",
+    "category": "AI-based cyberattacks",
+    "why": "Daily breach and attack news",
+    "site": "https://thehackernews.com/",
+    "type": "rss",
+    "url": "https://feeds.feedburner.com/TheHackersNews",
+    "ai_only": true
+  },
+  {
+    "name": "BleepingComputer",
+    "category": "AI-based cyberattacks",
+    "why": "Breaking attack and malware news",
+    "site": "https://www.bleepingcomputer.com/",
+    "type": "rss",
+    "url": "https://www.bleepingcomputer.com/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "Help Net Security",
+    "category": "AI-based cyberattacks",
+    "why": "Fast coverage of new AI-attack research",
+    "site": "https://www.helpnetsecurity.com/",
+    "type": "rss",
+    "url": "https://www.helpnetsecurity.com/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "SecurityWeek",
+    "category": "AI-based cyberattacks",
+    "why": "Industry news with a strong AI section",
+    "site": "https://www.securityweek.com/",
+    "type": "rss",
+    "url": "https://www.securityweek.com/feed/",
+    "ai_only": true
+  },
+  {
+    "name": "Dark Reading",
+    "category": "AI-based cyberattacks",
+    "why": "Analysis of attacks and defences",
+    "site": "https://www.darkreading.com/",
+    "type": "rss",
+    "url": "https://www.darkreading.com/rss.xml",
+    "ai_only": true
+  },
+  {
+    "name": "Security Affairs",
+    "category": "AI-based cyberattacks",
+    "why": "Includes roundups on AI in cyberattacks",
+    "site": "https://securityaffairs.com/",
+    "type": "rss",
+    "url": "https://securityaffairs.com/feed",
+    "ai_only": true
+  },
+  {
+    "name": "Hacker News (front page)",
+    "category": "Communities & podcasts",
+    "why": "What tech people are discussing today",
+    "site": "https://news.ycombinator.com/",
+    "type": "rss",
+    "url": "https://hnrss.org/frontpage",
+    "ai_only": true
+  },
+  {
+    "name": "Reddit r/LocalLLaMA",
+    "category": "Communities & podcasts",
+    "why": "Hands-on model comparisons from people who test them (Reddit blocks automated reading)",
+    "site": "https://www.reddit.com/r/LocalLLaMA/",
+    "type": "manual",
+    "url": "https://www.reddit.com/r/LocalLLaMA/"
+  },
+  {
+    "name": "Reddit r/cybersecurity",
+    "category": "Communities & podcasts",
+    "why": "Practitioners discussing real attacks (Reddit blocks automated reading)",
+    "site": "https://www.reddit.com/r/cybersecurity/",
+    "type": "manual",
+    "url": "https://www.reddit.com/r/cybersecurity/"
+  },
+  {
+    "name": "Latent Space",
+    "category": "Communities & podcasts",
+    "why": "Deep conversations on models and AI engineering",
+    "site": "https://www.latent.space/",
+    "type": "rss",
+    "url": "https://www.latent.space/feed"
+  },
+  {
+    "name": "Risky Business (podcast)",
+    "category": "Communities & podcasts",
+    "why": "The week's security news, including AI attacks",
+    "site": "https://risky.biz/",
+    "type": "manual",
+    "url": "https://risky.biz/"
+  }
+]

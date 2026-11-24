@@ -1,0 +1,143 @@
+{
+  "label": "Developer tools & software engineering",
+  "summary": "What's changing for developers: AI coding tools, frameworks, cloud, security and engineering practice",
+  "audience": "Software engineers, engineering managers and CTOs",
+  "pillars": [
+    {
+      "name": "AI coding",
+      "covers": "Coding assistants, agents, code review, AI in the dev workflow"
+    },
+    {
+      "name": "Frameworks & languages",
+      "covers": "Releases and changes in languages, frameworks and runtimes"
+    },
+    {
+      "name": "Cloud & infra",
+      "covers": "Cloud platforms, containers, serverless, databases, cost"
+    },
+    {
+      "name": "Security",
+      "covers": "Supply chain, vulnerabilities, secrets, secure coding"
+    },
+    {
+      "name": "Engineering practice",
+      "covers": "Testing, DevEx, productivity, team process, careers"
+    }
+  ],
+  "out_of_scope": [
+    "Consumer gadget reviews"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "AI coding",
+      "Frameworks & languages",
+      "Cloud & infra",
+      "Security",
+      "Engineering practice"
+    ],
+    "keywords": {
+      "AI coding": [
+        "copilot",
+        "coding assistant",
+        "code generation",
+        "coding agent",
+        "cursor",
+        "claude code",
+        "codex",
+        "ai pair",
+        "code review"
+      ],
+      "Frameworks & languages": [
+        "release",
+        "javascript",
+        "typescript",
+        "python",
+        "rust",
+        "go ",
+        "react",
+        "next.js",
+        "node",
+        "java",
+        "framework",
+        "runtime"
+      ],
+      "Cloud & infra": [
+        "aws",
+        "azure",
+        "gcp",
+        "kubernetes",
+        "docker",
+        "serverless",
+        "database",
+        "postgres",
+        "terraform",
+        "cloud cost",
+        "edge"
+      ],
+      "Security": [
+        "vulnerability",
+        "cve",
+        "supply chain",
+        "npm",
+        "pypi",
+        "secret",
+        "security",
+        "patch",
+        "exploit",
+        "dependency"
+      ],
+      "Engineering practice": [
+        "testing",
+        "ci/cd",
+        "devops",
+        "developer experience",
+        "productivity",
+        "engineering manager",
+        "incident",
+        "observability",
+        "hiring"
+      ]
+    },
+    "topic_terms": [
+      "developer",
+      "engineer",
+      "software",
+      "code",
+      "coding",
+      "programming",
+      "open source",
+      "github",
+      "api"
+    ],
+    "boost_terms": [
+      "ai",
+      "llm",
+      "agent"
+    ]
+  },
+  "hashtags": {
+    "A": [
+      "#programming",
+      "#developer",
+      "#softwareengineering",
+      "#coding",
+      "#devtools"
+    ],
+    "B": [
+      "#ai",
+      "#aicoding",
+      "#llm",
+      "#githubcopilot",
+      "#claudecode"
+    ],
+    "C": [
+      "#cloud",
+      "#devops",
+      "#opensource",
+      "#webdev",
+      "#security"
+    ]
+  },
+  "sources_file": null
+}

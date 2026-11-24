@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.venv/
+*service-account*.json
+credentials*.json
+*-key.json
+node_modules/
+reels/**/out/

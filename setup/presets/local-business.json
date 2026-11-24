@@ -1,0 +1,131 @@
+{
+  "label": "Local business marketing",
+  "summary": "Getting found and chosen locally: Google Business Profile, reviews, local SEO, social and ads for small businesses",
+  "audience": "Local business owners — clinics, restaurants, salons, gyms, agencies, trades",
+  "pillars": [
+    {
+      "name": "Local SEO & maps",
+      "covers": "Google Business Profile, Maps, local rankings, citations"
+    },
+    {
+      "name": "Reviews & reputation",
+      "covers": "Getting and answering reviews, review platforms"
+    },
+    {
+      "name": "Social & content",
+      "covers": "Instagram, WhatsApp, Facebook, short video for small businesses"
+    },
+    {
+      "name": "Ads & offers",
+      "covers": "Local ads, promotions, Google and Meta ads on small budgets"
+    },
+    {
+      "name": "Tools & operations",
+      "covers": "Booking, POS, CRM and AI tools for small teams"
+    }
+  ],
+  "out_of_scope": [
+    "Enterprise marketing technology"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "Local SEO & maps",
+      "Reviews & reputation",
+      "Social & content",
+      "Ads & offers",
+      "Tools & operations"
+    ],
+    "keywords": {
+      "Local SEO & maps": [
+        "google business profile",
+        "gbp",
+        "google maps",
+        "local seo",
+        "local pack",
+        "near me",
+        "citation",
+        "map pack",
+        "apple maps"
+      ],
+      "Reviews & reputation": [
+        "review",
+        "reviews",
+        "rating",
+        "reputation",
+        "yelp",
+        "trustpilot",
+        "testimonial",
+        "justdial"
+      ],
+      "Social & content": [
+        "instagram",
+        "whatsapp",
+        "facebook",
+        "reels",
+        "tiktok",
+        "social media",
+        "content",
+        "youtube"
+      ],
+      "Ads & offers": [
+        "local ads",
+        "google ads",
+        "meta ads",
+        "promotion",
+        "offer",
+        "coupon",
+        "budget",
+        "lead"
+      ],
+      "Tools & operations": [
+        "booking",
+        "pos",
+        "crm",
+        "invoice",
+        "scheduling",
+        "ai tool",
+        "chatbot",
+        "automation",
+        "small business"
+      ]
+    },
+    "topic_terms": [
+      "local",
+      "small business",
+      "smb",
+      "shop",
+      "store",
+      "customers",
+      "business owner",
+      "google"
+    ],
+    "boost_terms": [
+      "ai"
+    ]
+  },
+  "hashtags": {
+    "A": [
+      "#smallbusiness",
+      "#localbusiness",
+      "#shoplocal",
+      "#entrepreneur",
+      "#smallbiz"
+    ],
+    "B": [
+      "#localseo",
+      "#googlebusinessprofile",
+      "#googlemaps",
+      "#reviews",
+      "#seo"
+    ],
+    "C": [
+      "#smallbusinesstips",
+      "#marketingtips",
+      "#instagramforbusiness",
+      "#whatsappbusiness",
+      "#growth"
+    ]
+  },
+  "sources_file": null
+}

@@ -1,0 +1,161 @@
+{
+  "label": "AI for business, AI security & evals",
+  "summary": "AI news translated into what it means for business, with a focus on AI security, safe adoption, evals and AI-driven attacks",
+  "audience": "Business leaders, CISOs and security teams, IT and AI leads adopting AI at work",
+  "pillars": [
+    {
+      "name": "AI news for business",
+      "covers": "Model and product launches, pricing, adoption data, enterprise deals — what changes for a business"
+    },
+    {
+      "name": "AI security & safe adoption",
+      "covers": "Prompt injection, data leakage, AI governance, shadow AI, guardrails, OWASP LLM Top 10, NIST AI RMF, regulation"
+    },
+    {
+      "name": "AI evals & model comparison",
+      "covers": "Benchmarks, leaderboards, independent tests, how to choose a model for a job"
+    },
+    {
+      "name": "AI-based cyberattacks",
+      "covers": "Deepfakes, AI-written phishing, agentic attacks, malware that uses LLMs, real incidents"
+    }
+  ],
+  "out_of_scope": [
+    "AI in marketing and SEO",
+    "Consumer AI gadget news"
+  ],
+  "territories": {
+    "top_label": "stories in your four topics",
+    "order": [
+      "AI news for business",
+      "AI security & safe adoption",
+      "AI evals & model comparison",
+      "AI-based cyberattacks"
+    ],
+    "keywords": {
+      "AI news for business": [
+        "enterprise",
+        "pricing",
+        "launch",
+        "launches",
+        "rollout",
+        "adoption",
+        "revenue",
+        "funding",
+        "acquisition",
+        "partnership",
+        "productivity",
+        "workforce",
+        "copilot",
+        "chatgpt enterprise",
+        "agents",
+        "agentic",
+        "api",
+        "business",
+        "cio",
+        "cto",
+        "ceo"
+      ],
+      "AI security & safe adoption": [
+        "prompt injection",
+        "jailbreak",
+        "data leak",
+        "data leakage",
+        "guardrail",
+        "governance",
+        "shadow ai",
+        "owasp",
+        "nist",
+        "ai act",
+        "compliance",
+        "red team",
+        "red-team",
+        "model security",
+        "ai security",
+        "privacy",
+        "pii",
+        "dlp",
+        "secure ai",
+        "safety",
+        "mcp security",
+        "supply chain"
+      ],
+      "AI evals & model comparison": [
+        "benchmark",
+        "leaderboard",
+        "eval",
+        "evals",
+        "evaluation",
+        "mmlu",
+        "swe-bench",
+        "arena",
+        "lmarena",
+        "outperform",
+        "state-of-the-art",
+        "sota",
+        "hallucination",
+        "accuracy",
+        "tested",
+        "comparison",
+        "vs "
+      ],
+      "AI-based cyberattacks": [
+        "deepfake",
+        "phishing",
+        "malware",
+        "ransomware",
+        "attack",
+        "attacker",
+        "threat actor",
+        "exploit",
+        "breach",
+        "vulnerability",
+        "cve",
+        "fraud",
+        "scam",
+        "voice clone",
+        "impersonat",
+        "botnet"
+      ]
+    },
+    "topic_terms": [
+      "ai",
+      "llm",
+      "model",
+      "agent",
+      "chatgpt",
+      "claude",
+      "gemini",
+      "openai",
+      "anthropic",
+      "security",
+      "attack",
+      "business",
+      "enterprise"
+    ]
+  },
+  "hashtags": {
+    "A": [
+      "#ai",
+      "#aiforbusiness",
+      "#artificialintelligence",
+      "#genai",
+      "#aitools"
+    ],
+    "B": [
+      "#aisecurity",
+      "#cybersecurity",
+      "#infosec",
+      "#llmsecurity",
+      "#aigovernance"
+    ],
+    "C": [
+      "#llm",
+      "#aievals",
+      "#machinelearning",
+      "#enterpriseai",
+      "#aiagents"
+    ]
+  },
+  "sources_file": "ai-business-security.sources.json"
+}

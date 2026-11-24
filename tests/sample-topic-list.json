@@ -1,0 +1,8 @@
+{"date": "2026-01-15", "window": "Stories published 13–15 Jan 2026", "scanned": "Test list",
+ "topics": [
+  {"id": "t1", "category": "Pricing & packaging", "priority": "Top pick", "format": "Decode post", "title": "Test topic one",
+   "why": "Why it matters", "data": "query — 10 impressions", "facts": ["Fact (Source, 14 Jan)"], "angle": "Angle",
+   "refs": [["Example — headline", "https://example.com/a"]], "fanout": ["question one", "question two"]},
+  {"id": "t2", "category": "From your data", "priority": "Strong", "format": "Refresh", "title": "Test topic two",
+   "why": "Why", "facts": ["Fact"], "angle": "Angle", "refs": [["Example", "https://example.com/b"]], "fanout": ["q"]}
+ ]}

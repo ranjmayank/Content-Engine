@@ -1,0 +1,135 @@
+{
+  "label": "Health & fitness",
+  "summary": "Training, nutrition and recovery explained with evidence, for people who want to get fitter",
+  "audience": "Busy adults, beginners and regular gym-goers",
+  "pillars": [
+    {
+      "name": "Training",
+      "covers": "Strength, cardio, running, programs, technique"
+    },
+    {
+      "name": "Nutrition",
+      "covers": "Eating patterns, protein, supplements, research on food"
+    },
+    {
+      "name": "Recovery & sleep",
+      "covers": "Sleep, stress, injury prevention, rest"
+    },
+    {
+      "name": "Research & myths",
+      "covers": "New studies, guidelines, debunking"
+    },
+    {
+      "name": "Wearables & tools",
+      "covers": "Fitness trackers, apps, home equipment"
+    }
+  ],
+  "out_of_scope": [
+    "Medical diagnosis or treatment advice",
+    "Extreme diets"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "Training",
+      "Nutrition",
+      "Recovery & sleep",
+      "Research & myths",
+      "Wearables & tools"
+    ],
+    "keywords": {
+      "Training": [
+        "workout",
+        "training",
+        "strength",
+        "cardio",
+        "running",
+        "exercise",
+        "hiit",
+        "gym",
+        "muscle",
+        "mobility",
+        "marathon"
+      ],
+      "Nutrition": [
+        "nutrition",
+        "protein",
+        "diet",
+        "supplement",
+        "creatine",
+        "calorie",
+        "fiber",
+        "meal",
+        "vitamin",
+        "gut"
+      ],
+      "Recovery & sleep": [
+        "sleep",
+        "recovery",
+        "rest",
+        "injury",
+        "stress",
+        "soreness",
+        "stretch",
+        "physiotherapy"
+      ],
+      "Research & myths": [
+        "study",
+        "research",
+        "trial",
+        "guideline",
+        "world health organization",
+        "myth",
+        "evidence",
+        "meta-analysis",
+        "journal"
+      ],
+      "Wearables & tools": [
+        "wearable",
+        "tracker",
+        "smartwatch",
+        "garmin",
+        "whoop",
+        "oura",
+        "apple watch",
+        "fitness app",
+        "treadmill"
+      ]
+    },
+    "topic_terms": [
+      "fitness",
+      "health",
+      "exercise",
+      "workout",
+      "nutrition",
+      "wellness",
+      "body",
+      "weight"
+    ],
+    "boost_terms": []
+  },
+  "hashtags": {
+    "A": [
+      "#fitness",
+      "#health",
+      "#workout",
+      "#fitnesstips",
+      "#healthylifestyle"
+    ],
+    "B": [
+      "#nutrition",
+      "#protein",
+      "#healthyeating",
+      "#mealprep",
+      "#supplements"
+    ],
+    "C": [
+      "#strengthtraining",
+      "#running",
+      "#recovery",
+      "#sleep",
+      "#wellness"
+    ]
+  },
+  "sources_file": null
+}

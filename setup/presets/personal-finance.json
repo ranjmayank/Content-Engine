@@ -1,0 +1,137 @@
+{
+  "label": "Personal finance",
+  "summary": "Money decisions explained: saving, investing, tax, credit and financial news for ordinary people",
+  "audience": "Salaried professionals, young earners and families managing their own money",
+  "pillars": [
+    {
+      "name": "Investing",
+      "covers": "Stocks, index funds, mutual funds, ETFs, markets"
+    },
+    {
+      "name": "Saving & budgeting",
+      "covers": "Budgets, emergency funds, inflation, everyday money"
+    },
+    {
+      "name": "Tax",
+      "covers": "Income tax, filing, deductions, tax changes"
+    },
+    {
+      "name": "Credit & loans",
+      "covers": "Credit cards, credit scores, home and personal loans, interest rates"
+    },
+    {
+      "name": "Retirement & insurance",
+      "covers": "Pensions, retirement plans, health and life insurance"
+    }
+  ],
+  "out_of_scope": [
+    "Get-rich-quick schemes and tips on individual stock picks"
+  ],
+  "territories": {
+    "top_label": "stories in your pillars",
+    "order": [
+      "Investing",
+      "Saving & budgeting",
+      "Tax",
+      "Credit & loans",
+      "Retirement & insurance"
+    ],
+    "keywords": {
+      "Investing": [
+        "invest",
+        "stock",
+        "index fund",
+        "mutual fund",
+        "etf",
+        "sip",
+        "portfolio",
+        "market",
+        "nifty",
+        "s&p 500",
+        "dividend",
+        "bond"
+      ],
+      "Saving & budgeting": [
+        "budget",
+        "saving",
+        "savings",
+        "emergency fund",
+        "inflation",
+        "expense",
+        "frugal",
+        "cost of living"
+      ],
+      "Tax": [
+        "tax",
+        "itr",
+        "irs",
+        "deduction",
+        "filing",
+        "capital gains",
+        "gst",
+        "tax slab",
+        "refund"
+      ],
+      "Credit & loans": [
+        "credit card",
+        "credit score",
+        "cibil",
+        "loan",
+        "mortgage",
+        "emi",
+        "interest rate",
+        "repo rate",
+        "debt",
+        "refinanc"
+      ],
+      "Retirement & insurance": [
+        "retirement",
+        "pension",
+        "401(k)",
+        "nps",
+        "ppf",
+        "epf",
+        "insurance",
+        "term plan",
+        "annuity"
+      ]
+    },
+    "topic_terms": [
+      "money",
+      "finance",
+      "financial",
+      "bank",
+      "rbi",
+      "fed",
+      "sebi",
+      "investor",
+      "household",
+      "salary"
+    ],
+    "boost_terms": []
+  },
+  "hashtags": {
+    "A": [
+      "#personalfinance",
+      "#money",
+      "#investing",
+      "#financialliteracy",
+      "#savings"
+    ],
+    "B": [
+      "#tax",
+      "#taxsaving",
+      "#creditcard",
+      "#loans",
+      "#budgeting"
+    ],
+    "C": [
+      "#retirement",
+      "#mutualfunds",
+      "#stockmarket",
+      "#wealth",
+      "#financialplanning"
+    ]
+  },
+  "sources_file": null
+}
