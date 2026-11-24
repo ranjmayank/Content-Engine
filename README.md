@@ -83,7 +83,7 @@ In claude.ai you can also upload a skill folder under **Customize → Skills**, 
 
 ## Credits and licence
 
-MIT — see [LICENSE](LICENSE). Built by **[Mayank Ranjan](https://ranjanmayank.in)** from the engines he runs for his own sites.
+MIT — see [LICENSE](LICENSE). Built by **[Mayank Ranjan](https://ranjanmayank.in)** ([LinkedIn](https://www.linkedin.com/in/ranjanmayank-mr/)) from the engines he runs for his own sites.
 The SEO audit's issue set and thresholds are adapted from **[OpenSEO](https://github.com/every-app/open-seo)** (MIT). Fonts: Outfit and Geist Mono (SIL Open Font License). See [NOTICE.md](NOTICE.md).
 
 Contributions welcome — new niche presets and tested source lists especially. See [CONTRIBUTING.md](CONTRIBUTING.md).
