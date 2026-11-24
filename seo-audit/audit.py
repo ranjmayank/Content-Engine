@@ -304,6 +304,9 @@ def pagespeed(url, key=None):
     try:
         with urllib.request.urlopen(urllib.request.Request(api, headers={"User-Agent": UA}), timeout=90) as r:
             d = json.load(r)
+    except urllib.error.HTTPError as e:
+        hint = " — add a free PSI_API_KEY (the keyless quota is shared and often used up)" if e.code in (429, 403) else ""
+        return {"url": url, "error": f"HTTP {e.code}{hint}"}
     except Exception as e:
         return {"url": url, "error": f"{type(e).__name__}"}
     lh = d.get("lighthouseResult", {})
@@ -320,6 +323,7 @@ def pagespeed(url, key=None):
             "field_cls": field.get("CUMULATIVE_LAYOUT_SHIFT_SCORE", {}).get("percentile")}
 
 
+ACTION_LINK = re.compile(r"[?&](share|replytocom|add-to-cart|action|print|amp)=|/wp-login\.php|/feed/?$|/xmlrpc\.php", re.I)
 HREFLANG = re.compile(r"^(x-default|[a-zA-Z]{2,3}(-[a-zA-Z]{4})?(-([a-zA-Z]{2}|\d{3}))?)$")
 GENERIC_ANCHORS = {"click here", "here", "read more", "learn more", "more", "this", "link", "this link", "go",
                    "continue", "continue reading", "details", "click", "see more"}
@@ -390,7 +394,7 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
     images = defaultdict(set)          # image url -> pages using it
     hreflangs = {}                     # page -> [(lang, absolute url)]
     renderer = Renderer() if render else None
-    site = {"start": start, "checked_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
+    site = {"start": start, "checked_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "rendered": bool(render)}
 
     def flag(issue, url="(site)", detail=""):
         found[issue].add(url)
@@ -483,6 +487,7 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
                 queue.append((u, 99))
 
     sitemap_added = False
+    processed = set()
     while len(pages) < max_pages:
         if not queue:
             if sitemap_added:
@@ -498,9 +503,10 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
                "hops": len(chain) - 1, "ms": r["ms"], "depth": depth if depth != 99 else "", "title": "", "words": 0,
                "h1": 0, "indexable": False, "in_sitemap": url in in_sitemap, "schema": ""}
         pages[url] = row
+        leaves_site = bare(host_of(chain[-1][0])) != bare(host)
         if loop:
             flag("redirect-loop", url)
-        elif len(chain) > 2:
+        elif len(chain) > 2 and not leaves_site:
             flag("redirect-chain", url, " → ".join(c[0] for c in chain))
         st = r["status"]
         if st in (401, 403) or (st == 503 and b"challenge" in r["body"][:5000].lower()):
@@ -520,6 +526,10 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
             continue
         if final != url and bare(host_of(final)) != bare(host):
             continue
+        if final in processed:
+            row["duplicate_of"] = final
+            continue                       # a redirect to a page already checked: don't count it twice
+        processed.add(final)
         if r["ms"] > THRESHOLDS["slow_ms"]:
             flag("slow-response", url, f"{r['ms']} ms")
         if len(r["body"]) > THRESHOLDS["html_max_kb"] * 1024:
@@ -630,9 +640,11 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
                 flag("hreflang-invalid", final, ", ".join(bad[:5]))
         # anchor text
         generic = sum(1 for h, t in p.anchors if t.lower().strip(" .!→»>") in GENERIC_ANCHORS)
-        empty = sum(1 for h, t in p.anchors if not t and not h.startswith(("#", "javascript:")))
-        if empty:
-            flag("empty-anchor", final, f"{empty} link(s)")
+        empties = [h for h, t in p.anchors if not t and not h.startswith(("#", "javascript:"))]
+        if empties:
+            sample = ", ".join(dict.fromkeys(urllib.parse.urlsplit(urllib.parse.urljoin(final, h)).netloc.replace("www.", "")
+                                             + urllib.parse.urlsplit(urllib.parse.urljoin(final, h)).path[:30] for h in empties))
+            flag("empty-anchor", final, f"{len(empties)} link(s): {sample[:150]}")
         if generic:
             flag("generic-anchor-text", final, f"{generic} link(s)")
 
@@ -651,7 +663,7 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
                 out_internal += 1
                 inlinks[tgt].add(final)
                 link_targets[tgt].add(final)
-            if tgt not in queued and allowed(tgt) and depth != 99:
+            if tgt not in queued and allowed(tgt) and depth != 99 and "nofollow" not in rel and not ACTION_LINK.search(tgt):
                 queued.add(tgt)
                 queue.append((tgt, depth + 1))
         row["internal_links_out"] = out_internal
@@ -686,8 +698,8 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
         if row["status"] >= 400 or row["status"] == 0:
             for s in list(srcs)[:20]:
                 flag("broken-internal-link", s, f"→ {tgt} ({row['status']})")
-        elif row["hops"]:
-            flag("internal-redirect-link", tgt, f"linked from {len(srcs)} page(s)")
+        elif row["hops"] and bare(host_of(row.get("final_url") or tgt)) == bare(host):
+            flag("internal-redirect-link", tgt, f"linked from {len(srcs)} page(s) → {row.get('final_url')}")
     for u in in_sitemap:
         row = pages.get(u)
         if not row:
@@ -734,7 +746,7 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
         for u in ext:
             info = head(u)
             st = info.get("status", 0)
-            if st in (404, 410) or st >= 500 or (st == 0 and info.get("dns")):
+            if st in (404, 410) or 500 <= st < 600 or (st == 0 and info.get("dns")):
                 for pg in list(externals[u])[:20]:
                     flag("broken-external-link", pg, f"→ {u} ({st or 'no answer'})")
         site["external_links_checked"] = len(ext)
@@ -846,8 +858,9 @@ def write_reports(res, out, site_name):
                          f"{p.get('field_lcp_ms') or '—'} ms / {p.get('field_inp_ms') or '—'} ms |")
         L.append("")
     L += ["---", "_Built by seo-audit/audit.py (Content Engine). Issue set and thresholds adapted from OpenSEO (MIT). "
-          "This is a crawl of the HTML your server returns; it doesn't run JavaScript. For backlinks, rankings and AI-visibility "
-          "tracking, use the OpenSEO skill (`.claude/skills/openseo-audit`)._"]
+          + ("Pages were rendered with JavaScript before checking. " if s.get("rendered") else
+             "This checks the HTML your server returns (what most AI crawlers see); add --render to check JavaScript-rendered content. ")
+          + "For backlinks, rankings and AI-visibility tracking, connect OpenSEO and use the `seo-audit` skill._"]
     md = "\n".join(L)
     for p in (os.path.join(out, f"{today}.md"), os.path.join(out, "latest.md")):
         open(p, "w").write(md)

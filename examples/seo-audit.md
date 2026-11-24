@@ -51,7 +51,7 @@
 **How to fix:** Expand the page with a direct answer, specifics and examples — or noindex/merge it if it has no search purpose.
 
 - http://demo-site.example/ — 149 words
-- http://demo-site.example/blog/orphan.html — 8 words
+- http://demo-site.example/blog/orphan.html — 9 words
 - http://demo-site.example/blog/post-a.html — 7 words
 
 ### Missing meta description — 3 page(s)
@@ -88,7 +88,7 @@
 
 **How to fix:** Add descriptive text, or alt text on the linked image, or an aria-label for icon links.
 
-- http://demo-site.example/ — 1 link(s)
+- http://demo-site.example/ — 1 link(s): demo-site.example/blog/post-b.html
 
 ### Multiple H1 headings — 1 page(s)
 
@@ -294,4 +294,4 @@
 - http://demo-site.example/blog/orphan.html
 
 ---
-_Built by seo-audit/audit.py (Content Engine). Issue set and thresholds adapted from OpenSEO (MIT). This is a crawl of the HTML your server returns; it doesn't run JavaScript. For backlinks, rankings and AI-visibility tracking, use the OpenSEO skill (`.claude/skills/openseo-audit`)._
+_Built by seo-audit/audit.py (Content Engine). Issue set and thresholds adapted from OpenSEO (MIT). This checks the HTML your server returns (what most AI crawlers see); add --render to check JavaScript-rendered content. For backlinks, rankings and AI-visibility tracking, connect OpenSEO and use the `seo-audit` skill._

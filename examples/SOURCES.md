@@ -3,7 +3,7 @@
 Every source, grouped by category: what it's for and how it did on the last run.
 This file is rewritten automatically after each run. To add or remove a source, edit `sources.json` in this folder.
 
-**Last run:** 2026-11-24 06:50 UTC · **Scanned automatically:** 1 of 1 working
+**Last run:** 2026-11-24 07:41 UTC · **Scanned automatically:** 1 of 1 working
 
 ## Sales & GTM
 

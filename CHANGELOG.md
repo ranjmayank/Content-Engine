@@ -2,6 +2,9 @@
 
 Notable changes. Your settings (`engine.config.json`, `scanner/sources/`) are never touched by an update — see [docs/UPDATING.md](docs/UPDATING.md).
 
+## 1.1.1 — 2026-11-24
+- **Audit, from the first live-site run:** no longer crawls share/nofollow/action links (`?share=`, `?replytocom=`…); redirect chains that leave the site aren't flagged; a page reached through a redirect is checked once (fixes false duplicate title/content); LinkedIn's 999 and other non-HTTP codes aren't reported as broken links; empty-link findings show which links; PageSpeed errors explain the missing key.
+
 ## 1.1.0 — 2026-11-24
 - **Audit:** hreflang, broken outbound links (`--external`), heavy/unsized images, sitemap freshness and size, weak anchor text, FAQ schema that doesn't match the page, optional JavaScript rendering (`--render`).
 - **Analytics:** Bing Webmaster Tools (queries and pages; Bing feeds Copilot and ChatGPT search).
