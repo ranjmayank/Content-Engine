@@ -2,6 +2,14 @@
 
 Notable changes. Your settings (`engine.config.json`, `scanner/sources/`) are never touched by an update — see [docs/UPDATING.md](docs/UPDATING.md).
 
+## 1.2.0 — 2026-11-24
+- **Setup in the browser, no installs:** Actions → **1 · Set up my engine** — an 8-box form (brand, website, name, niche, country/city, about, language, sites you read). It writes your settings, makes the brand kit, commits, and starts the first news scan and SEO audit.
+- **Actions → 2 · Check my setup:** a ✅/⚠️/❌ checklist of what's working (it sees whether secrets are set, never their values), the one thing to do next, and when your jobs run in your timezone.
+- **`setup/quick.py`:** the same 6-question setup in the terminal; accepts countries and cities for the timezone ("India", "London", "New York").
+- **docs/START-HERE.md:** a click-by-click guide for non-technical users (Part 1 basics, Part 2 Google/Bing/email, Part 3 Claude), with what you should see after each step and what to do if it goes wrong.
+- `engine-setup` skill finishes a quick setup conversationally (bio, handles, voice, channels…).
+- No more manual "Read and write permissions" step: each workflow asks for what it needs.
+
 ## 1.1.1 — 2026-11-24
 - **Audit, from the first live-site run:** no longer crawls share/nofollow/action links (`?share=`, `?replytocom=`…); redirect chains that leave the site aren't flagged; a page reached through a redirect is checked once (fixes false duplicate title/content); LinkedIn's 999 and other non-HTTP codes aren't reported as broken links; empty-link findings show which links; PageSpeed errors explain the missing key.
 

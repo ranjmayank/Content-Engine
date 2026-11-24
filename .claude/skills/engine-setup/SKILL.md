@@ -7,6 +7,15 @@ description: Set up or re-configure this Content Engine for the user's niche —
 
 You set the engine up for the user's niche in a conversation, so they never have to edit JSON. Ask in small groups (2–4 questions at a time), offer sensible defaults, and keep going.
 
+Many users are not technical. Use plain words (say "your settings", not "the JSON"), give one step at a time with exact clicks, and point them to `docs/START-HERE.md` for the browser-only route.
+
+## Step 0 — Where are they?
+
+- **No `engine.config.json`:** the fastest route is the browser form — tell them: *Actions tab → "1 · Set up my engine" → Run workflow → fill the 8 boxes → Run workflow* (docs/START-HERE.md, Part 1). Or run the interview below and write the files yourself.
+- **`engine.config.json` has `"_setup": {"mode": "quick"}`:** they used the quick form. Say what's already set (brand, site, niche, timezone), then **finish the setup**: ask only for what quick setup filled with defaults — bio and role line, what their job lets them see, anything confidential, social handles, which channels they use, posts per week, voice and banned phrases, colours, CTAs, and whether to adjust the pillars. Update the file, remove `_setup`, re-run `python3 setup/schedule.py` if times changed, and commit (with their go-ahead).
+- **Fully set up:** show the current values and ask only what they want to change.
+- If they ask "where am I?" or something isn't working, have them run **Actions → "2 · Check my setup"** and read its Summary with them.
+
 ## Step 1 — Interview
 
 Check whether `engine.config.json` exists; if it does, show the current values and ask only what they want to change.

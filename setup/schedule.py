@@ -10,7 +10,8 @@ to UTC and rewrites the `- cron:` line tagged `# engine:<job>` in each workflow.
   cadence.times.email      "11:00"      daily topic email (leave time after the topic-list task)
   cadence.times.seo_audit  "Mon 07:00"  weekly SEO audit
 
-Usage: python3 setup/schedule.py            (prints the result; --dry-run to only print)
+Usage: python3 setup/schedule.py            (rewrites the cron lines; --dry-run to only print)
+       python3 setup/schedule.py --show     (when each job runs now in your timezone, and the line to change)
 GitHub may start scheduled jobs a few minutes late at busy times; that's normal.
 """
 import datetime as dt
@@ -41,7 +42,49 @@ def to_cron(spec, tzname):
     return f"{u.minute} {u.hour} * * *"
 
 
+LABEL = {"analytics": "Daily search & analytics pull", "scan": "Daily fuel scan", "topic_list": "Daily topic list (Claude API)",
+         "email": "Daily topic email", "seo_audit": "Weekly SEO audit"}
+
+
+def cron_to_local(cron, tzname):
+    """'45 7 * * 1' (UTC) → 'Mon 13:15' in tzname."""
+    from zoneinfo import ZoneInfo
+    mi, h, _, _, dow = cron.split()[:5]
+    day = 5 if dow == "*" else 4 + (int(dow) or 7)        # 2026-01-05 is a Monday; cron 1 = Monday
+    u = dt.datetime(2026, 1, day if dow != "*" else 5, int(h), int(mi), tzinfo=dt.timezone.utc)
+    loc = u.astimezone(ZoneInfo(tzname))
+    return (DAYS[loc.weekday()] + " " if dow != "*" else "") + loc.strftime("%H:%M")
+
+
+def show(markdown=False):
+    """Print when each job runs now (in your timezone) and the cron line to use for your chosen time."""
+    cfg = json.load(open(os.path.join(ROOT, "engine.config.json")))
+    cad = cfg.get("cadence", {})
+    tzname = cad.get("timezone", "UTC")
+    times = {**DEFAULTS, **cad.get("times", {})}
+    rows = []
+    for f in sorted(os.listdir(WF)):
+        s = open(os.path.join(WF, f)).read()
+        for job, spec in times.items():
+            m = re.search(rf'- cron: "([^"]*)"\s+# engine:{job}\b', s)
+            if m:
+                want = to_cron(spec, tzname)
+                rows.append((LABEL.get(job, job), f, cron_to_local(m.group(1), tzname), spec, m.group(1), want))
+    if markdown:
+        print(f"| Job | Runs now ({tzname}) | Your chosen time | To change: in `.github/workflows/<file>` set the cron line to |")
+        print("|---|---|---|---|")
+        for lab, f, now, spec, cur, want in rows:
+            print(f"| {lab} | {now} | {spec} | " + ("✅ already right" if cur == want else f'`{f}` → `- cron: "{want}"`') + " |")
+    else:
+        for lab, f, now, spec, cur, want in rows:
+            print(f"{lab:32} runs {now} ({tzname}); chosen {spec}" + ("" if cur == want else f'  → edit {f}: - cron: "{want}"'))
+    return rows
+
+
 def main():
+    if "--show" in sys.argv:
+        show("--markdown" in sys.argv)
+        return
     cfg = json.load(open(os.path.join(ROOT, "engine.config.json")))
     cad = cfg.get("cadence", {})
     tzname = cad.get("timezone", "UTC")

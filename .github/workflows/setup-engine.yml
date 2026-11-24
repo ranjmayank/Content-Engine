@@ -1,0 +1,126 @@
+name: "1 · Set up my engine"
+
+# The no-install setup. Actions tab → "1 · Set up my engine" → Run workflow → fill the form → Run.
+# It writes your settings, makes your brand kit, commits them, then starts your first news scan and SEO audit.
+# Run it again any time to change these answers (your other settings are kept).
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: "Your brand or blog name (e.g. Growth Notes)"
+        required: true
+      site:
+        description: "Your website address (e.g. mysite.com)"
+        required: true
+      name:
+        description: "Your name (shown as the author)"
+        required: true
+      niche:
+        description: "Your niche (pick the closest — you can fine-tune topics later)"
+        type: choice
+        required: true
+        options:
+          - "ai-marketing — AI in marketing, SEO & AEO"
+          - "ai-business-security — AI for business, AI security & evals"
+          - "b2b-saas — B2B SaaS growth"
+          - "ecommerce — E-commerce & DTC"
+          - "personal-finance — Personal finance"
+          - "health-fitness — Health & fitness"
+          - "travel — Travel"
+          - "local-business — Local business marketing"
+          - "developer-tools — Developer tools & software engineering"
+      location:
+        description: "Where are you? Country or city (e.g. India, London, New York) — sets the times jobs run"
+        required: true
+        default: "India"
+      about:
+        description: "One line about what you do (optional, e.g. runs marketing at a SaaS company)"
+        required: false
+      language:
+        description: "Language to write in"
+        required: false
+        default: "English"
+      sites:
+        description: "Optional: websites you read in your niche, separated by commas"
+        required: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: repo-writes
+  cancel-in-progress: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Write your settings
+        env:
+          SETUP_BRAND: ${{ inputs.brand }}
+          SETUP_SITE: ${{ inputs.site }}
+          SETUP_NAME: ${{ inputs.name }}
+          SETUP_NICHE: ${{ inputs.niche }}
+          SETUP_TIMEZONE: ${{ inputs.location }}
+          SETUP_ABOUT: ${{ inputs.about }}
+          SETUP_LANGUAGE: ${{ inputs.language }}
+          SETUP_SITES: ${{ inputs.sites }}
+        run: |
+          python3 setup/quick.py
+          # GitHub's built-in token may not change workflow files, so the job times stay as they are;
+          # the summary below shows when they run in your timezone and how to change them.
+          git checkout -- .github/workflows
+      - name: Make your brand kit
+        run: |
+          pip install --quiet Pillow
+          python3 brand/scripts/make_brand.py
+      - name: Save to your repo
+        env:
+          BRAND: ${{ inputs.brand }}
+        run: |
+          git config user.name "setup-bot"
+          git config user.email "setup-bot@users.noreply.github.com"
+          git add -A engine.config.json scanner/sources CLAUDE.md style.md brand
+          git diff --staged --quiet && echo "Nothing changed." || git commit -m "Set up the engine for $BRAND"
+          git pull --rebase && git push
+      - name: Start the first news scan and SEO audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run daily-fuel-scan.yml --ref "${GITHUB_REF_NAME}" || echo "Start 'Daily fuel scan' by hand from the Actions tab."
+          gh workflow run weekly-seo-audit.yml --ref "${GITHUB_REF_NAME}" || echo "Start 'Weekly SEO audit' by hand from the Actions tab."
+      - name: What happens next
+        run: |
+          python3 - >> "$GITHUB_STEP_SUMMARY" <<'PY'
+          import json
+          c = json.load(open("engine.config.json"))
+          src = json.load(open("scanner/sources/sources.json"))
+          print(f"""## ✅ Your engine is set up — {c['brand']['name']}
+
+          | | |
+          |---|---|
+          | Website | {c['brand']['site']} |
+          | Niche | {c['niche']['preset']} — {', '.join(p['name'] for p in c['niche']['pillars'])} |
+          | Timezone | {c['cadence']['timezone']} |
+          | News sources | {len(src)} |
+
+          **Already started for you:** your first news scan and SEO audit (see the Actions tab — each takes 2–10 minutes).
+
+          **When they finish, open these files in your repo:**
+          - `scanner/sources/digests/` → today's news, ranked for your niche
+          - `seo-audit/reports/latest.md` → what to fix on your site
+          - `brand/` → your starter brand images
+
+          **When the daily jobs run:** see the table below. They work fine as they are — to move them to the times you prefer, open the file named in the table, click ✏️, change that one `cron` line, and click **Commit changes** (or ask Claude to do it).
+
+          **Next (all optional):** follow **docs/START-HERE.md → Part 2** to add your Google data and the daily email, then run **"2 · Check my setup"** to see what's connected.
+          """.replace("\n          ", "\n"))
+          PY
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python3 setup/schedule.py --show --markdown >> "$GITHUB_STEP_SUMMARY"

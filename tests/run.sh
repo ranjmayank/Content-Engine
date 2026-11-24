@@ -10,6 +10,20 @@ rm -f engine.config.json scanner/sources/sources.json scanner/sources/territorie
 export NO_PROXY=127.0.0.1 no_proxy=127.0.0.1
 ok() { echo "  ✓ $1"; }
 
+echo "0. quick setup (the browser form's path) and setup check"
+SETUP_BRAND="Fit Daily" SETUP_SITE="fitdaily.example" SETUP_NAME="Sam Lee" SETUP_NICHE="health-fitness — Health & fitness" \
+  SETUP_TIMEZONE="London" python3 setup/quick.py >/dev/null
+python3 - <<'PY'
+import json
+c = json.load(open("engine.config.json"))
+assert c["brand"]["site"] == "https://fitdaily.example" and c["niche"]["preset"] == "health-fitness"
+assert c["cadence"]["timezone"] == "Europe/London" and c["_setup"]["mode"] == "quick"
+assert len(json.load(open("scanner/sources/sources.json"))) >= 5
+PY
+ok "quick setup writes settings from the form fields"
+GITHUB_ACTIONS=true python3 setup/check.py | grep -q "Do this next" && ok "setup check runs"
+rm -f engine.config.json scanner/sources/sources.json scanner/sources/territories.json
+
 echo "1. setup (answers file)"
 python3 - <<'PY'
 import json; c=json.load(open("engine.config.example.json")); c["use_preset_sources"]=False; json.dump(c,open("/tmp/ce-answers.json","w"))

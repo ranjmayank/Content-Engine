@@ -35,20 +35,18 @@ It runs on free GitHub Actions and Claude skills. Pick a niche preset (or define
 
 **Niche presets:** AI in marketing & SEO · AI for business & AI security · B2B SaaS · E-commerce & DTC · Personal finance · Health & fitness · Travel · Local business · Developer tools · or start blank. The first two ship with 58–77 tested sources; the others ship 8–13 well-known starter sites whose feeds are found on the first run — add the sites you read the same way.
 
-## Quick start (15 minutes to a working scanner and audit)
+## Get started — in your browser, no coding
 
-1. **Get your own copy.** Click **Use this template** (or Fork) → make it **private** if you'll store analytics data in it.
-2. **Set it up for your niche.**
-   ```bash
-   git clone https://github.com/<you>/<your-repo> && cd <your-repo>
-   python3 setup/init.py            # ~5 minutes of questions; or open the repo in Claude and say "set up the engine"
-   pip install Pillow && python3 brand/scripts/make_brand.py
-   git add -A && git commit -m "Set up for my niche" && git push
-   ```
-3. **Turn on Actions.** Repo → **Actions** → enable workflows → run **Daily fuel scan** and **Weekly SEO audit** once.
-4. Read `scanner/sources/digests/` and `seo-audit/reports/latest.md`. 🎉
+**➡️ Follow [docs/START-HERE.md](docs/START-HERE.md)** — a click-by-click guide for non-technical users. The short version:
 
-Windows: use `py` instead of `python3`, or Git Bash (see the setup guide). Then add Search Console, GA4 and Bing, email, and the topic list when you're ready: **[docs/SETUP.md](docs/SETUP.md)** walks through every step, and **[docs/ACCESS.md](docs/ACCESS.md)** lists every access and secret, what it's for, and whether you need it.
+1. **Use this template** (green button, top right) → **Create a new repository** → choose **Private** → **Create**.
+2. In your new repo: **Actions** tab → **1 · Set up my engine** → **Run workflow** → fill in 8 boxes (brand, website, your name, niche, country…) → **Run workflow**.
+3. Wait ~10 minutes. Your first news digest and SEO audit appear in the repo on their own.
+4. **Actions** → **2 · Check my setup** → **Run workflow** → the Summary tells you what's working and the one thing to do next.
+
+That's Part 1 — it runs every day from then on. [Part 2](docs/START-HERE.md#part-2--connect-your-data-and-email-30-minutes) adds your Google/Bing data and a daily email (30 min), [Part 3](docs/START-HERE.md#part-3--write-with-claude-10-minutes) connects Claude for writing (10 min). Every key and permission is listed in [docs/ACCESS.md](docs/ACCESS.md).
+
+**Prefer the terminal?** `python3 setup/quick.py` (6 questions) or `python3 setup/init.py` (every option) — see [docs/SETUP.md](docs/SETUP.md).
 
 ## Using it with Claude
 
@@ -69,7 +67,7 @@ In claude.ai you can also upload a skill folder under **Customize → Skills**, 
 | Path | What's in it |
 |---|---|
 | `engine.config.json` | **Your settings** (written by `setup/init.py`; see `engine.config.example.json`) |
-| `setup/` | `init.py` (setup), `presets/` (niches), `discover_feed.py` (add sources), `schedule.py` (local times → cron), `create_notion_db.py` |
+| `setup/` | `quick.py` (6-question setup, also behind the **1 · Set up my engine** workflow), `init.py` (full setup), `check.py` (**2 · Check my setup**), `presets/` (niches), `discover_feed.py` (add sources), `schedule.py` (local times → cron), `create_notion_db.py` |
 | `scanner/` | `fuel_scanner.py` + `sources/` (sources.json, territories.json, digests, SOURCES.md health report) |
 | `analytics/` | `fetch.py` (Search Console + GA4), `analyze.py` (report + opportunities.json), `reports/` |
 | `seo-audit/` | `audit.py` (crawler), `issues.py` (every check, why it matters, how to fix), `reports/` |

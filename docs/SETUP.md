@@ -1,4 +1,8 @@
-# Setup, step by step
+# Setup from the terminal (advanced)
+
+> **Not comfortable with a terminal? Use [START-HERE.md](START-HERE.md)** — the same setup in your browser, with a form.
+>
+> In a hurry? `python3 setup/quick.py` asks 6 questions and fills the rest with defaults. `python3 setup/check.py` shows what's set up.
 
 Each step works on its own: stop after step 4 and you already have a daily news digest and a weekly SEO audit. Steps 5–9 add your search data, email, Claude and integrations.
 
@@ -71,7 +75,7 @@ git add -A && git commit -m "Set up for my niche" && git push
 ## 4. Turn on GitHub Actions
 
 1. Repo → **Actions** → "I understand my workflows, go ahead and enable them".
-2. Settings → **Actions → General → Workflow permissions** → **Read and write permissions** → Save. (The jobs commit their reports back to the repo.)
+2. Nothing else to switch on: each workflow asks for the permission it needs. (If an organisation policy blocks it and jobs fail to push, see [troubleshooting.md](troubleshooting.md).)
 3. Actions → **Daily fuel scan** → **Run workflow**. The first run records everything it sees and reports the last 2 days.
 4. Open `scanner/sources/SOURCES.md`: 🟢 working · 🟡 reachable but nothing found · 🔴 failed. Fix or remove 🔴 sources (see [troubleshooting.md](troubleshooting.md)).
 5. Actions → **Weekly SEO audit** → **Run workflow** → read `seo-audit/reports/latest.md`.

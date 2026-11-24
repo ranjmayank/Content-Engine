@@ -1,12 +1,14 @@
 # Every access, key and permission — what it's for and whether you need it
 
+> Step-by-step clicks for each of these are in **[START-HERE.md](START-HERE.md)**. Not sure what you've set up? Run **Actions → 2 · Check my setup**.
+
 Nothing here is needed to start. With **zero** secrets you get the daily news digest, the weekly SEO & AI-search audit, the brand kit and every Claude skill. Add the rest when you want what they unlock.
 
 **Where secrets go:** GitHub → your repo → **Settings → Secrets and variables → Actions**. *Secrets* are hidden after saving; *Variables* are visible. Never paste a secret into a chat, a file in the repo, a commit message or an issue.
 
 | # | Access | Unlocks | Required? | Where you get it | Goes in |
 |---|---|---|---|---|---|
-| 1 | **GitHub repo + Actions** with *Read and write* workflow permissions | All automation (jobs commit reports back) | **Yes** | Settings → Actions → General | — |
+| 1 | **GitHub repo with Actions on** (each workflow asks for the write access it needs) | All automation (jobs commit reports back) | **Yes** | Actions tab → enable | — |
 | 2 | **Your website, readable by bots** (no WAF block for `ContentEngine-Audit`) | SEO audit | Yes for the audit | Your host / Cloudflare | — |
 | 3 | `GOOGLE_SERVICE_ACCOUNT_JSON` | Search Console + GA4 pulls | Recommended | Google Cloud → service account key (SETUP step 5) | Secret |
 | 4 | `GSC_SITE_URL` | Which Search Console property | With #3 | Search Console property name | Variable |

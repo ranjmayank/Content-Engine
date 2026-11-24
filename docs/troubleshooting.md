@@ -5,7 +5,12 @@
 | Symptom | Fix |
 |---|---|
 | Jobs say "Not set up yet" | Run `python3 setup/init.py`, then commit and push `engine.config.json`. |
-| `git push` fails in a job (403) | Settings → Actions → General → Workflow permissions → **Read and write**. |
+| Not sure what's set up or what to do next | **Actions → 2 · Check my setup → Run workflow**, then open the run's **Summary**. |
+| **1 · Set up my engine** fails at "Write your settings" | Usually a typo: check the website address (e.g. `mysite.com`) and pick a niche from the list. Run the form again — it's safe to repeat. |
+| **1 · Set up my engine** isn't in the Actions list | You're in the original repo, not your copy — open your own repo (your username in the address). Or Actions isn't enabled yet: click the green "I understand my workflows…" button. |
+| The first scan/audit didn't start after setup | Start them by hand: **Actions → Daily fuel scan → Run workflow**, then **Weekly SEO audit**. |
+| `git push` fails in a job (403) | Your organisation restricts workflow permissions. Settings → Actions → General → Workflow permissions → **Read and write** (or ask an org admin). |
+| "Service account key creation is disabled" (Google Cloud) | A company Google Workspace policy. Create the project with a personal Google account, or ask your admin. |
 | Scheduled jobs don't run | Enable Actions (Actions tab). GitHub pauses schedules in public repos with no activity for 60 days — push any commit or run a workflow by hand to wake them. |
 | Jobs run at the wrong time | `python3 setup/schedule.py` after changing `cadence`. GitHub can start scheduled jobs late at busy times. In daylight-saving zones the time shifts an hour in summer. |
 | Analytics job is skipped | `GOOGLE_SERVICE_ACCOUNT_JSON` isn't set. |
