@@ -5,7 +5,7 @@ description: Read the site's Google Search Console and GA4 data and turn it into
 
 # Search & analytics review
 
-**First, read `engine.config.json`** (site, pillars, `integrations`).
+**First, read `engine.config.json`** (and write in `niche.language`, default English) (site, pillars, `integrations`).
 
 You turn the site's own numbers into a short list of actions. A number is only useful if it ends in a decision: write, update, rewrite, merge, or leave alone.
 

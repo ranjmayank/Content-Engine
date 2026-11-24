@@ -5,7 +5,7 @@ description: Weekly planning session — score the week's fuel items with the 3-
 
 # Weekly content plan
 
-**First, read `engine.config.json`**: `niche.pillars`, `niche.audience`, `channels`, `cadence` (posts per week, timezone), `integrations`. Read `docs/daily-cadence.md` and `docs/content-fuel-system.md` if they aren't in context.
+**First, read `engine.config.json`** (and write in `niche.language`, default English): `niche.pillars`, `niche.audience`, `channels`, `cadence` (posts per week, timezone), `integrations`. Read `docs/daily-cadence.md` and `docs/content-fuel-system.md` if they aren't in context.
 
 **Surfaces and roles** (only those switched on in `channels`)
 - **The site** — the canonical home; every blog post publishes here first.

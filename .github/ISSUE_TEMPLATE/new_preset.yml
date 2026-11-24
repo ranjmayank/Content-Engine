@@ -1,0 +1,19 @@
+name: New niche preset
+description: Propose pillars, keywords and sources for a niche
+labels: [preset]
+body:
+  - type: input
+    id: niche
+    attributes: {label: Niche}
+    validations: {required: true}
+  - type: textarea
+    id: pillars
+    attributes:
+      label: Pillars (3–6) — name, what it covers, 10–20 keywords each
+    validations: {required: true}
+  - type: textarea
+    id: audience
+    attributes: {label: Audience and what's out of scope}
+  - type: textarea
+    id: sources
+    attributes: {label: Sources (optional)}

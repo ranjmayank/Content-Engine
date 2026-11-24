@@ -214,5 +214,16 @@
       "#marketing"
     ]
   },
-  "sources_file": "ai-marketing.sources.json"
+  "sources_file": "ai-marketing.sources.json",
+  "regional": {
+    "India": [
+      "Inc42",
+      "Analytics India Magazine",
+      "exchange4media",
+      "afaqs!",
+      "ETBrandEquity",
+      "MediaNama",
+      "YourStory"
+    ]
+  }
 }

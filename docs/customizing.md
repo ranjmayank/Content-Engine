@@ -41,16 +41,20 @@ After changing `cadence.timezone` or `cadence.times`, run `python3 setup/schedul
 
 | Field | Options |
 |---|---|
-| `type` | `rss` (RSS or Atom) · `sitemap` (for sites without a feed) · `manual` (listed in SOURCES.md to check by hand) |
+| `type` | `rss` (RSS or Atom) · `sitemap` (for sites without a feed) · `auto` (just the site URL — the scanner finds the feed on its first run and saves it) · `manual` (listed in SOURCES.md to check by hand) |
 | `include` | For sitemaps: only URLs containing this path, e.g. `"/blog/"` |
 | `topic_only` | `true` for a general news site — keep only stories that hit a pillar or topic term |
 | `ai_only` | `true` — keep only stories about AI |
 
 Aim for 30–80 sources: a few primary sources (official blogs of the companies that shape your niche), the main trade publications, 5–10 independent experts, and communities to check by hand. Cut any source that produces no top pick in 30 days.
 
+## Language and region
+
+`niche.language` sets the language the skills write in (titles, posts, captions); the scanner and audit work for any language, but add pillar keywords in that language to `territories.json` so stories and queries are tagged. `niche.region` steers examples and regional sources: presets with region-specific sources (`"regional"` in the preset) ask whether to keep them.
+
 ## Adding a niche preset
 
-Copy `setup/presets/blank.json` to `setup/presets/<name>.json`, fill in `label`, `summary`, `audience`, `pillars`, `out_of_scope`, `territories` and `hashtags`. Optionally add `<name>.sources.json` and set `"sources_file"`. Run the scanner for a week, check SOURCES.md, and send a pull request — tested source lists are the most useful contribution.
+Copy `setup/presets/blank.json` to `setup/presets/<name>.json`, fill in `label`, `summary`, `audience`, `pillars`, `out_of_scope`, `territories` and `hashtags`. Add `<name>.sources.json` (sites can be `"type": "auto"`), set `"sources_file"`, and list region-specific sources under `"regional": {"Country": [names]}`. Run the scanner for a week, check SOURCES.md, and send a pull request — tested source lists are the most useful contribution.
 
 ## Skills
 

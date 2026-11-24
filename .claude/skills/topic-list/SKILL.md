@@ -5,7 +5,7 @@ description: Build today's ranked topic list from the scanner digest and the sit
 
 # Daily topic list
 
-**First, read `engine.config.json`** (pillars, audience, out_of_scope, `cadence.timezone`) and `content/topic-lists/README.md` (the JSON format).
+**First, read `engine.config.json`** (and write in `niche.language`, default English) (pillars, audience, out_of_scope, `cadence.timezone`) and `content/topic-lists/README.md` (the JSON format).
 
 ## Steps
 

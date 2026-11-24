@@ -5,7 +5,7 @@ description: Write an engaging, information-rich Medium article for the author o
 
 # Medium Article
 
-**First, read `engine.config.json`** — `brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `hashtags`, `channels`, and `author.confidential`. Wherever this skill says *the author*, *the site* or *the pillars*, use those values. If the file is missing, run the `engine-setup` skill first.
+**First, read `engine.config.json`** (and write in `niche.language`, default English) — `brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `hashtags`, `channels`, and `author.confidential`. Wherever this skill says *the author*, *the site* or *the pillars*, use those values. If the file is missing, run the `engine-setup` skill first.
 
 You write the author's Medium article for the current topic. The the site post is built to rank and be cited; the Medium article is built to be **read to the end, clapped, highlighted, and followed**. Same topic, different job.
 

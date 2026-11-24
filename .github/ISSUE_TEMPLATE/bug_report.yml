@@ -1,0 +1,30 @@
+name: Bug report
+description: Something in the scanner, audit, analytics, setup or a skill doesn't work
+labels: [bug]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part?
+      options: [Setup (init.py), News scanner, SEO audit, Analytics (Search Console / GA4 / Bing), Topic list / email, A Claude skill, Docs, Other]
+    validations: {required: true}
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations: {required: true}
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps or the command you ran
+      render: shell
+  - type: textarea
+    id: log
+    attributes:
+      label: Error output or Actions log (remove any secrets, keys or private URLs)
+      render: shell
+  - type: input
+    id: preset
+    attributes:
+      label: Niche preset and Python version
+      placeholder: "b2b-saas, Python 3.12"

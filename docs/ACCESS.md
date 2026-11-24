@@ -16,6 +16,8 @@ Nothing here is needed to start. With **zero** secrets you get the daily news di
 | 8 | `MAIL_TO`, `TOPIC_PAGE_URL` | Email recipient, link to the topic page | Optional | — | Variables |
 | 9 | `NOTION_TOKEN`, `NOTION_DATABASE_ID` | Top picks into a Notion Fuel Database | Optional | notion.so/profile/integrations + `setup/create_notion_db.py` | Secrets |
 | 10 | `NOTION_STATUS_TYPE` = `status` | Only if your Notion database uses the built-in Status type | Optional | — | Variable |
+| 10b | `BING_API_KEY` + `BING_SITE_URL` | Bing Webmaster Tools data (Bing feeds Copilot and ChatGPT search) | Recommended | bing.com/webmasters → Settings → API access | Secret + Variable |
+| 10c | `ANTHROPIC_API_KEY` (+ `CLAUDE_MODEL`, `TOPIC_WEB_SEARCH`) | Daily topic list built by the Claude API workflow | Optional | console.anthropic.com → API keys | Secret (+ Variables) |
 | 11 | `PSI_API_KEY` | Core Web Vitals in the weekly audit | Optional | Google Cloud → enable PageSpeed Insights API → API key | Secret |
 | 12 | `AUDIT_MAX_PAGES` | Bigger/smaller weekly crawl (default 200) | Optional | — | Variable |
 | 13 | **Claude** (claude.ai plan or Claude Code) | The skills; the daily topic-list task | For writing | claude.ai | — |
@@ -25,6 +27,8 @@ Nothing here is needed to start. With **zero** secrets you get the daily news di
 ## What each piece can and can't do
 
 - The **service account** gets read-only access you grant per property. Remove it from Search Console / GA4 to revoke.
+- The **Bing API key** reads your Webmaster Tools data; regenerate it in Bing to revoke.
+- The **Claude API key** is billed to your Anthropic account; set a monthly spend limit in the console.
 - **GitHub Actions** writes only to your repo, using the built-in `GITHUB_TOKEN`.
 - **Claude skills** never publish, schedule, send or change site settings without your explicit go-ahead. Connectors are used only when you've marked them in `integrations`.
 - The **scanner** and **audit** fetch public pages only. The audit respects your robots.txt for its own user agent and waits `seo_audit.delay` seconds between requests.

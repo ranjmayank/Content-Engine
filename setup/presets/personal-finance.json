@@ -133,5 +133,11 @@
       "#financialplanning"
     ]
   },
-  "sources_file": null
+  "sources_file": "personal-finance.sources.json",
+  "regional": {
+    "India": [
+      "Freefincal (India)",
+      "Moneycontrol Personal Finance (India)"
+    ]
+  }
 }

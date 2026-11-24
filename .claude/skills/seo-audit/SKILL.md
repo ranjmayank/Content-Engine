@@ -5,7 +5,7 @@ description: Audit the site for SEO and AI-search problems and turn the findings
 
 # SEO & AI-search audit
 
-**First, read `engine.config.json`** (`brand.site`, `seo_audit`, `integrations.openseo`).
+**First, read `engine.config.json`** (and write in `niche.language`, default English) (`brand.site`, `seo_audit`, `integrations.openseo`).
 
 You find what's stopping the site from ranking and being cited, and say what to fix first in plain words — for someone who may never have done SEO. Every recommendation names the page(s), the exact change, and why it's worth the effort.
 
@@ -16,11 +16,12 @@ You find what's stopping the site from ranking and being cited, and say what to 
    ```bash
    python3 seo-audit/audit.py                    # brand.site, up to seo_audit.max_pages
    python3 seo-audit/audit.py --max-pages 500 --psi   # bigger crawl + PageSpeed for the top 5 pages
+   python3 seo-audit/audit.py --external --render     # + outbound links, + JavaScript rendering (needs Playwright)
    ```
    If this environment can't reach the site, tell the user to run the workflow: GitHub → Actions → "Weekly SEO audit" → Run workflow, then pull and re-read `seo-audit/reports/latest.json`.
 3. Read `latest.json`: `score`, `site` (crawler access, llms.txt, sitemaps, pages crawled, `stopped_at_limit`), `issues` (severity, count, urls, details, fix), `pagespeed`.
 
-What the crawler checks: status codes, redirects and loops, broken internal links, slow responses, JavaScript-only pages, noindex, canonicals, sitemap hygiene, orphan and deep pages, titles, meta descriptions, H1s and heading order, thin and duplicate content, image alt text, lang, viewport, Open Graph, mixed content, JSON-LD validity and Article dates/author, HTTPS and host consolidation, robots.txt, soft 404s, llms.txt, and which search / AI-search / AI-training crawlers robots.txt lets in. It reads the HTML the server returns; it doesn't run JavaScript.
+What the crawler checks: status codes, redirects and loops, broken internal links, slow responses, JavaScript-only pages, noindex, canonicals, sitemap hygiene, orphan and deep pages, titles, meta descriptions, H1s and heading order, thin and duplicate content, image alt text, image weight and dimensions, empty and generic link text, outbound links (with `--external`), hreflang, sitemap freshness and size, lang, viewport, Open Graph, mixed content, JSON-LD validity, Article dates/author, FAQ schema vs the visible page, HTTPS and host consolidation, robots.txt, soft 404s, llms.txt, and which search / AI-search / AI-training crawlers robots.txt lets in. By default it reads the HTML the server returns; `--render` runs JavaScript first.
 
 ## Step 2 — Go deeper with OpenSEO (only if connected)
 

@@ -29,6 +29,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install a browser (only if seo_audit.render_js is true)
+        run: |
+          if python3 -c 'import json,sys;sys.exit(0 if json.load(open("engine.config.json")).get("seo_audit",{}).get("render_js") else 1)' 2>/dev/null; then
+            pip install playwright && python3 -m playwright install --with-deps chromium
+          fi
       - name: Audit
         env:
           AUDIT_MAX_PAGES: ${{ github.event.inputs.max_pages || vars.AUDIT_MAX_PAGES }}

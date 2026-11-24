@@ -5,7 +5,7 @@ description: Turn one finished deep blog post into its full distribution set —
 
 # Blog Cascade
 
-**First, read `engine.config.json`** — `channels` decides which assets to make (skip any channel that's off), `brand.handles` goes in CTAs, `hashtags`, `voice` and `author.confidential` apply to everything.
+**First, read `engine.config.json`** (and write in `niche.language`, default English) — `channels` decides which assets to make (skip any channel that's off), `brand.handles` goes in CTAs, `hashtags`, `voice` and `author.confidential` apply to everything.
 
 You turn one finished **deep post** into every asset it should feed. One post, written once, distributed everywhere. Ask for the post (text or link) if it isn't provided.
 

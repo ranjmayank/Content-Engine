@@ -1,0 +1,66 @@
+[
+  {
+    "name": "NerdWallet",
+    "category": "Credit & loans",
+    "why": "Cards, loans and money guides",
+    "site": "https://www.nerdwallet.com/",
+    "type": "auto",
+    "url": "https://www.nerdwallet.com/"
+  },
+  {
+    "name": "Kiplinger",
+    "category": "Investing",
+    "why": "Personal finance and investing news",
+    "site": "https://www.kiplinger.com/",
+    "type": "auto",
+    "url": "https://www.kiplinger.com/"
+  },
+  {
+    "name": "Morningstar personal finance",
+    "category": "Investing",
+    "why": "Fund and investing research",
+    "site": "https://www.morningstar.com/personal-finance",
+    "type": "auto",
+    "url": "https://www.morningstar.com/personal-finance"
+  },
+  {
+    "name": "CNBC Personal Finance",
+    "category": "Saving & budgeting",
+    "why": "Money news",
+    "site": "https://www.cnbc.com/personal-finance/",
+    "type": "auto",
+    "url": "https://www.cnbc.com/personal-finance/"
+  },
+  {
+    "name": "Get Rich Slowly",
+    "category": "Saving & budgeting",
+    "why": "Independent money writing",
+    "site": "https://www.getrichslowly.org/",
+    "type": "auto",
+    "url": "https://www.getrichslowly.org/"
+  },
+  {
+    "name": "The Balance",
+    "category": "Saving & budgeting",
+    "why": "Plain-language money guides",
+    "site": "https://www.thebalancemoney.com/",
+    "type": "auto",
+    "url": "https://www.thebalancemoney.com/"
+  },
+  {
+    "name": "Freefincal (India)",
+    "category": "Retirement & insurance",
+    "why": "Independent Indian personal finance",
+    "site": "https://freefincal.com/",
+    "type": "auto",
+    "url": "https://freefincal.com/"
+  },
+  {
+    "name": "Moneycontrol Personal Finance (India)",
+    "category": "Tax",
+    "why": "Indian tax and money news",
+    "site": "https://www.moneycontrol.com/news/business/personal-finance/",
+    "type": "auto",
+    "url": "https://www.moneycontrol.com/news/business/personal-finance/"
+  }
+]

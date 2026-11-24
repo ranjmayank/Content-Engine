@@ -5,7 +5,7 @@ description: Write AEO + SEO blog posts for the site in engine.config.json — t
 
 # Blog post — AEO + SEO
 
-**First, read `engine.config.json`.** Everything below that says *the site*, *the author*, *the pillars*, *the audience*, *the voice* or *the CTA* means the values there (`brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `cta`). If the file is missing, stop and run the `engine-setup` skill first.
+**First, read `engine.config.json`** and write in `niche.language` (default English). Everything below that says *the site*, *the author*, *the pillars*, *the audience*, *the voice* or *the CTA* means the values there (`brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `cta`). If the file is missing, stop and run the `engine-setup` skill first.
 
 You write the canonical blog post for the site. Every other format (Medium, LinkedIn, carousel, Reel, newsletter) is derived from it, so it has to be the most complete, best-sourced version.
 
@@ -157,8 +157,19 @@ Then a short verdict: strongest part, weakest part, and the one change that woul
 
 ```
 # [Title]
-Slug · Meta title · Meta description · Primary/secondary keywords · Tier · Category · Tags · Last updated
+
+Slug: /[slug]
+Meta title: [≤60]
+Meta description: [140–155]
+Primary keyword: [...]
+Secondary keywords: [a, b, c]
+Tier: Deep / Decode
+Category: [pillar]
+Tags: [a, b, c]
+Last updated: [YYYY-MM-DD]
+Featured image: [path or brief]
 Author: [author.name] — [author.role_line]
+
 ---
 [Intro]
 > TL;DR …
@@ -186,6 +197,8 @@ Internal links to add to older posts · Source cards · Cascade hooks (3 quotabl
 - [ ] Medium Import Story 2–3 days later (if `channels.medium`)
 - [ ] Note the target query; check it in the analytics report after 7 and 28 days
 - [ ] Refresh date: 30 days for news-led posts, 90 days for Deep posts
+
+**Static sites** (`publishing.platform` = `static` — Next.js, Astro, Hugo, Jekyll, Eleventy): save the post as `content/blog/<date>-<slug>.md` in exactly the output format above, then run `python3 tools/export_post.py content/blog/<file>.md` — it writes the post with front matter (title, description, slug, dates, author, tags, category, image, FAQ) into the site repo set in `publishing.static_site`. The JSON-LD goes in the site's template or the `schema` front-matter field. Commit to the site repo only with an explicit go-ahead.
 
 **With connectors** (only those marked true in `integrations`, and never publish without an explicit go-ahead): WordPress (WordPress.com MCP or a WordPress MCP adapter) — create the post as a **draft**, then run the SEO plugin's checks if available; Google Drive — save the draft for review; Canva — in-post visuals from the brand kit.
 

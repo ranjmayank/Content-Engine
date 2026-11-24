@@ -38,13 +38,15 @@ grep -q "Top picks (2)" "$D" && grep -q "Celebrity gossip" "$D" && ok "digest ra
 grep -q "🟢" scanner/sources/SOURCES.md && ok "SOURCES.md health report"
 
 echo "4. SEO audit"
-python3 seo-audit/audit.py --site "http://127.0.0.1:$PORT/" --delay 0 --out "$WORK/audit" >/dev/null
+python3 seo-audit/audit.py --site "http://127.0.0.1:$PORT/" --delay 0 --external --out "$WORK/audit" >/dev/null
 python3 - "$WORK/audit/latest.json" <<'PY'
 import json,sys
 r=json.load(open(sys.argv[1])); ids={i["id"] for i in r["issues"]}
 want={"no-https","ai-search-blocked","ai-training-blocked","broken-internal-link","client-error","multiple-h1","missing-h1",
       "invalid-structured-data","heading-skip","noindex","canonicalized","sitemap-non-indexable","orphan-page","no-llms-txt",
-      "images-missing-alt","missing-description","thin-content","article-missing-dates","article-missing-author"}
+      "images-missing-alt","missing-description","thin-content","article-missing-dates","article-missing-author",
+      "faq-schema-mismatch","hreflang-invalid","hreflang-no-return","images-missing-dimensions","heavy-images",
+      "generic-anchor-text","empty-anchor","broken-external-link","sitemap-stale"}
 miss=want-ids
 assert not miss, f"missing issues: {miss}"
 assert r["site"]["crawler_access"]["GPTBot"] is False and r["site"]["crawler_access"]["Googlebot"] is True
@@ -57,6 +59,31 @@ cp tests/sample-topic-list.json content/topic-lists/2026-01-15.json
 python3 tools/render_topics.py content/topic-lists/2026-01-15.json >/dev/null
 grep -q "Growth Notes\|example.com" content/topic-lists/2026-01-15.md && test -f content/topic-lists/latest.html && ok "markdown, email and page rendered"
 
-echo "6. schedules"
+echo "6. static-site export"
+cat > "$WORK/post.md" <<'MD'
+# Test post
+
+Slug: /test-post
+Meta description: Test.
+Tags: a, b
+Last updated: 2026-01-15
+Author: Alex Doe — test
+
+---
+Body.
+
+## Frequently asked questions
+**Question one?**
+Answer one.
+MD
+python3 tools/export_post.py "$WORK/post.md" --site "$WORK/site" --dir content/blog --filename "{date}-{slug}.md" >/dev/null
+grep -q 'question: "Question one?"' "$WORK/site/content/blog/2026-01-15-test-post.md" && ok "front matter with FAQ written"
+
+echo "7. demo analytics"
+python3 tests/make_demo_analytics.py "$WORK/data/2026-01-15" >/dev/null
+python3 analytics/analyze.py --data "$WORK/data/2026-01-15" >/dev/null
+grep -q "Bing-only demand" analytics/reports/latest.md && grep -q "Striking distance" analytics/reports/latest.md && ok "report with Search Console, GA4 and Bing sections"
+
+echo "8. schedules"
 python3 setup/schedule.py --dry-run | grep -q "cron" && ok "cron conversion"
 echo "All tests passed."

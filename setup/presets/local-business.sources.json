@@ -1,0 +1,68 @@
+[
+  {
+    "name": "BrightLocal blog",
+    "category": "Local SEO & maps",
+    "why": "Local SEO research and surveys",
+    "site": "https://www.brightlocal.com/blog/",
+    "type": "auto",
+    "url": "https://www.brightlocal.com/blog/"
+  },
+  {
+    "name": "Whitespark blog",
+    "category": "Local SEO & maps",
+    "why": "Local search ranking factors",
+    "site": "https://whitespark.ca/blog/",
+    "type": "auto",
+    "url": "https://whitespark.ca/blog/"
+  },
+  {
+    "name": "Sterling Sky",
+    "category": "Local SEO & maps",
+    "why": "Google Business Profile tests",
+    "site": "https://www.sterlingsky.ca/blog/",
+    "type": "auto",
+    "url": "https://www.sterlingsky.ca/blog/"
+  },
+  {
+    "name": "Search Engine Roundtable",
+    "category": "Local SEO & maps",
+    "why": "Google and Maps changes (local stories only)",
+    "site": "https://www.seroundtable.com/",
+    "type": "auto",
+    "url": "https://www.seroundtable.com/",
+    "topic_only": true
+  },
+  {
+    "name": "Search Engine Land",
+    "category": "Ads & offers",
+    "why": "Search and ads news (local stories only)",
+    "site": "https://searchengineland.com/",
+    "type": "auto",
+    "url": "https://searchengineland.com/",
+    "topic_only": true
+  },
+  {
+    "name": "Small Business Trends",
+    "category": "Tools & operations",
+    "why": "Small business news and tools",
+    "site": "https://smallbiztrends.com/",
+    "type": "auto",
+    "url": "https://smallbiztrends.com/"
+  },
+  {
+    "name": "Later blog",
+    "category": "Social & content",
+    "why": "Instagram and social for small brands",
+    "site": "https://later.com/blog/",
+    "type": "auto",
+    "url": "https://later.com/blog/"
+  },
+  {
+    "name": "GatherUp blog",
+    "category": "Reviews & reputation",
+    "why": "Reviews and reputation",
+    "site": "https://gatherup.com/blog/",
+    "type": "auto",
+    "url": "https://gatherup.com/blog/"
+  }
+]

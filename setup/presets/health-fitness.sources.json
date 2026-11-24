@@ -1,0 +1,75 @@
+[
+  {
+    "name": "Stronger By Science",
+    "category": "Training",
+    "why": "Evidence-based strength training",
+    "site": "https://www.strongerbyscience.com/",
+    "type": "auto",
+    "url": "https://www.strongerbyscience.com/"
+  },
+  {
+    "name": "Examine",
+    "category": "Nutrition",
+    "why": "Supplement and nutrition research summaries",
+    "site": "https://examine.com/",
+    "type": "auto",
+    "url": "https://examine.com/"
+  },
+  {
+    "name": "Runner's World",
+    "category": "Training",
+    "why": "Running news and training",
+    "site": "https://www.runnersworld.com/",
+    "type": "auto",
+    "url": "https://www.runnersworld.com/"
+  },
+  {
+    "name": "Outside",
+    "category": "Training",
+    "why": "Endurance and outdoor fitness",
+    "site": "https://www.outsideonline.com/",
+    "type": "auto",
+    "url": "https://www.outsideonline.com/"
+  },
+  {
+    "name": "BarBend",
+    "category": "Training",
+    "why": "Strength sports and training",
+    "site": "https://barbend.com/",
+    "type": "auto",
+    "url": "https://barbend.com/"
+  },
+  {
+    "name": "Precision Nutrition",
+    "category": "Nutrition",
+    "why": "Coaching-led nutrition guides",
+    "site": "https://www.precisionnutrition.com/blog",
+    "type": "auto",
+    "url": "https://www.precisionnutrition.com/blog"
+  },
+  {
+    "name": "ScienceDaily — Health",
+    "category": "Research & myths",
+    "why": "New studies",
+    "site": "https://www.sciencedaily.com/news/health_medicine/",
+    "type": "auto",
+    "url": "https://www.sciencedaily.com/news/health_medicine/"
+  },
+  {
+    "name": "STAT",
+    "category": "Research & myths",
+    "why": "Health and medicine news (fitness stories only)",
+    "site": "https://www.statnews.com/",
+    "type": "auto",
+    "url": "https://www.statnews.com/",
+    "topic_only": true
+  },
+  {
+    "name": "DC Rainmaker",
+    "category": "Wearables & tools",
+    "why": "In-depth wearable reviews",
+    "site": "https://www.dcrainmaker.com/",
+    "type": "auto",
+    "url": "https://www.dcrainmaker.com/"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "name": "SaaStr",
+    "category": "Sales & GTM",
+    "why": "SaaS go-to-market and scaling advice",
+    "site": "https://www.saastr.com/",
+    "type": "auto",
+    "url": "https://www.saastr.com/"
+  },
+  {
+    "name": "Lenny's Newsletter",
+    "category": "Product-led growth",
+    "why": "Product and growth practice from operators",
+    "site": "https://www.lennysnewsletter.com/",
+    "type": "auto",
+    "url": "https://www.lennysnewsletter.com/"
+  },
+  {
+    "name": "Tomasz Tunguz",
+    "category": "Pricing & packaging",
+    "why": "SaaS metrics, pricing and market data",
+    "site": "https://tomtunguz.com/",
+    "type": "auto",
+    "url": "https://tomtunguz.com/"
+  },
+  {
+    "name": "First Round Review",
+    "category": "Sales & GTM",
+    "why": "Long-form operator playbooks",
+    "site": "https://review.firstround.com/",
+    "type": "auto",
+    "url": "https://review.firstround.com/"
+  },
+  {
+    "name": "a16z",
+    "category": "Product-led growth",
+    "why": "Software market analysis",
+    "site": "https://a16z.com/",
+    "type": "auto",
+    "url": "https://a16z.com/"
+  },
+  {
+    "name": "ChartMogul blog",
+    "category": "Retention & expansion",
+    "why": "Subscription metrics and benchmarks",
+    "site": "https://chartmogul.com/blog/",
+    "type": "auto",
+    "url": "https://chartmogul.com/blog/"
+  },
+  {
+    "name": "Paddle blog",
+    "category": "Pricing & packaging",
+    "why": "SaaS pricing and monetisation",
+    "site": "https://www.paddle.com/blog",
+    "type": "auto",
+    "url": "https://www.paddle.com/blog"
+  },
+  {
+    "name": "ProductLed",
+    "category": "Product-led growth",
+    "why": "PLG onboarding and activation",
+    "site": "https://productled.com/blog",
+    "type": "auto",
+    "url": "https://productled.com/blog"
+  },
+  {
+    "name": "Reforge blog",
+    "category": "Product-led growth",
+    "why": "Growth and retention frameworks",
+    "site": "https://www.reforge.com/blog",
+    "type": "auto",
+    "url": "https://www.reforge.com/blog"
+  },
+  {
+    "name": "Intercom blog",
+    "category": "Retention & expansion",
+    "why": "Customer service, onboarding, retention",
+    "site": "https://www.intercom.com/blog/",
+    "type": "auto",
+    "url": "https://www.intercom.com/blog/"
+  },
+  {
+    "name": "Gong blog",
+    "category": "Sales & GTM",
+    "why": "Sales data and call research",
+    "site": "https://www.gong.io/blog/",
+    "type": "auto",
+    "url": "https://www.gong.io/blog/"
+  },
+  {
+    "name": "HubSpot Marketing blog",
+    "category": "Marketing & demand",
+    "why": "Inbound and demand gen",
+    "site": "https://blog.hubspot.com/marketing",
+    "type": "auto",
+    "url": "https://blog.hubspot.com/marketing"
+  },
+  {
+    "name": "TechCrunch",
+    "category": "Sales & GTM",
+    "why": "Funding and launches (SaaS stories only)",
+    "site": "https://techcrunch.com/",
+    "type": "auto",
+    "url": "https://techcrunch.com/",
+    "topic_only": true
+  }
+]

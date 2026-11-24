@@ -1,0 +1,74 @@
+[
+  {
+    "name": "The Points Guy",
+    "category": "Budget & points",
+    "why": "Points, miles and card deals",
+    "site": "https://thepointsguy.com/",
+    "type": "auto",
+    "url": "https://thepointsguy.com/"
+  },
+  {
+    "name": "Skift",
+    "category": "Flights & airlines",
+    "why": "Travel industry news",
+    "site": "https://skift.com/",
+    "type": "auto",
+    "url": "https://skift.com/"
+  },
+  {
+    "name": "One Mile at a Time",
+    "category": "Flights & airlines",
+    "why": "Airline and loyalty news",
+    "site": "https://onemileatatime.com/",
+    "type": "auto",
+    "url": "https://onemileatatime.com/"
+  },
+  {
+    "name": "View from the Wing",
+    "category": "Budget & points",
+    "why": "Airline and points analysis",
+    "site": "https://viewfromthewing.com/",
+    "type": "auto",
+    "url": "https://viewfromthewing.com/"
+  },
+  {
+    "name": "Simple Flying",
+    "category": "Flights & airlines",
+    "why": "Aviation news",
+    "site": "https://simpleflying.com/",
+    "type": "auto",
+    "url": "https://simpleflying.com/"
+  },
+  {
+    "name": "Condé Nast Traveler",
+    "category": "Destinations",
+    "why": "Destinations and hotels",
+    "site": "https://www.cntraveler.com/",
+    "type": "auto",
+    "url": "https://www.cntraveler.com/"
+  },
+  {
+    "name": "Travel + Leisure",
+    "category": "Destinations",
+    "why": "Destinations and travel news",
+    "site": "https://www.travelandleisure.com/",
+    "type": "auto",
+    "url": "https://www.travelandleisure.com/"
+  },
+  {
+    "name": "Nomadic Matt",
+    "category": "Budget & points",
+    "why": "Budget travel guides",
+    "site": "https://www.nomadicmatt.com/travel-blog/",
+    "type": "auto",
+    "url": "https://www.nomadicmatt.com/travel-blog/"
+  },
+  {
+    "name": "Lonely Planet",
+    "category": "Destinations",
+    "why": "Destination guides and news",
+    "site": "https://www.lonelyplanet.com/",
+    "type": "auto",
+    "url": "https://www.lonelyplanet.com/"
+  }
+]

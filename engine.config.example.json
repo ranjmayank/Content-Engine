@@ -19,7 +19,9 @@
     "role_line": "runs growth marketing for a B2B software company",
     "bio": "Alex Doe runs growth marketing for a B2B software company and writes about SaaS growth at example.com.",
     "work_context": "Runs SEO, content, lifecycle email and paid campaigns for a mid-size SaaS product; manages a team of 4",
-    "confidential": ["Call my employer 'a B2B software company' — never name it or its customers"]
+    "confidential": [
+      "Call my employer 'a B2B software company' — never name it or its customers"
+    ]
   },
   "niche": {
     "preset": "b2b-saas",
@@ -27,18 +29,43 @@
     "audience": "SaaS founders, product managers, growth, marketing and sales leaders",
     "region": "",
     "pillars": [
-      {"name": "Product-led growth", "covers": "Activation, onboarding, freemium and trials, product analytics"},
-      {"name": "Pricing & packaging", "covers": "Pricing models, usage-based pricing, discounting, price increases"},
-      {"name": "Sales & GTM", "covers": "Outbound, sales-led motions, partnerships, ICP and positioning"},
-      {"name": "Marketing & demand", "covers": "Demand gen, content, SEO, paid, events, brand"},
-      {"name": "Retention & expansion", "covers": "Churn, NRR, customer success, expansion revenue"}
+      {
+        "name": "Product-led growth",
+        "covers": "Activation, onboarding, freemium and trials, product analytics"
+      },
+      {
+        "name": "Pricing & packaging",
+        "covers": "Pricing models, usage-based pricing, discounting, price increases"
+      },
+      {
+        "name": "Sales & GTM",
+        "covers": "Outbound, sales-led motions, partnerships, ICP and positioning"
+      },
+      {
+        "name": "Marketing & demand",
+        "covers": "Demand gen, content, SEO, paid, events, brand"
+      },
+      {
+        "name": "Retention & expansion",
+        "covers": "Churn, NRR, customer success, expansion revenue"
+      }
     ],
-    "out_of_scope": ["Consumer app news", "Crypto and trading"],
-    "out_of_scope_goes_to": ""
+    "out_of_scope": [
+      "Consumer app news",
+      "Crypto and trading"
+    ],
+    "out_of_scope_goes_to": "",
+    "language": "English"
   },
   "channels": {
-    "blog": true, "linkedin": true, "instagram": true, "facebook_mirror": false,
-    "youtube_shorts": false, "x": false, "medium": true, "newsletter": true
+    "blog": true,
+    "linkedin": true,
+    "instagram": true,
+    "facebook_mirror": false,
+    "youtube_shorts": false,
+    "x": false,
+    "medium": true,
+    "newsletter": true
   },
   "cadence": {
     "timezone": "America/New_York",
@@ -46,26 +73,107 @@
     "decode_posts_per_week": 3,
     "linkedin_per_week": 5,
     "instagram_per_day": 1,
-    "times": {"analytics": "07:45", "scan": "08:00", "topic_list": "10:15", "email": "11:00", "seo_audit": "Mon 07:00"}
+    "times": {
+      "analytics": "07:45",
+      "scan": "08:00",
+      "topic_list": "10:15",
+      "email": "11:00",
+      "seo_audit": "Mon 07:00"
+    }
   },
   "voice": {
     "description": "Practical, clear and direct, proof-led; a practitioner explaining to a smart peer",
-    "banned_phrases": ["In today's fast-paced world", "delve", "leverage", "navigate the landscape", "game-changer", "unlock",
-                       "unleash", "revolutionize", "seamless", "it's important to note", "In conclusion", "let's dive in"]
+    "banned_phrases": [
+      "In today's fast-paced world",
+      "delve",
+      "leverage",
+      "navigate the landscape",
+      "game-changer",
+      "unlock",
+      "unleash",
+      "revolutionize",
+      "seamless",
+      "it's important to note",
+      "In conclusion",
+      "let's dive in"
+    ]
   },
   "cta": {
     "mid": "Read a related post on the site, or join the newsletter",
     "end": "Subscribe to the weekly newsletter"
   },
-  "colors": {"ink": "#16161E", "accent": "#F5A623", "paper": "#FAF7F2"},
-  "hashtags": {
-    "A": ["#saas", "#b2b", "#startups", "#productledgrowth", "#growth"],
-    "B": ["#pricing", "#gtm", "#sales", "#founders", "#saasmarketing"],
-    "C": ["#customersuccess", "#churn", "#b2bmarketing", "#plg", "#revenue"]
+  "colors": {
+    "ink": "#16161E",
+    "accent": "#F5A623",
+    "paper": "#FAF7F2"
   },
-  "seo_audit": {"max_pages": 200, "delay": 0.5, "exclude": ["/tag/", "/author/", "?replytocom", "/page/"], "pagespeed": false},
+  "hashtags": {
+    "A": [
+      "#saas",
+      "#b2b",
+      "#startups",
+      "#productledgrowth",
+      "#growth"
+    ],
+    "B": [
+      "#pricing",
+      "#gtm",
+      "#sales",
+      "#founders",
+      "#saasmarketing"
+    ],
+    "C": [
+      "#customersuccess",
+      "#churn",
+      "#b2bmarketing",
+      "#plg",
+      "#revenue"
+    ]
+  },
+  "seo_audit": {
+    "max_pages": 200,
+    "delay": 0.5,
+    "exclude": [
+      "/tag/",
+      "/author/",
+      "?replytocom",
+      "/page/"
+    ],
+    "pagespeed": false,
+    "check_external": false,
+    "render_js": false
+  },
   "integrations": {
     "_note": "true = you've connected it in Claude (claude.ai → Settings → Connectors) or set its GitHub secrets. Skills use it only when true.",
-    "notion": false, "openseo": false, "wordpress": false, "postzen": false, "canva": false, "google_drive": false
-  }
+    "notion": false,
+    "openseo": false,
+    "wordpress": false,
+    "postzen": false,
+    "canva": false,
+    "google_drive": false
+  },
+  "ai_visibility": {
+    "prompts": [
+      "what is usage-based pricing",
+      "how do I reduce churn in a SaaS business",
+      "best SaaS pricing page examples"
+    ],
+    "competitors": [
+      "openviewpartners.com",
+      "saastr.com"
+    ]
+  },
+  "publishing": {
+    "platform": "wordpress",
+    "static_site": {
+      "repo_path": "",
+      "content_dir": "content/blog",
+      "format": "markdown",
+      "front_matter": "yaml",
+      "filename": "{date}-{slug}.md",
+      "images_dir": "public/images/blog",
+      "url_pattern": "/blog/{slug}/"
+    }
+  },
+  "config_version": 2
 }

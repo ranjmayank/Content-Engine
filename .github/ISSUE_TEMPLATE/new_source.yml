@@ -1,0 +1,19 @@
+name: Suggest sources for a preset
+description: Feeds or sites that should be in a niche preset
+labels: [sources]
+body:
+  - type: input
+    id: preset
+    attributes: {label: Preset (or a new niche)}
+    validations: {required: true}
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sites — one per line, "url | category | why it's useful"
+    validations: {required: true}
+  - type: checkboxes
+    id: tested
+    attributes:
+      label: Tested?
+      options:
+        - label: I ran the scanner with these and they show 🟢 in SOURCES.md

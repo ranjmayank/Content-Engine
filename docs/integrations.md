@@ -2,6 +2,20 @@
 
 Every integration is optional. After you connect one, set it to `true` under `integrations` in `engine.config.json` so the skills know to use it. Skills never publish, schedule or change anything through an integration without your explicit go-ahead.
 
+## Static sites — Next.js, Astro, Hugo, Jekyll, Eleventy
+
+Set `publishing.platform` to `static` and fill `publishing.static_site` (or re-run setup):
+
+| Site | `content_dir` | `front_matter` | `filename` |
+|---|---|---|---|
+| Astro (content collections) | `src/content/blog` | yaml | `{slug}.md` |
+| Next.js (MDX/markdown) | `content/posts` | yaml | `{slug}.mdx` |
+| Hugo | `content/posts` | toml or yaml | `{slug}.md` |
+| Jekyll | `_posts` | yaml | `{date}-{slug}.md` |
+| Eleventy | `posts` | yaml | `{slug}.md` |
+
+`python3 tools/export_post.py content/blog/<post>.md` writes the post with front matter — `title`, `description`, `slug`, `date`, `updated`, `author`, `category`, `tags`, `image`, `canonical`, `seo_title`, `faq` (question/answer list) and `schema` (the JSON-LD) — into `repo_path/content_dir`. Map those keys in your site's content schema or template (for example, render `faq` as the visible FAQ and `schema` in a `<script type="application/ld+json">`). Then commit and push the site repo — or let your host (Vercel, Netlify, Cloudflare Pages) deploy it.
+
 ## OpenSEO — backlinks, rankings, AI visibility, deeper audits
 
 [OpenSEO](https://openseo.so) is an open-source (MIT), pay-as-you-go alternative to Semrush/Ahrefs, with an MCP server for AI agents. The built-in audit (`seo-audit/audit.py`) is free and covers technical and on-page SEO; OpenSEO adds what a crawler alone can't see:

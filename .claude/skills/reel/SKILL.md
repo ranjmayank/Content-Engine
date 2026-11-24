@@ -5,7 +5,7 @@ description: Turn a blog post link into a finished vertical reel — story forma
 
 # Make a reel from a blog post
 
-**First, read `engine.config.json`** — `brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `hashtags`, `channels`, and `author.confidential`. Wherever this skill says *the author*, *the site* or *the pillars*, use those values. If the file is missing, run the `engine-setup` skill first.
+**First, read `engine.config.json`** (and write in `niche.language`, default English) — `brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `hashtags`, `channels`, and `author.confidential`. Wherever this skill says *the author*, *the site* or *the pillars*, use those values. If the file is missing, run the `engine-setup` skill first.
 
 **In:** a link to one of the author's blog posts (the site or Medium), plus any notes.
 **Out:** an approved script, the comment-to-DM CTA kit, and — if the video setup exists in this folder — a finished video at `reels/<short-name>/<short-name>.mp4`.

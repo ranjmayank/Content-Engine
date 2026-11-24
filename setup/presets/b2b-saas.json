@@ -59,7 +59,9 @@
         "discount",
         "monetiz",
         "willingness to pay",
-        "tier"
+        "tier",
+        "prices",
+        "price "
       ],
       "Sales & GTM": [
         "sales",
@@ -139,5 +141,5 @@
       "#revenue"
     ]
   },
-  "sources_file": null
+  "sources_file": "b2b-saas.sources.json"
 }

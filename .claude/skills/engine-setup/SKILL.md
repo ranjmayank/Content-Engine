@@ -13,15 +13,17 @@ Check whether `engine.config.json` exists; if it does, show the current values a
 
 1. **Brand and site:** brand name, website URL (where posts live), one-line tagline. The site's platform (WordPress, Webflow, Ghost, Shopify, custom…) — note it for later steps.
 2. **Author:** name, one line on what they do, a 2-sentence bio, what their day job lets them see (used for "from my work" anchors, anonymized), and anything never to name (employer, clients) with how to refer to it instead.
-3. **Niche:** show the presets (`python3 setup/init.py --list-presets`): ai-marketing, ai-business-security, b2b-saas, ecommerce, personal-finance, health-fitness, travel, local-business, developer-tools, blank. Pick one, then review the pillars together (3–6 pillars, each with a "covers" line). For a custom pillar, propose 10–20 keywords that would appear in a headline about it, and confirm them. Ask for audience, region, and what's out of scope.
+3. **Niche:** show the presets (`python3 setup/init.py --list-presets`): ai-marketing, ai-business-security, b2b-saas, ecommerce, personal-finance, health-fitness, travel, local-business, developer-tools, blank. Pick one, then review the pillars together (3–6 pillars, each with a "covers" line). For a custom pillar, propose 10–20 keywords that would appear in a headline about it, and confirm them. Ask for audience, region, the language to write in, and what's out of scope.
 4. **Channels:** blog, LinkedIn, Instagram, Facebook mirror, YouTube Shorts, X, Medium, newsletter — and the handles/URLs.
 5. **Cadence:** timezone (IANA name), posts per week per channel, and the times for the analytics pull, news scan, topic list, email and weekly audit.
 6. **Voice and look:** voice in a few words, phrases to ban (start from the default list), colours (hex), CTAs.
-7. **Sources:** keep the preset's sources (if any)? Then ask for the 5–20 sites they actually read in this niche; you'll find the feeds.
+7. **Sources:** every preset ships a starter list. Keep it? If the preset has region-specific sources (e.g. India), keep them only if the audience is there. Then ask for the 5–20 sites they actually read; you'll find the feeds (sites can also be added as `"type": "auto"` — the scanner finds the feed on its first run).
+8. **Publishing:** WordPress, a static site (Next.js, Astro, Hugo, Jekyll, Eleventy — repo path, content folder, front-matter style, URL pattern), Ghost, Webflow or other.
+9. **AI visibility (optional):** 10–30 questions the audience asks assistants, and 2–5 competitor sites — saved under `ai_visibility` for the `ai-visibility` skill.
 
 ## Step 2 — Write the files
 
-Write the answers to a temporary JSON in the shape of `engine.config.example.json` (add `"use_preset_sources": true/false` and `"add_sources": [{"url": "...", "category": "<pillar>", "why": "..."}]`; for custom pillars put `"keywords": [...]` on each pillar), then run:
+Write the answers to a temporary JSON in the shape of `engine.config.example.json` (add `"use_preset_sources": true/false`, `"drop_regional": ["India"]` (to drop a preset's regional sources) and `"add_sources": [{"url": "...", "category": "<pillar>", "why": "..."}]`; for custom pillars put `"keywords": [...]` on each pillar), then run:
 
 ```bash
 python3 setup/init.py --answers /tmp/answers.json
@@ -43,6 +45,8 @@ Walk through `docs/ACCESS.md` in order and record each answer. For anything that
 | 3 | SMTP email (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_TO`) | daily topic email | optional |
 | 4 | Notion integration (`NOTION_TOKEN`, `NOTION_DATABASE_ID`) — `python3 setup/create_notion_db.py` makes the database | Fuel Database | optional |
 | 5 | PageSpeed API key (`PSI_API_KEY`) | Core Web Vitals in the audit | optional |
+| 5b | Bing Webmaster Tools API key (`BING_API_KEY`, `BING_SITE_URL`) | Bing queries (feeds Copilot and ChatGPT search) | recommended |
+| 5c | Claude API key (`ANTHROPIC_API_KEY`) | Daily topic list without a Claude scheduled task | optional |
 | 6 | Claude connectors: OpenSEO, WordPress, Canva, Notion, Google Drive, a social scheduler | live data, drafts, visuals, scheduling | optional |
 | 7 | A Claude scheduled task for the topic list (prompt in the `topic-list` skill) | daily topic list | optional |
 

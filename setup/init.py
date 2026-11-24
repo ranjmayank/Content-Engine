@@ -6,6 +6,7 @@
   python3 setup/init.py --answers my.json     # no questions: use a filled-in answers file
                                               # (same shape as engine.config.example.json)
   python3 setup/init.py --list-presets
+  python3 setup/init.py --migrate             # after an update: add new settings with defaults, keep yours
 
 Writes:
   engine.config.json                 brand, author, niche, pillars, voice, cadence, channels (every skill reads this)
@@ -29,6 +30,7 @@ PRESETS = os.path.join(HERE, "presets")
 CONFIG = os.path.join(ROOT, "engine.config.json")
 EXAMPLE = os.path.join(ROOT, "engine.config.example.json")
 SRC_DIR = os.path.join(ROOT, "scanner", "sources")
+CONFIG_VERSION = 2
 
 BANNED = ["In today's fast-paced world", "delve", "leverage", "navigate the landscape", "game-changer", "unlock",
           "unleash", "revolutionize", "seamless", "it's important to note", "In conclusion", "let's dive in"]
@@ -106,6 +108,7 @@ def interview(cur, preset_name=None):
              "summary": ask("What your content is about, in one sentence", n.get("summary") or pr["summary"], True),
              "audience": ask("Who it's for", n.get("audience") or pr["audience"], True),
              "region": ask("Main region/country of your audience (blank = global)", n.get("region", "")),
+             "language": ask("Language to write in", n.get("language", "English")),
              }
     pillars = n.get("pillars") if n.get("preset") == pick else pr["pillars"]
     terr = dict(pr["territories"])
@@ -174,8 +177,22 @@ def interview(cur, preset_name=None):
            "end": ask("End-of-post call to action", cta.get("end", "Subscribe to the newsletter"))}
     cfg = {**cur, "brand": brand, "author": author, "niche": niche, "channels": channels, "cadence": cadence,
            "voice": voice, "colors": colors, "cta": cta, "hashtags": cur.get("hashtags") or pr.get("hashtags", {}),
-           "seo_audit": cur.get("seo_audit", {"max_pages": 200, "delay": 0.5, "exclude": ["/tag/", "/author/", "?replytocom", "/page/"], "pagespeed": False}),
+           "seo_audit": cur.get("seo_audit", {"max_pages": 200, "delay": 0.5, "exclude": ["/tag/", "/author/", "?replytocom", "/page/"],
+                                               "pagespeed": False, "check_external": False, "render_js": False}),
            "integrations": cur.get("integrations", {})}
+    print("\n— Publishing —")
+    pub = cur.get("publishing", {})
+    plat = ask("Where is the blog? (wordpress / static / ghost / webflow / other)", pub.get("platform", "wordpress")).lower()
+    cfg["publishing"] = {"platform": plat, "static_site": pub.get("static_site", {})}
+    if plat == "static":
+        ssd = cfg["publishing"]["static_site"]
+        ssd["repo_path"] = ask("  Path to the site's repo on this computer", ssd.get("repo_path", "../my-site"))
+        ssd["content_dir"] = ask("  Folder for posts in it (Astro src/content/blog · Next content/posts · Hugo content/posts · Jekyll _posts)",
+                                 ssd.get("content_dir", "content/blog"))
+        ssd["front_matter"] = ask("  Front matter: yaml or toml", ssd.get("front_matter", "yaml"))
+        ssd["filename"] = ask("  File name pattern", ssd.get("filename", "{slug}.md"))
+        ssd["url_pattern"] = ask("  Public URL path of a post", ssd.get("url_pattern", "/blog/{slug}/"))
+    cfg["config_version"] = CONFIG_VERSION
 
     print("\n— News sources —")
     src = load_sources()
@@ -183,6 +200,9 @@ def interview(cur, preset_name=None):
         preset_src = json.load(open(os.path.join(PRESETS, pr["sources_file"])))
         if not src and yes(f"Start with the preset's {len(preset_src)} sources?"):
             src = preset_src
+            for region, names in pr.get("regional", {}).items():
+                if not yes(f"  Keep the {len(names)} {region}-specific sources?", region.lower() in niche.get("region", "").lower()):
+                    src = [x for x in src if x["name"] not in names]
     print(f"You have {len(src)} sources. Add sites you read (blogs, news sites, newsletters) — the feed is found for you.")
     extra = []
     while True:
@@ -210,7 +230,7 @@ def render_claude_md(cfg):
 Read `engine.config.json` at the start of any content task: it holds the brand, author, pillars, audience, voice and cadence.
 
 - Scope: {len(n['pillars'])} pillars only — {pillars}. Never: {oos}.{goes}
-- Audience: {n['audience']}{(' — mostly in ' + n['region']) if n.get('region') else ''}.
+- Audience: {n['audience']}{(' — mostly in ' + n['region']) if n.get('region') else ''}. Write in {n.get('language') or 'English'}.
 - Propose the topic first and wait for approval before writing; one topic at a time, covered across formats.
 - Build from current, dated sources: the newest digest in `scanner/sources/digests/`, and check `analytics/opportunities.json` / `analytics/reports/latest.md` before proposing topics — the site's own Search Console and GA4 data come first.
 - Check `seo-audit/reports/latest.md` before publishing advice: fix critical site issues before writing more content.
@@ -280,18 +300,59 @@ def from_answers(path):
     cfg.setdefault("hashtags", pr.get("hashtags", {}))
     cfg.setdefault("voice", {}).setdefault("banned_phrases", BANNED)
     src = load_sources()
+    drop = cfg.pop("drop_regional", [])
     if not src and pr.get("sources_file") and cfg.pop("use_preset_sources", True):
         src = json.load(open(os.path.join(PRESETS, pr["sources_file"])))
+        for region in drop:
+            names = pr.get("regional", {}).get(region, [])
+            src = [x for x in src if x["name"] not in names]
+    cfg.pop("use_preset_sources", None)
+    cfg["config_version"] = CONFIG_VERSION
     extra = [(s["url"], s.get("category", ""), s.get("why", "")) for s in cfg.pop("add_sources", [])]
     return cfg, terr, src, extra
 
 
+def merge_defaults(cur, dflt):
+    """Add keys that exist in the example config but not in yours (recursively). Never changes your values."""
+    added = []
+    for k, v in dflt.items():
+        if k.startswith("_"):
+            continue
+        if k not in cur:
+            cur[k] = v
+            added.append(k)
+        elif isinstance(v, dict) and isinstance(cur[k], dict):
+            added += [f"{k}.{x}" for x in merge_defaults(cur[k], v)]
+    return added
+
+
+def migrate():
+    if not os.path.exists(CONFIG):
+        sys.exit("No engine.config.json yet — run python3 setup/init.py first.")
+    cur = json.load(open(CONFIG))
+    dflt = json.load(open(EXAMPLE))
+    # personal fields stay yours: don't copy the example's people, handles, prompts or competitors
+    for k in ("brand", "author"):
+        dflt.pop(k, None)
+    dflt.get("niche", {}).pop("pillars", None)
+    dflt.pop("ai_visibility", None)
+    dflt.setdefault("ai_visibility", {"prompts": [], "competitors": []})
+    added = merge_defaults(cur, dflt)
+    cur["config_version"] = CONFIG_VERSION
+    json.dump(cur, open(CONFIG, "w"), indent=2, ensure_ascii=False)
+    print("Added settings:", ", ".join(added) if added else "none (already up to date)")
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--migrate", action="store_true")
     ap.add_argument("--preset")
     ap.add_argument("--answers")
     ap.add_argument("--list-presets", action="store_true")
     a = ap.parse_args()
+    if a.migrate:
+        migrate()
+        return
     if a.list_presets:
         for k, v in presets().items():
             print(f"{k:22} {v['label']} — {len(v['pillars'])} pillars" + (f", {len(json.load(open(os.path.join(PRESETS, v['sources_file']))))} sources" if v.get("sources_file") else ""))
@@ -308,6 +369,7 @@ def main():
         cur["niche"] = {}
         cur["hashtags"] = {}
         cur["cadence"]["timezone"] = "UTC"
+        cur["ai_visibility"] = {"prompts": [], "competitors": []}
     cur.pop("_readme", None)
     try:
         write_all(*interview(cur, a.preset))

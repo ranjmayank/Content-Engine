@@ -1,0 +1,19 @@
+name: Tests
+
+# Runs the end-to-end smoke test (setup → scanner → audit → topic render) against a local fixture site.
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md", "content/**", "analytics/data/**", "analytics/reports/**", "seo-audit/reports/**", "scanner/sources/digests/**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: bash tests/run.sh

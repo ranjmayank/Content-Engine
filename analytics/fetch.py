@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pull your site's numbers from Google Search Console and Google Analytics 4.
+Pull your site's numbers from Google Search Console, Google Analytics 4 and Bing Webmaster Tools.
 
 Writes one folder per run: analytics/data/YYYY-MM-DD/
   gsc_query_page_cur.csv / _prev.csv   query × page, last 28 days vs the 28 before
@@ -9,6 +9,8 @@ Writes one folder per run: analytics/data/YYYY-MM-DD/
   gsc_daily.csv                        site totals per day, last 90 days
   ga4_landing_cur.csv / _prev.csv      landing page × source × medium × channel
   ga4_daily.csv                        sessions per day by channel, last 90 days
+  bing_query_cur.csv / _prev.csv       Bing queries (clicks, impressions, avg position)
+  bing_page_cur.csv / _prev.csv        Bing pages
   meta.json                            the date windows used
 
 Search Console data lags 2–3 days, so windows end 3 days ago.
@@ -17,7 +19,8 @@ Settings (GitHub secrets / variables, or environment variables locally):
   GOOGLE_SERVICE_ACCOUNT_JSON  the service account key (the whole JSON text), or
   GOOGLE_APPLICATION_CREDENTIALS  a path to that file
   GSC_SITE_URL     e.g. sc-domain:example.com  or  https://example.com/
-  GA4_PROPERTY_ID  the numeric property ID, e.g. 412345678
+  GA4_PROPERTY_ID  the numeric property ID, e.g. 123456789
+  BING_API_KEY     Bing Webmaster Tools API key (Settings → API access); BING_SITE_URL e.g. https://example.com/
 Either source can be missing: the script pulls what it can and says what it skipped.
 
 Usage: python3 analytics/fetch.py [--days 28]
@@ -114,6 +117,48 @@ def pull_ga4(s, prop, out, cur, prev, daily):
               ga4_report(s, prop, *daily, ["date", "sessionDefaultChannelGroup"], ["sessions", "keyEvents"]))
 
 
+# ---------------------------------------------------------------- Bing Webmaster Tools
+
+def bing_call(method, site, key):
+    import urllib.request
+    url = (f"https://ssl.bing.com/webmaster/api.svc/json/{method}?"
+           + urllib.parse.urlencode({"siteUrl": site, "apikey": key}))
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"Accept": "application/json"}), timeout=60) as r:
+        return json.load(r).get("d") or []
+
+
+def bing_date(v):
+    """Bing returns dates as "/Date(1700000000000-0800)/"."""
+    import re
+    m = re.search(r"Date\((-?\d+)", str(v))
+    return dt.datetime.fromtimestamp(int(m.group(1)) / 1000, dt.timezone.utc).date() if m else None
+
+
+def bing_window(rows, start, end, key_field):
+    agg = {}
+    for r in rows:
+        d = bing_date(r.get("Date"))
+        if not d or not (start <= d <= end):
+            continue
+        k = r.get(key_field) or ""
+        a = agg.setdefault(k, {"clicks": 0, "impressions": 0, "pos_x_impr": 0.0})
+        imp = r.get("Impressions") or 0
+        a["clicks"] += r.get("Clicks") or 0
+        a["impressions"] += imp
+        a["pos_x_impr"] += (r.get("AvgImpressionPosition") or 0) * imp
+    return [[k, v["clicks"], v["impressions"], round(v["clicks"] / v["impressions"], 5) if v["impressions"] else 0,
+             round(v["pos_x_impr"] / v["impressions"], 2) if v["impressions"] else 0]
+            for k, v in sorted(agg.items(), key=lambda x: -x[1]["impressions"])]
+
+
+def pull_bing(site, key, out, cur, prev):
+    m = ["clicks", "impressions", "ctr", "position"]
+    q, pg = bing_call("GetQueryStats", site, key), bing_call("GetPageStats", site, key)
+    for tag, (a, b) in (("cur", cur), ("prev", prev)):
+        write_csv(f"{out}/bing_query_{tag}.csv", ["query"] + m, bing_window(q, a, b, "Query"))
+        write_csv(f"{out}/bing_page_{tag}.csv", ["page"] + m, bing_window(pg, a, b, "Query"))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=28, help="window length (default 28)")
@@ -126,8 +171,9 @@ def main():
     daily = (end - dt.timedelta(days=89), end)
 
     s = session()
-    if s is None:
-        print("No Google credentials set (GOOGLE_SERVICE_ACCOUNT_JSON). Skipping the pull — see analytics/README.md.")
+    bing_key, bing_site = os.environ.get("BING_API_KEY"), os.environ.get("BING_SITE_URL")
+    if s is None and not bing_key:
+        print("No Google credentials (GOOGLE_SERVICE_ACCOUNT_JSON) and no BING_API_KEY. Skipping — see analytics/README.md.")
         return 0
     out = os.path.join(HERE, "data", today.isoformat())
     os.makedirs(out, exist_ok=True)
@@ -135,7 +181,7 @@ def main():
             "previous": [d.isoformat() for d in prev], "daily": [d.isoformat() for d in daily], "sources": []}
 
     site, prop, failed = os.environ.get("GSC_SITE_URL"), os.environ.get("GA4_PROPERTY_ID"), []
-    if site:
+    if site and s is not None:
         try:
             pull_gsc(s, site, out, cur, prev, daily)
             meta["sources"].append("gsc")
@@ -144,7 +190,7 @@ def main():
             failed.append(f"Search Console: {e}")
     else:
         print("GSC_SITE_URL not set; skipped Search Console.")
-    if prop:
+    if prop and s is not None:
         try:
             pull_ga4(s, prop, out, cur, prev, daily)
             meta["sources"].append("ga4")
@@ -153,6 +199,15 @@ def main():
             failed.append(f"GA4: {e}")
     else:
         print("GA4_PROPERTY_ID not set; skipped GA4.")
+    if bing_key and bing_site:
+        try:
+            pull_bing(bing_site, bing_key, out, cur, prev)
+            meta["sources"].append("bing")
+            print("Bing: pulled", bing_site)
+        except Exception as e:
+            failed.append(f"Bing: {e}")
+    elif bing_key:
+        print("BING_SITE_URL not set; skipped Bing.")
     meta["errors"] = failed
     json.dump(meta, open(os.path.join(out, "meta.json"), "w"), indent=2)
     for f in failed:

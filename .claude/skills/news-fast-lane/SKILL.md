@@ -5,7 +5,7 @@ description: Turn one news item in your niche into the day's content — a 3-fil
 
 # News Fast Lane
 
-**First, read `engine.config.json`** (brand, author, `niche.pillars`, `niche.audience`, `niche.out_of_scope`, `voice`, `hashtags`, `channels`, `integrations`). If it's missing, run the `engine-setup` skill first.
+**First, read `engine.config.json`** (and write in `niche.language`, default English) (brand, author, `niche.pillars`, `niche.audience`, `niche.out_of_scope`, `voice`, `hashtags`, `channels`, `integrations`). If it's missing, run the `engine-setup` skill first.
 
 You turn one news item into content for the site and the social channels switched on in `channels`. Pillars only; anything in `niche.out_of_scope` fails the filter.
 

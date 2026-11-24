@@ -1,0 +1,102 @@
+<title>example.com Topics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column of topic cards, filter chips on top, each card splits facts | sources+queries on wide screens */
+:root{--bg:#F6F5F1;--surface:#FFFFFF;--fg:#16161E;--muted:#5D5C66;--line:#E3E1DA;--accent:#B26A00;--accent-bg:#FBEFD9;
+--c0:#2F6FD6;--c1:#1E8A6B;--c2:#7A4FD1;--c3:#C2412D;--c4:#B0457F;--c5:#8A6A00;--link:#1F5FBF;
+--display:"Outfit",system-ui,sans-serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"Geist Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121218;--surface:#1B1B23;--fg:#F1EFEA;--muted:#A3A1AB;--line:#2C2C37;--accent:#F5A623;--accent-bg:#2E2414;--c0:#7FA8F0;--c1:#5CC9A7;--c2:#B497F0;--c3:#F08A76;--c4:#EE8CC2;--c5:#E3C25A;--link:#8DB4F5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121218;--surface:#1B1B23;--fg:#F1EFEA;--muted:#A3A1AB;--line:#2C2C37;--accent:#F5A623;--accent-bg:#2E2414;--c0:#7FA8F0;--c1:#5CC9A7;--c2:#B497F0;--c3:#F08A76;--c4:#EE8CC2;--c5:#E3C25A;--link:#8DB4F5;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-size:clamp(28px,4.4vw,42px);line-height:1.1;margin:6px 0 8px;text-wrap:balance}
+.meta{color:var(--muted);margin:0 0 20px;font-size:14px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.f{font:500 13px var(--body);color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.f b{font-family:var(--mono);font-weight:500;color:var(--muted)}
+.f.on{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+.f:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot.c0,.cat.c0{--c:var(--c0)}.dot.c1,.cat.c1{--c:var(--c1)}.dot.c2,.cat.c2{--c:var(--c2)}.dot.c3,.cat.c3{--c:var(--c3)}.dot.c4,.cat.c4{--c:var(--c4)}.dot.c5,.cat.c5{--c:var(--c5)}
+.dot{background:var(--c)}
+.list{display:flex;flex-direction:column;gap:16px}
+.topic{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.th{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px}
+.cat{color:var(--c);font-weight:600;letter-spacing:.02em}
+.pri{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.pri.p0{background:var(--accent-bg);color:var(--accent);border-color:transparent;font-weight:500}
+.fmt{color:var(--muted);margin-left:auto}
+h2{font-family:var(--display);font-weight:600;font-size:21px;line-height:1.25;margin:10px 0 8px;text-wrap:balance;display:flex;gap:12px}
+h2 .n{font-family:var(--mono);font-size:13px;font-weight:400;color:var(--muted);padding-top:5px}
+.why{margin:0 0 14px;max-width:72ch}
+.data{margin:-6px 0 14px;font-size:14px;border-left:3px solid var(--accent);padding:4px 10px} .data b{color:var(--accent);margin-right:6px}
+.cols{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;border-top:1px solid var(--line);padding-top:14px}
+.cols>section{min-width:0}
+h3{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px;display:flex;gap:6px;align-items:center}
+h3:not(:first-child){margin-top:16px}
+.cnt{font-family:var(--mono);font-weight:400}
+.facts{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.angle{margin:14px 0 0;font-size:14px;background:var(--accent-bg);padding:10px 12px;border-radius:6px}
+.angle b{color:var(--accent);margin-right:6px}
+.refs{margin:0;padding-left:20px;font-size:14px;display:flex;flex-direction:column;gap:6px}
+.refs a{color:var(--link);text-decoration:none} .refs a:hover{text-decoration:underline}
+.host{display:block;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.fan{display:flex;flex-wrap:wrap;gap:6px}
+.fan a{font-size:13px;color:var(--fg);text-decoration:none;border:1px dashed var(--line);border-radius:6px;padding:4px 8px}
+.fan a:hover{border-color:var(--link);color:var(--link)}
+.foot{color:var(--muted);font-size:13px;margin-top:28px;max-width:72ch}
+@media (max-width:720px){.cols{grid-template-columns:1fr}.fmt{margin-left:0;width:100%}.topic{padding:16px}}
+</style>
+<div class="wrap">
+<div class="eyebrow">example.com · daily topic list</div>
+<h1>Thursday 15 January 2026</h1>
+<p class="meta">Demo: 8 new items from 1 source; analytics through 12 Jan (fictional data) · Stories published 13–15 Jan 2026 (fictional demo) · 4 topics, ranked. Fan-out queries open a Google search.</p>
+<nav class="filters" aria-label="Filter by topic"><button class="f on" data-f="all" id="f-all">All <b>4</b></button><button class="f" data-f="0" id="f-0"><i class="dot c0"></i>Product-led growth <b>1</b></button><button class="f" data-f="1" id="f-1"><i class="dot c1"></i>Pricing &amp; packaging <b>1</b></button><button class="f" data-f="4" id="f-4"><i class="dot c4"></i>Retention &amp; expansion <b>1</b></button><button class="f" data-f="5" id="f-5"><i class="dot c5"></i>From your data <b>1</b></button></nav>
+<div class="list"><article class="topic" id="t1" data-cat="1">
+<header class="th"><span class="cat c1">Pricing &amp; packaging</span><span class="pri p0">Top pick</span><span class="fmt">Decode post + Reel</span></header>
+<h2><span class="n">01</span>Is usage-based pricing becoming the SaaS default?</h2>
+<p class="why">A new survey says 41% of SaaS companies now charge partly by usage — and your site already ranks 11th for &#x27;usage based pricing&#x27;.</p><p class="data"><b>Your data</b> &#x27;usage based pricing&#x27; — 820 impressions, position 11.4 (28 days to 12 Jan, demo data)</p>
+<div class="cols">
+<section><h3>Key facts</h3><ul class="facts"><li>41% of 300 surveyed SaaS firms charge partly by usage, up from 34% (Demo Pricing Survey, 14 Jan 2026)</li><li>Hybrid seat + usage models are the most common form (same survey)</li></ul>
+<p class="angle"><b>Angle</b> Update the existing post with the new numbers and a &#x27;should you switch?&#x27; decision table instead of writing a new one.</p></section>
+<section><h3>References <span class="cnt">1</span></h3><ol class="refs"><li><a href="https://news.example.com/usage-pricing-survey" target="_blank" rel="noopener">Demo SaaS News — Survey: 41% of SaaS companies now charge partly by usage</a><span class="host">news.example.com</span></li></ol>
+<h3>Fan-out queries</h3><div class="fan"><a href="https://www.google.com/search?q=what+is+usage+based+pricing" target="_blank" rel="noopener">what is usage based pricing</a><a href="https://www.google.com/search?q=usage+based+pricing+examples" target="_blank" rel="noopener">usage based pricing examples</a><a href="https://www.google.com/search?q=hybrid+pricing+saas" target="_blank" rel="noopener">hybrid pricing saas</a><a href="https://www.google.com/search?q=should+i+switch+to+usage+based+pricing" target="_blank" rel="noopener">should i switch to usage based pricing</a><a href="https://www.google.com/search?q=usage+based+pricing+vs+seat+based" target="_blank" rel="noopener">usage based pricing vs seat based</a></div></section>
+</div></article><article class="topic" id="t4" data-cat="5">
+<header class="th"><span class="cat c5">From your data</span><span class="pri p0">Top pick</span><span class="fmt">Refresh</span></header>
+<h2><span class="n">02</span>Refresh: &#x27;how to reduce saas churn&#x27; — page 1, but Bing ranks it higher</h2>
+<p class="why">Position 6.1 on Google and 5.5 on Bing; one FAQ block and a dated stat could push it into the top 3.</p><p class="data"><b>Your data</b> 960 Google impressions (pos. 6.1) + 140 Bing impressions (pos. 5.5), 28 days to 12 Jan (demo data)</p>
+<div class="cols">
+<section><h3>Key facts</h3><ul class="facts"><li>Page already earns sign-ups (key events) in GA4 (demo data)</li></ul>
+<p class="angle"><b>Angle</b> Add the 3 question queries as FAQs, a 2026 benchmark line, and internal links from the NRR post.</p></section>
+<section><h3>References <span class="cnt">1</span></h3><ol class="refs"><li><a href="https://example.com/blog/reduce-saas-churn/" target="_blank" rel="noopener">Demo analytics report</a><span class="host">example.com</span></li></ol>
+<h3>Fan-out queries</h3><div class="fan"><a href="https://www.google.com/search?q=how+to+reduce+saas+churn" target="_blank" rel="noopener">how to reduce saas churn</a><a href="https://www.google.com/search?q=saas+churn+rate+benchmark" target="_blank" rel="noopener">saas churn rate benchmark</a><a href="https://www.google.com/search?q=customer+success+playbook" target="_blank" rel="noopener">customer success playbook</a></div></section>
+</div></article><article class="topic" id="t2" data-cat="0">
+<header class="th"><span class="cat c0">Product-led growth</span><span class="pri p1">Strong</span><span class="fmt">LinkedIn + carousel</span></header>
+<h2><span class="n">03</span>Do shorter free trials convert better?</h2>
+<p class="why">A study of 1,200 trials found 7-day trials converted at 14% vs 9% for 30-day trials.</p>
+<div class="cols">
+<section><h3>Key facts</h3><ul class="facts"><li>7-day trials: 14% conversion; 30-day: 9% (Demo Onboarding Study, 13 Jan 2026)</li></ul>
+<p class="angle"><b>Angle</b> The trial length matters less than how fast users reach the aha moment — show the onboarding checklist.</p></section>
+<section><h3>References <span class="cnt">1</span></h3><ol class="refs"><li><a href="https://news.example.com/trial-length-study" target="_blank" rel="noopener">Demo SaaS News — Shorter free trials convert better</a><span class="host">news.example.com</span></li></ol>
+<h3>Fan-out queries</h3><div class="fan"><a href="https://www.google.com/search?q=how+long+should+a+saas+free+trial+be" target="_blank" rel="noopener">how long should a saas free trial be</a><a href="https://www.google.com/search?q=7+day+vs+14+day+free+trial" target="_blank" rel="noopener">7 day vs 14 day free trial</a><a href="https://www.google.com/search?q=free+trial+conversion+rate+benchmark" target="_blank" rel="noopener">free trial conversion rate benchmark</a></div></section>
+</div></article><article class="topic" id="t3" data-cat="4">
+<header class="th"><span class="cat c4">Retention &amp; expansion</span><span class="pri p1">Strong</span><span class="fmt">Deep post</span></header>
+<h2><span class="n">04</span>NRR benchmarks 2026: what &#x27;good&#x27; looks like now</h2>
+<p class="why">Median NRR fell to 102% for mid-market SaaS; the site gets 380 impressions for &#x27;net revenue retention benchmark&#x27; at position 8.7.</p><p class="data"><b>Your data</b> &#x27;net revenue retention benchmark&#x27; — 380 impressions, position 8.7 (demo data)</p>
+<div class="cols">
+<section><h3>Key facts</h3><ul class="facts"><li>Median NRR 102%, down from 106% (Demo NRR Benchmark, 15 Jan 2026)</li></ul>
+<p class="angle"><b>Angle</b> Turn the striking-distance page into the definitive benchmark table, updated quarterly.</p></section>
+<section><h3>References <span class="cnt">1</span></h3><ol class="refs"><li><a href="https://news.example.com/nrr-benchmark-2026" target="_blank" rel="noopener">Demo SaaS News — New NRR benchmark</a><span class="host">news.example.com</span></li></ol>
+<h3>Fan-out queries</h3><div class="fan"><a href="https://www.google.com/search?q=what+is+a+good+nrr+for+saas" target="_blank" rel="noopener">what is a good nrr for saas</a><a href="https://www.google.com/search?q=nrr+vs+grr" target="_blank" rel="noopener">nrr vs grr</a><a href="https://www.google.com/search?q=net+revenue+retention+benchmark+2026" target="_blank" rel="noopener">net revenue retention benchmark 2026</a></div></section>
+</div></article></div>
+<p class="foot">Every fact is taken from the linked source; items marked "open the article" were not readable from here, so check them before publishing. Vendor numbers are labelled as vendor claims. "Your data" lines come from Search Console and GA4 (analytics/reports/latest.md).</p>
+</div>
+<script>
+(function(){var bs=document.querySelectorAll('.f'),cs=document.querySelectorAll('.topic');
+bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});var f=b.dataset.f;
+cs.forEach(function(c){c.hidden=!(f==='all'||c.dataset.cat===f)})})})})();
+</script>

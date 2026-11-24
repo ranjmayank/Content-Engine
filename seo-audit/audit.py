@@ -11,6 +11,9 @@ Usage:
   python3 seo-audit/audit.py --psi                   # + Google PageSpeed (Core Web Vitals) for the top pages
                                                      #   (works without a key at low volume; set PSI_API_KEY for more)
 Options:
+  --external       also check outbound links for 404s (up to 300 links)
+  --render         render pages in a headless browser first (JavaScript sites; needs Playwright)
+  --no-images      skip the image-size check
   --max-pages N    stop after N pages (default from config seo_audit.max_pages, else 200)
   --delay S        seconds between requests (default 0.5 — be polite to your own server)
   --exclude PATH   skip URLs containing PATH (repeatable), e.g. --exclude /tag/ --exclude ?replytocom
@@ -137,7 +140,9 @@ class PageParser(HTMLParser):
         self.lang = None
         self.text, self._skip, self._in_jsonld, self._buf = [], 0, False, []
         self.app_container = False
-        self._h = None
+        self._a = None           # [href, rel, text parts, has labelled image]
+        self.anchors = []        # (href, text)
+        self.img_meta = []       # (src, has width+height)
 
     def handle_starttag(self, tag, attrs):
         a = {k.lower(): (v or "") for k, v in attrs}
@@ -159,10 +164,14 @@ class PageParser(HTMLParser):
                 self.resources.append(a["href"])
         elif tag == "a" and a.get("href"):
             self.links.append((a["href"], a.get("rel", "").lower()))
+            self._a = [a["href"], a.get("aria-label", "") or a.get("title", ""), [], False]
         elif tag == "img":
             self.images.append(a.get("alt"))
             if a.get("src"):
                 self.resources.append(a["src"])
+                self.img_meta.append((a["src"], bool(a.get("width") and a.get("height"))))
+            if self._a is not None and (a.get("alt") or "").strip():
+                self._a[3] = True
         elif tag in ("script", "iframe") and a.get("src"):
             self.resources.append(a["src"])
         elif tag in ("h1", "h2", "h3", "h4", "h5", "h6"):
@@ -175,6 +184,10 @@ class PageParser(HTMLParser):
             self._skip += 1
 
     def handle_endtag(self, tag):
+        if tag == "a" and self._a is not None:
+            text = re.sub(r"\s+", " ", "".join(self._a[2])).strip() or self._a[1].strip()
+            self.anchors.append((self._a[0], text if text else ("[image]" if self._a[3] else "")))
+            self._a = None
         if tag == "title":
             self._in_title = False
         if tag == "script" and self._in_jsonld:
@@ -190,11 +203,13 @@ class PageParser(HTMLParser):
             self._buf.append(data)
         elif not self._skip:
             self.text.append(data)
+            if self._a is not None:
+                self._a[2].append(data)
 
 
 def schema_types(blocks):
-    """(types found, parse_errors, article objects)."""
-    types, errors, articles = set(), 0, []
+    """(types found, parse_errors, article objects, FAQ question texts)."""
+    types, errors, articles, faqs = set(), 0, [], []
 
     def walk(o):
         if isinstance(o, dict):
@@ -204,6 +219,8 @@ def schema_types(blocks):
                     types.add(x)
                     if x in ("Article", "BlogPosting", "NewsArticle", "TechArticle"):
                         articles.append(o)
+                    if x == "Question" and isinstance(o.get("name"), str):
+                        faqs.append(o["name"])
             for v in o.values():
                 walk(v)
         elif isinstance(o, list):
@@ -215,7 +232,7 @@ def schema_types(blocks):
             walk(json.loads(b.strip()))
         except Exception:
             errors += 1
-    return types, errors, articles
+    return types, errors, articles, faqs
 
 
 # ---------------------------------------------------------------- site-level
@@ -231,8 +248,11 @@ def read_robots(base):
     return rp, text, sitemaps
 
 
-def sitemap_urls(url, depth=0, limit=5000):
-    """All <loc> URLs in a sitemap or sitemap index (follows children, one level)."""
+SITEMAP_STATS = []   # (sitemap url, url count, bytes) per file read
+
+
+def sitemap_urls(url, depth=0, limit=5000, lastmods=None):
+    """All <loc> URLs in a sitemap or sitemap index (follows children, one level). Fills lastmods[url]."""
     r, _, _ = follow(url)
     if r["status"] != 200 or not r["body"]:
         return None
@@ -241,14 +261,27 @@ def sitemap_urls(url, depth=0, limit=5000):
     except ET.ParseError:
         return []
     tag = root.tag.split("}")[-1].lower()
-    locs = [el.text.strip() for el in root.iter() if el.tag.split("}")[-1].lower() == "loc" and el.text]
+    locs = []
+    for el in root:
+        loc = lm = None
+        for c in el:
+            t = c.tag.split("}")[-1].lower()
+            if t == "loc" and c.text:
+                loc = c.text.strip()
+            elif t == "lastmod" and c.text:
+                lm = c.text.strip()[:10]
+        if loc:
+            locs.append(loc)
+            if lastmods is not None and lm and tag != "sitemapindex":
+                lastmods[loc] = lm
     if tag == "sitemapindex" and depth == 0:
         out = []
         for child in locs[:50]:
-            out += sitemap_urls(child, 1, limit) or []
+            out += sitemap_urls(child, 1, limit, lastmods) or []
             if len(out) >= limit:
                 break
         return out[:limit]
+    SITEMAP_STATS.append((url, len(locs), len(r["body"])))
     return locs[:limit]
 
 
@@ -287,12 +320,76 @@ def pagespeed(url, key=None):
             "field_cls": field.get("CUMULATIVE_LAYOUT_SHIFT_SCORE", {}).get("percentile")}
 
 
+HREFLANG = re.compile(r"^(x-default|[a-zA-Z]{2,3}(-[a-zA-Z]{4})?(-([a-zA-Z]{2}|\d{3}))?)$")
+GENERIC_ANCHORS = {"click here", "here", "read more", "learn more", "more", "this", "link", "this link", "go",
+                   "continue", "continue reading", "details", "click", "see more"}
+MAX_IMAGE_CHECKS = 150
+MAX_EXTERNAL_CHECKS = 300
+
+
+def head(url):
+    """Status and size of a URL without downloading it (falls back to a ranged GET)."""
+    for method in ("HEAD", "GET"):
+        hdrs = {"User-Agent": UA}
+        if method == "GET":
+            hdrs["Range"] = "bytes=0-0"
+        req = urllib.request.Request(url, headers=hdrs, method=method)
+        try:
+            with urllib.request.urlopen(req, timeout=15) as r:
+                size = r.headers.get("Content-Length")
+                cr = r.headers.get("Content-Range", "")
+                if "/" in cr:
+                    size = cr.rsplit("/", 1)[-1]
+                return {"status": r.status, "bytes": int(size) if size and str(size).isdigit() else None}
+        except urllib.error.HTTPError as e:
+            if method == "HEAD" and e.code in (403, 405, 501):
+                continue
+            return {"status": e.code}
+        except urllib.error.URLError as e:
+            return {"status": 0, "dns": "Name or service not known" in str(e.reason) or "getaddrinfo" in str(e.reason)}
+        except Exception:
+            return {"status": 0}
+    return {"status": 0}
+
+
+class Renderer:
+    """Optional JavaScript rendering with Playwright (pip install playwright && playwright install chromium)."""
+
+    def __init__(self):
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            sys.exit("--render needs Playwright: pip install playwright && python3 -m playwright install chromium")
+        self._pw = sync_playwright().start()
+        self._browser = self._pw.chromium.launch()
+        self._page = self._browser.new_page(user_agent=UA)
+
+    def html(self, url):
+        try:
+            self._page.goto(url, wait_until="networkidle", timeout=30000)
+            return self._page.content()
+        except Exception:
+            return None
+
+    def close(self):
+        try:
+            self._browser.close()
+            self._pw.stop()
+        except Exception:
+            pass
+
+
 # ---------------------------------------------------------------- the audit
 
-def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print):
+def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print,
+          check_external=False, check_images=True, render=False):
     found = defaultdict(set)          # issue -> set(urls)   ("(site)" for site-wide issues)
     details = defaultdict(dict)        # issue -> url -> detail text
     pages = {}                         # url -> row
+    externals = defaultdict(set)       # external url -> pages linking to it
+    images = defaultdict(set)          # image url -> pages using it
+    hreflangs = {}                     # page -> [(lang, absolute url)]
+    renderer = Renderer() if render else None
     site = {"start": start, "checked_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
 
     def flag(issue, url="(site)", detail=""):
@@ -339,9 +436,9 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print)
     if not site["llms_txt"]:
         flag("no-llms-txt")
     sm_candidates = sm_listed or [urllib.parse.urljoin(base, p) for p in ("/sitemap.xml", "/sitemap_index.xml", "/wp-sitemap.xml")]
-    in_sitemap = []
+    in_sitemap, lastmods = [], {}
     for sm in sm_candidates:
-        urls = sitemap_urls(sm)
+        urls = sitemap_urls(sm, lastmods=lastmods)
         if urls:
             site.setdefault("sitemaps", []).append(sm)
             in_sitemap += urls
@@ -349,6 +446,17 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print)
     site["sitemap_urls"] = len(in_sitemap)
     if not in_sitemap:
         flag("no-sitemap")
+    for sm_url, count, size in SITEMAP_STATS:
+        if count > 50000 or size > 50 * 1024 * 1024:
+            flag("sitemap-too-large", sm_url, f"{count} URLs, {size // 1024 // 1024} MB")
+    dates = sorted(v for v in lastmods.values() if re.match(r"\d{4}-\d{2}-\d{2}$", v))
+    if dates:
+        newest = dt.date.fromisoformat(dates[-1])
+        site["sitemap_newest_lastmod"] = dates[-1]
+        if (dt.date.today() - newest).days > THRESHOLDS["sitemap_stale_days"]:
+            flag("sitemap-stale", detail=f"newest lastmod {dates[-1]}")
+    elif in_sitemap:
+        site["sitemap_newest_lastmod"] = ""
     junk = urllib.parse.urljoin(base, f"/this-page-should-not-exist-{int(time.time())}/")
     jr, _, _ = follow(junk)
     if jr["status"] == 200:
@@ -418,6 +526,8 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print)
             flag("html-too-large", url, f"{len(r['body']) // 1024} KB")
 
         page = r["body"].decode("utf-8", "replace")
+        if renderer:
+            page = renderer.html(final) or page
         p = PageParser()
         try:
             p.feed(page)
@@ -431,7 +541,7 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print)
         noindex = "noindex" in robots
         canon = [urllib.parse.urljoin(final, c) for c in p.canonicals if c]
         canonical_other = bool(canon) and norm(canon[0]) != final
-        types, jerr, articles = schema_types(p.jsonld)
+        types, jerr, articles, faq_qs = schema_types(p.jsonld)
         h1 = p.headings.count(1)
         row.update({"title": title[:120], "words": words, "h1": h1, "schema": " ".join(sorted(types)),
                     "indexable": not noindex and not canonical_other, "canonical": canon[0] if canon else "",
@@ -498,13 +608,44 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print)
             if not art.get("author"):
                 flag("article-missing-author", final)
 
+        # FAQ schema must match visible questions (Google requires marked-up content to be visible)
+        low = " " + re.sub(r"[^a-z0-9 ]+", " ", text.lower()) + " "
+        unseen = [q for q in faq_qs if re.sub(r"[^a-z0-9 ]+", " ", q.lower()).split() and
+                  " ".join(re.sub(r"[^a-z0-9 ]+", " ", q.lower()).split()) not in " ".join(low.split())]
+        if unseen:
+            flag("faq-schema-mismatch", final, f"{len(unseen)} of {len(faq_qs)} questions not on the page: {unseen[0][:80]}")
+        # images: dimensions and (later) weight
+        unsized = sum(1 for _, ok in p.img_meta if not ok)
+        if unsized:
+            flag("images-missing-dimensions", final, f"{unsized} image(s)")
+        for src, _ in p.img_meta:
+            if not src.startswith("data:"):
+                images[urllib.parse.urljoin(final, src)].add(final)
+        # hreflang
+        if p.hreflang:
+            hreflangs[final] = [(lang.strip(), norm(urllib.parse.urljoin(final, h))) for lang, h in p.hreflang if h]
+            bad = [lang for lang, _ in p.hreflang if not HREFLANG.match(lang.strip())
+                   or lang.strip().split("-")[-1].upper() in ("UK", "EN") and "-" in lang]
+            if bad:
+                flag("hreflang-invalid", final, ", ".join(bad[:5]))
+        # anchor text
+        generic = sum(1 for h, t in p.anchors if t.lower().strip(" .!→»>") in GENERIC_ANCHORS)
+        empty = sum(1 for h, t in p.anchors if not t and not h.startswith(("#", "javascript:")))
+        if empty:
+            flag("empty-anchor", final, f"{empty} link(s)")
+        if generic:
+            flag("generic-anchor-text", final, f"{generic} link(s)")
+
         # links
         out_internal = 0
         for href, rel in p.links:
             if href.startswith(("mailto:", "tel:", "javascript:", "#")):
                 continue
             tgt = norm(urllib.parse.urljoin(final, href))
-            if not tgt.startswith("http") or bare(host_of(tgt)) != bare(host):
+            if not tgt.startswith("http"):
+                continue
+            if bare(host_of(tgt)) != bare(host):
+                externals[tgt].add(final)
                 continue
             if tgt != final:
                 out_internal += 1
@@ -560,6 +701,46 @@ def audit(start, max_pages=200, delay=0.5, exclude=(), use_psi=False, log=print)
         can = row.get("canonical")
         if can and norm(can) != u and norm(can) in pages and pages[norm(can)]["status"] != 200:
             flag("canonical-conflict", u, f"canonical → {can} ({pages[norm(can)]['status']})")
+
+    # hreflang: targets must work and link back
+    for src, alts in hreflangs.items():
+        langs = [l for l, _ in alts]
+        for lang, tgt in alts:
+            row = pages.get(tgt)
+            if row and (row["status"] >= 300 or row.get("noindex")):
+                flag("hreflang-broken", src, f"{lang} → {tgt} ({row['status']}{', noindex' if row.get('noindex') else ''})")
+            elif row and tgt != src and src not in [u for _, u in hreflangs.get(tgt, [])]:
+                flag("hreflang-no-return", src, f"{lang} → {tgt} doesn't link back")
+        if src not in [u for _, u in alts] and len(alts) > 0:
+            flag("hreflang-no-self", src, ", ".join(langs[:5]))
+
+    # images: size check by HEAD request (capped)
+    if check_images and images:
+        log(f"  checking {min(len(images), MAX_IMAGE_CHECKS)} images")
+        for img in list(images)[:MAX_IMAGE_CHECKS]:
+            info = head(img)
+            size = info.get("bytes") or 0
+            if size > THRESHOLDS["image_max_kb"] * 1024:
+                for pg in list(images[img])[:10]:
+                    flag("heavy-images", pg, f"{img.rsplit('/', 1)[-1][:60]} {size // 1024} KB")
+            if info.get("status", 200) >= 400:
+                for pg in list(images[img])[:10]:
+                    flag("broken-image", pg, f"{img} ({info['status']})")
+
+    # outbound links (opt-in: --external)
+    if check_external and externals:
+        ext = list(externals)[:MAX_EXTERNAL_CHECKS]
+        log(f"  checking {len(ext)} outbound links")
+        for u in ext:
+            info = head(u)
+            st = info.get("status", 0)
+            if st in (404, 410) or st >= 500 or (st == 0 and info.get("dns")):
+                for pg in list(externals[u])[:20]:
+                    flag("broken-external-link", pg, f"→ {u} ({st or 'no answer'})")
+        site["external_links_checked"] = len(ext)
+    site["external_links_found"] = len(externals)
+    if renderer:
+        renderer.close()
 
     psi = []
     if use_psi:
@@ -698,13 +879,19 @@ def main():
     ap.add_argument("--delay", type=float, default=float(sa.get("delay", 0.5)))
     ap.add_argument("--exclude", action="append", default=list(sa.get("exclude", [])))
     ap.add_argument("--psi", action="store_true", default=bool(sa.get("pagespeed", False)))
+    ap.add_argument("--external", action="store_true", default=bool(sa.get("check_external", False)),
+                    help="also check outbound links for 404s (up to 300)")
+    ap.add_argument("--no-images", action="store_true", help="skip the image-size check")
+    ap.add_argument("--render", action="store_true", default=bool(sa.get("render_js", False)),
+                    help="render pages with a headless browser (needs Playwright) for JavaScript sites")
     ap.add_argument("--out", default=os.path.join(HERE, "reports"))
     a = ap.parse_args()
     if not a.site:
         sys.exit("No site to audit. Pass --site https://your-site.com or set brand.site in engine.config.json.")
     site = a.site if a.site.startswith("http") else "https://" + a.site
     print(f"Auditing {site} (up to {a.max_pages} pages)…")
-    res = audit(site, a.max_pages, a.delay, a.exclude, a.psi)
+    res = audit(site, a.max_pages, a.delay, a.exclude, a.psi,
+                check_external=a.external, check_images=not a.no_images, render=a.render)
     name = cfg.get("brand", {}).get("site_name") or host_of(site)
     write_reports(res, a.out, name)
     c = sum(1 for i in res["issues"] if i["severity"] == "critical")

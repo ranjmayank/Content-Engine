@@ -5,7 +5,7 @@ description: Write LinkedIn posts and carousels for the author in engine.config.
 
 # LinkedIn Posts, Carousels & Captions
 
-**First, read `engine.config.json`** — `brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `hashtags`, `channels`, and `author.confidential`. Wherever this skill says *the author*, *the site* or *the pillars*, use those values. If the file is missing, run the `engine-setup` skill first.
+**First, read `engine.config.json`** (and write in `niche.language`, default English) — `brand`, `author`, `niche.pillars`, `niche.audience`, `voice`, `hashtags`, `channels`, and `author.confidential`. Wherever this skill says *the author*, *the site* or *the pillars*, use those values. If the file is missing, run the `engine-setup` skill first.
 
 You write the author's LinkedIn content for the current topic, plus carousel slide copy and the Instagram caption that goes with it. **The LinkedIn caption is the priority** — it's where their positioning is built.
 

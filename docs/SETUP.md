@@ -8,13 +8,17 @@ Each step works on its own: stop after step 4 and you already have a daily news 
 | 2. Run the setup | Everything tuned to your niche | 5–10 min | Free |
 | 3. Brand kit | Avatar, covers, OG image, quote card | 2 min | Free |
 | 4. Turn on GitHub Actions | Daily scan + weekly audit | 3 min | Free (public repos; private repos get 2,000 Actions minutes/month on GitHub Free — this engine uses roughly 150–300) |
-| 5. Search Console + GA4 | Daily analytics report | 15 min | Free |
+| 5. Search Console + GA4 + Bing | Daily analytics report | 20 min | Free |
 | 6. Email | Topic list in your inbox | 5 min | Free with Gmail |
-| 7. Claude | Skills + daily topic list | 10 min | A Claude plan |
+| 7. Claude | Skills + daily topic list | 10 min | A Claude plan, or Claude API credits for the topic-list workflow |
 | 8. Optional integrations | Notion, OpenSEO, WordPress, Canva, scheduler | varies | Their own pricing |
 | 9. First week | A planned week of content | 20 min | — |
 
 **You need:** a GitHub account, Python 3.10+ on your computer (for setup; the automations run on GitHub), and a website with a blog. Everything you'll be asked for is listed in [ACCESS.md](ACCESS.md).
+
+> **On Windows:** install Python from python.org (tick "Add python.exe to PATH") and Git for Windows. Use `py` instead of `python3` in every command (e.g. `py setup\init.py`), or run everything in **Git Bash**, where the commands work exactly as written — including `bash tests/run.sh`. WSL works too. The GitHub Actions jobs run on Linux, so nothing else changes.
+
+**See what you'll get first:** [`examples/`](../examples/) has a sample digest, audit, analytics report and topic list.
 
 ---
 
@@ -90,6 +94,12 @@ From now on the scan runs daily and the audit weekly. To re-report the last few 
 5. Actions → **Daily search & analytics pull** → Run workflow → read `analytics/reports/latest.md`.
 6. In GA4, mark your newsletter sign-up (or lead form) as a **key event** so the report shows which pages convert.
 
+**Bing Webmaster Tools (recommended — Bing's index feeds Microsoft Copilot and ChatGPT search):**
+1. bing.com/webmasters → add and verify your site (you can import it from Search Console in one click).
+2. Settings (⚙️) → **API access** → **API key** → generate → copy.
+3. GitHub: secret `BING_API_KEY`, variable `BING_SITE_URL` = your site exactly as listed in Bing (e.g. `https://example.com/`).
+The next pull adds Bing clicks and impressions to the scorecard, Bing's top queries, and **Bing-only demand** — queries Bing shows you for that Google doesn't yet.
+
 Either source can be left out; the job pulls what it can. **Never commit the JSON key** — `.gitignore` blocks the usual names.
 
 ## 6. Email the topic list (optional)
@@ -112,13 +122,16 @@ Run **Daily topic email** once to test. If the Claude topic-list task hasn't run
 
 - **Claude Code:** open the repo folder; `CLAUDE.md` and `.claude/skills/` load automatically.
 - **claude.ai:** connect GitHub and attach this repo to a project or session, or upload individual skill folders under **Customize → Skills**.
-- **Daily topic list:** create a Claude scheduled task at your `cadence.times.topic_list` with the prompt in `.claude/skills/topic-list/SKILL.md` (it needs push access to your repo). It writes `content/topic-lists/<date>.json` before the email goes out.
+- **Daily topic list — pick one:**
+  - **Claude scheduled task:** create one at your `cadence.times.topic_list` with the prompt in `.claude/skills/topic-list/SKILL.md` (it needs push access to your repo).
+  - **Claude API workflow (no app needed):** add the secret `ANTHROPIC_API_KEY` (console.anthropic.com → API keys). The **Daily topic list (Claude API)** workflow then builds the list at the same time each day; it usually costs a few cents a day. Optional variables: `CLAUDE_MODEL`, `TOPIC_WEB_SEARCH=0` to turn off web search.
+  Either way the list lands in `content/topic-lists/<date>.json` before the email goes out.
 
-Try: "plan my week", "what should I write today?", "audit my site", "how is the site doing?".
+Try: "plan my week", "what should I write today?", "audit my site", "how is the site doing?", "are we cited in AI answers?", "review this draft".
 
 ## 8. Optional integrations
 
-See [integrations.md](integrations.md): Notion (Fuel Database), OpenSEO (backlinks, rankings, AI visibility, JS-rendered audits), WordPress (drafts and SEO-plugin checks), Canva (brand-kit visuals), Google Drive (drafts), a social scheduler, PageSpeed. After connecting one, set it to `true` under `integrations` in `engine.config.json` so the skills use it.
+See [integrations.md](integrations.md): static-site publishing (Next.js, Astro, Hugo, Jekyll, Eleventy), Notion (Fuel Database), OpenSEO (backlinks, rankings, AI visibility, JS-rendered audits), WordPress (drafts and SEO-plugin checks), Canva (brand-kit visuals), Google Drive (drafts), a social scheduler, PageSpeed. After connecting one, set it to `true` under `integrations` in `engine.config.json` so the skills use it.
 
 ## 9. Your first week
 

@@ -1,7 +1,7 @@
 name: Daily search & analytics pull
 
-# Pulls Google Search Console + GA4, writes analytics/reports/latest.md and analytics/opportunities.json.
-# Needs: secret GOOGLE_SERVICE_ACCOUNT_JSON, variables GSC_SITE_URL and/or GA4_PROPERTY_ID (see docs/SETUP.md, step 5).
+# Pulls Google Search Console + GA4 (+ Bing Webmaster Tools if BING_API_KEY is set), writes analytics/reports/latest.md and analytics/opportunities.json.
+# Needs: secret GOOGLE_SERVICE_ACCOUNT_JSON + variables GSC_SITE_URL / GA4_PROPERTY_ID, and/or secret BING_API_KEY + variable BING_SITE_URL (docs/SETUP.md step 5).
 # Skips quietly until they are set.
 
 on:
@@ -25,8 +25,9 @@ jobs:
         id: check
         env:
           KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          BING: ${{ secrets.BING_API_KEY }}
         run: |
-          if [ -z "$KEY" ]; then echo "GOOGLE_SERVICE_ACCOUNT_JSON is not set yet — skipping (docs/SETUP.md step 5)."; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
+          if [ -z "$KEY" ] && [ -z "$BING" ]; then echo "No GOOGLE_SERVICE_ACCOUNT_JSON or BING_API_KEY yet — skipping (docs/SETUP.md step 5)."; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
       - uses: actions/setup-python@v5
         if: steps.check.outputs.skip != '1'
         with:
@@ -39,6 +40,8 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
+          BING_SITE_URL: ${{ vars.BING_SITE_URL }}
         run: python3 analytics/fetch.py
       - name: Analyse (Mondays also add the weekly tracker row)
         if: steps.check.outputs.skip != '1'

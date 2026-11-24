@@ -382,6 +382,30 @@ def is_ai_text(text):
     return any(re.search(r"(?<![a-z0-9])" + re.escape(k) + r"(?![a-z0-9])", t) for k in AI_STRICT)
 
 
+def resolve_auto(sources):
+    """"type": "auto" sources list just the site; find the feed (or sitemap) once and save it to sources.json."""
+    todo = [x for x in sources if x.get("type") == "auto"]
+    if not todo:
+        return
+    sys.path.insert(0, os.path.join(ROOT, "setup"))
+    try:
+        from discover_feed import discover
+    except ImportError:
+        print("Can't import setup/discover_feed.py; leaving auto sources as manual for this run")
+        for x in todo:
+            x["type"] = "manual"
+        return
+    for x in todo:
+        f = discover(x["url"])
+        x["type"], x["url"] = f["type"], f["url"]
+        x.setdefault("site", f.get("site", x["url"]))
+        if f.get("include") and "include" not in x:
+            x["include"] = f["include"]
+        print(f"auto: {x['name']} → {x['type']} {x['url']}")
+    with open(SOURCES, "w") as fh:
+        json.dump(sources, fh, indent=2, ensure_ascii=False)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--init", action="store_true",
@@ -418,6 +442,7 @@ def main():
         return d is not None and (today - d).days <= days
 
     health = {}   # per-source result for SOURCES.md
+    resolve_auto(sources)
     for s in sources:
         name, typ, url = s["name"], s["type"], s["url"]
         if typ == "manual":

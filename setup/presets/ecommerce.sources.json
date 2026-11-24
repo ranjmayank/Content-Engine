@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Shopify blog",
+    "category": "Platforms & operations",
+    "why": "Platform updates and store guides",
+    "site": "https://www.shopify.com/blog",
+    "type": "auto",
+    "url": "https://www.shopify.com/blog"
+  },
+  {
+    "name": "Modern Retail",
+    "category": "Ads & acquisition",
+    "why": "DTC brand and retail news",
+    "site": "https://www.modernretail.co/",
+    "type": "auto",
+    "url": "https://www.modernretail.co/"
+  },
+  {
+    "name": "Retail Dive",
+    "category": "Platforms & operations",
+    "why": "Retail industry news",
+    "site": "https://www.retaildive.com/",
+    "type": "auto",
+    "url": "https://www.retaildive.com/"
+  },
+  {
+    "name": "Practical Ecommerce",
+    "category": "Conversion & CRO",
+    "why": "How-to for store owners",
+    "site": "https://www.practicalecommerce.com/",
+    "type": "auto",
+    "url": "https://www.practicalecommerce.com/"
+  },
+  {
+    "name": "Marketplace Pulse",
+    "category": "Marketplaces",
+    "why": "Amazon and marketplace data",
+    "site": "https://www.marketplacepulse.com/",
+    "type": "auto",
+    "url": "https://www.marketplacepulse.com/"
+  },
+  {
+    "name": "Digital Commerce 360",
+    "category": "Platforms & operations",
+    "why": "E-commerce data and rankings",
+    "site": "https://www.digitalcommerce360.com/",
+    "type": "auto",
+    "url": "https://www.digitalcommerce360.com/"
+  },
+  {
+    "name": "Klaviyo blog",
+    "category": "Retention & email",
+    "why": "Email/SMS for e-commerce",
+    "site": "https://www.klaviyo.com/blog",
+    "type": "auto",
+    "url": "https://www.klaviyo.com/blog"
+  },
+  {
+    "name": "2PM",
+    "category": "Ads & acquisition",
+    "why": "DTC strategy analysis",
+    "site": "https://2pml.com/",
+    "type": "auto",
+    "url": "https://2pml.com/"
+  },
+  {
+    "name": "Jungle Scout blog",
+    "category": "Marketplaces",
+    "why": "Amazon seller research",
+    "site": "https://www.junglescout.com/blog/",
+    "type": "auto",
+    "url": "https://www.junglescout.com/blog/"
+  },
+  {
+    "name": "eCommerceFuel",
+    "category": "Platforms & operations",
+    "why": "Independent store operators",
+    "site": "https://www.ecommercefuel.com/blog/",
+    "type": "auto",
+    "url": "https://www.ecommercefuel.com/blog/"
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "The GitHub Blog",
+    "category": "AI coding",
+    "why": "GitHub and Copilot changes",
+    "site": "https://github.blog/",
+    "type": "auto",
+    "url": "https://github.blog/"
+  },
+  {
+    "name": "Stack Overflow blog",
+    "category": "Engineering practice",
+    "why": "Developer surveys and practice",
+    "site": "https://stackoverflow.blog/",
+    "type": "auto",
+    "url": "https://stackoverflow.blog/"
+  },
+  {
+    "name": "InfoQ",
+    "category": "Engineering practice",
+    "why": "Architecture and practice",
+    "site": "https://www.infoq.com/",
+    "type": "auto",
+    "url": "https://www.infoq.com/"
+  },
+  {
+    "name": "The New Stack",
+    "category": "Cloud & infra",
+    "why": "Cloud-native news",
+    "site": "https://thenewstack.io/",
+    "type": "auto",
+    "url": "https://thenewstack.io/"
+  },
+  {
+    "name": "Simon Willison",
+    "category": "AI coding",
+    "why": "LLMs and tools, hands-on",
+    "site": "https://simonwillison.net/",
+    "type": "auto",
+    "url": "https://simonwillison.net/"
+  },
+  {
+    "name": "Martin Fowler",
+    "category": "Engineering practice",
+    "why": "Software design",
+    "site": "https://martinfowler.com/",
+    "type": "auto",
+    "url": "https://martinfowler.com/"
+  },
+  {
+    "name": "The Pragmatic Engineer",
+    "category": "Engineering practice",
+    "why": "Engineering industry deep dives",
+    "site": "https://blog.pragmaticengineer.com/",
+    "type": "auto",
+    "url": "https://blog.pragmaticengineer.com/"
+  },
+  {
+    "name": "AWS News Blog",
+    "category": "Cloud & infra",
+    "why": "AWS launches",
+    "site": "https://aws.amazon.com/blogs/aws/",
+    "type": "auto",
+    "url": "https://aws.amazon.com/blogs/aws/"
+  },
+  {
+    "name": "Cloudflare blog",
+    "category": "Security",
+    "why": "Infra and security engineering",
+    "site": "https://blog.cloudflare.com/",
+    "type": "auto",
+    "url": "https://blog.cloudflare.com/"
+  },
+  {
+    "name": "Vercel blog",
+    "category": "Frameworks & languages",
+    "why": "Frontend platform and Next.js",
+    "site": "https://vercel.com/blog",
+    "type": "auto",
+    "url": "https://vercel.com/blog"
+  },
+  {
+    "name": "Node.js blog",
+    "category": "Frameworks & languages",
+    "why": "Node releases",
+    "site": "https://nodejs.org/en/blog",
+    "type": "auto",
+    "url": "https://nodejs.org/en/blog"
+  }
+]

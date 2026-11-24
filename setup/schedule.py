@@ -6,6 +6,7 @@ to UTC and rewrites the `- cron:` line tagged `# engine:<job>` in each workflow.
 
   cadence.times.analytics  "07:45"      daily Search Console + GA4 pull
   cadence.times.scan       "08:00"      daily news scan
+  cadence.times.topic_list "10:15"      daily topic list (Claude API workflow, or your Claude scheduled task)
   cadence.times.email      "11:00"      daily topic email (leave time after the topic-list task)
   cadence.times.seo_audit  "Mon 07:00"  weekly SEO audit
 
@@ -21,7 +22,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WF = os.path.join(ROOT, ".github", "workflows")
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-DEFAULTS = {"analytics": "07:45", "scan": "08:00", "email": "11:00", "seo_audit": "Mon 07:00"}
+DEFAULTS = {"analytics": "07:45", "scan": "08:00", "topic_list": "10:15", "email": "11:00", "seo_audit": "Mon 07:00"}
 
 
 def to_cron(spec, tzname):

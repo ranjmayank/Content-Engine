@@ -146,7 +146,8 @@ def analyze(d):
     has_gsc, has_ga4 = bool(p_cur or q_cur), bool(g_cur)
 
     o = {"date": meta.get("pulled", os.path.basename(d)), "window": meta.get("current"),
-         "previous_window": meta.get("previous"), "sources": meta.get("sources", []), "errors": meta.get("errors", [])}
+         "previous_window": meta.get("previous"), "sources": meta.get("sources", []), "errors": meta.get("errors", []),
+         **({"demo": meta["demo"]} if meta.get("demo") else {})}
 
     # 1. Scorecard
     sc = {}
@@ -155,6 +156,19 @@ def analyze(d):
         sc["gsc"] = {"cur": a, "prev": b}
     if has_ga4:
         sc["ga4"] = {"cur": dict(ga4_totals(g_cur)), "prev": dict(ga4_totals(g_prev))}
+    b_cur, b_prev = read(f"{d}/bing_query_cur.csv"), read(f"{d}/bing_query_prev.csv")
+    if b_cur or read(f"{d}/bing_page_cur.csv"):
+        sc["bing"] = {"cur": totals_gsc(read(f"{d}/bing_page_cur.csv") or b_cur),
+                      "prev": totals_gsc(read(f"{d}/bing_page_prev.csv") or b_prev)}
+        bq = agg_gsc(b_cur, "query")
+        o["bing"] = {
+            "top_queries": [{"query": k, "clicks": int(v["clicks"]), "impressions": int(v["impressions"]),
+                             "position": round(v["position"], 1), "pillar": pillar(k)}
+                            for k, v in sorted(bq.items(), key=lambda x: -x[1]["impressions"])[:15]],
+            # demand Bing (and so Copilot / ChatGPT search) sees that Google doesn't show you for
+            "bing_only": [{"query": k, "impressions": int(v["impressions"]), "position": round(v["position"], 1), "pillar": pillar(k)}
+                          for k, v in sorted(bq.items(), key=lambda x: -x[1]["impressions"])
+                          if k not in q_cur and v["impressions"] >= MIN_IMPR_GAP][:15]}
     o["scorecard"] = sc
 
     # best page per query (by impressions) and pages per query
@@ -266,6 +280,8 @@ def report(o):
     if o.get("window"):
         L += [f"Window: **{o['window'][0]} → {o['window'][1]}** (last 28 days with data) vs "
               f"{o['previous_window'][0]} → {o['previous_window'][1]}. Search Console data lags 2–3 days.", ""]
+    if o.get("demo"):
+        L += [f"> 🧪 **{o['demo']}.**", ""]
     for e in o.get("errors", []):
         first = " ".join(e.split())
         m = re.search(r'"message":\s*"([^"]+)', e)
@@ -285,6 +301,10 @@ def report(o):
         for k, lab in (("sessions", "Sessions"), ("organic", "Organic search sessions"), ("ai", "AI assistant referrals"),
                        ("engaged", "Engaged sessions"), ("key_events", "Key events (sign-ups etc.)"), ("new_users", "New users")):
             L.append(f"| {lab} | {fmt_n(a.get(k, 0))} | {fmt_n(b.get(k, 0))} | {pct(a.get(k, 0), b.get(k, 0))} |")
+    if "bing" in sc:
+        a, b = sc["bing"]["cur"], sc["bing"]["prev"]
+        L += [f"| Bing clicks | {fmt_n(a['clicks'])} | {fmt_n(b['clicks'])} | {pct(a['clicks'], b['clicks'])} |",
+              f"| Bing impressions | {fmt_n(a['impressions'])} | {fmt_n(b['impressions'])} | {pct(a['impressions'], b['impressions'])} |"]
     if not sc:
         L.append("| — | no data yet | | |")
     L.append("")
@@ -337,7 +357,14 @@ def report(o):
               [("Channel", lambda r: r["channel"]), ("Sessions", lambda r: r["sessions"])])
         table("9b. Pages that convert", "Landing pages with the most key events (newsletter sign-ups etc.). Point internal links and CTAs here.",
               o["key_event_pages"], [("Page", lambda r: r["page"]), ("Key events", lambda r: r["key_events"])])
-    L += ["---", "_Built by analytics/analyze.py from Search Console and GA4. CTR benchmarks are rough industry averages, "
+    if o.get("bing"):
+        table("10. Bing — top queries", "Bing's index also feeds Microsoft Copilot and ChatGPT search.",
+              o["bing"]["top_queries"], [("Query", lambda r: r["query"]), ("Clicks", lambda r: r["clicks"]),
+                                         ("Impr.", lambda r: r["impressions"]), ("Pos.", lambda r: r["position"]), ("Pillar", lambda r: r["pillar"])])
+        table("10b. Bing-only demand", "Queries Bing shows you for that Google doesn't (yet). Often early signal for new topics.",
+              o["bing"]["bing_only"], [("Query", lambda r: r["query"]), ("Impr.", lambda r: r["impressions"]),
+                                       ("Pos.", lambda r: r["position"]), ("Pillar", lambda r: r["pillar"])])
+    L += ["---", "_Built by analytics/analyze.py from Search Console, GA4 and Bing Webmaster Tools. CTR benchmarks are rough industry averages, "
           "used only to spot outliers. Thresholds are at the top of the script._"]
     return "\n".join(L)
 
